@@ -32,7 +32,7 @@ public class Reuniones extends Activity {
 
         ParseObject a;
         ParseQuery<ParseObject> query = ParseQuery.getQuery(valorSpin);
-        Toast.makeText(this, "Consultando " + valorSpin, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Consultandoo " + valorSpin, Toast.LENGTH_LONG).show();
         try {
             List<ParseObject> lista=query.find();
             Log.d("yo que se", "conteo: "+query.count());
