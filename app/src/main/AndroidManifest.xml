@@ -12,7 +12,7 @@
 
     <!--
       IMPORTANT: Change "com.parse.starter.permission.C2D_MESSAGE" in the lines below
-      to match your app's package name + ".permission.C2D_MESSAGE".
+      to match your app's package name + ".permission.C2D_ME
     -->
     <permission
         android:name="com.example.soke.faeca.permission.C2D_MESSAGE"
@@ -41,6 +41,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
+
             </intent-filter>
         </receiver>
         <receiver

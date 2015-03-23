@@ -83,6 +83,15 @@ public class MenuPrincipal extends ActionBarActivity {
     }
 
     public void enviarATodos(View v){
+        EditText mensaje = (EditText) findViewById(R.id.mensajeCaja);
+
+        ParsePush pruebapush = new ParsePush();
+        pruebapush.setMessage(mensaje.getText().toString());
+
+        pruebapush.sendInBackground();
+    }
+
+    public void enviarA(View v){
         EditText edit=(EditText) findViewById(R.id.mensajeCaja);
 
         ParsePush pruebapush = new ParsePush();
