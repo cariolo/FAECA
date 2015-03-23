@@ -35,7 +35,6 @@ public class Consulta extends Activity {
         Toast.makeText(this, "Consultandoo " + valorSpin, Toast.LENGTH_LONG).show();
         try {
             List<ParseObject> lista=query.find();
-            Log.d("yo que se", "conteo: "+query.count());
             ArrayList<String> listaResultado = new ArrayList<>();
             for(int i = 0; i < lista.size(); i++){
                 listaResultado.add(lista.get(i).getString("Mensaje"));
