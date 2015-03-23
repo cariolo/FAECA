@@ -12,7 +12,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.parse.Parse;
-import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
@@ -28,7 +27,8 @@ public class MenuPrincipal extends ActionBarActivity {
 
         //Parse.enableLocalDatastore(this); Al habilitar la BD local, no se logea bien al servidor parse (se envian los push, pero no hay constancia de quien)
 
-        Parse.initialize(this, "IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR", "xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof");
+        Parse.initialize(this,"IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR","xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof");
+
         ParsePush.subscribeInBackground("", new SaveCallback() {
 
             @Override
@@ -40,7 +40,6 @@ public class MenuPrincipal extends ActionBarActivity {
                 }
             }
         });
-        ParseAnalytics.trackAppOpened(getIntent());
     }
 
 
@@ -91,8 +90,8 @@ public class MenuPrincipal extends ActionBarActivity {
         pruebapush.sendInBackground();
     }
     public void reuniones(View v){
-        final Spinner spinnerLayout = (Spinner) findViewById((R.id.spinner));
-        final String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
+        Spinner spinnerLayout = (Spinner) findViewById((R.id.spinner));
+        String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
 
 
         Intent i = new Intent(this, Consulta.class );
