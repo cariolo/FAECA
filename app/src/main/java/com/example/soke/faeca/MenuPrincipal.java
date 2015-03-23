@@ -66,8 +66,8 @@ public class MenuPrincipal extends ActionBarActivity {
     }
 
     public void enviarPushManual(View v){
-        EditText campoTexto = (EditText) findViewById(R.id.editText);
-        Spinner spinnerLayout = (Spinner) findViewById((R.id.spinner));
+        EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
+        Spinner spinnerLayout = (Spinner) findViewById((R.id.spinnerTipoPush));
         String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
 
         ParseObject push = new ParseObject(valorSpin);
@@ -82,15 +82,15 @@ public class MenuPrincipal extends ActionBarActivity {
     }
 
     public void enviarATodos(View v){
-        EditText edit=(EditText) findViewById(R.id.editText);
+        EditText edit=(EditText) findViewById(R.id.mensajeCaja);
 
         ParsePush pruebapush = new ParsePush();
         pruebapush.setMessage(edit.getText().toString());
 
         pruebapush.sendInBackground();
     }
-    public void reuniones(View v){
-        Spinner spinnerLayout = (Spinner) findViewById((R.id.spinner));
+    public void consulta(View v){
+        Spinner spinnerLayout = (Spinner) findViewById((R.id.spinnerTipoPush));
         String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
 
 
