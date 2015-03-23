@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.parse.Parse;
+import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
@@ -40,6 +41,7 @@ public class MenuPrincipal extends ActionBarActivity {
                 }
             }
         });
+        ParseAnalytics.trackAppOpened(getIntent());
     }
 
 
