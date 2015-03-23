@@ -1,5 +1,6 @@
 package com.example.soke.faeca;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Parse.enableLocalDatastore(this);
-        Parse.initialize(this,"IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR","xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof");
+        //Parse.initialize(this,"IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR","xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof");
 
         ParsePush.subscribeInBackground("", new SaveCallback() {
             @Override
@@ -74,17 +75,29 @@ public class MainActivity extends ActionBarActivity {
         push.put("Mensaje", edit.getText().toString());
         push.pinInBackground();
         push.saveEventually();
-        ParsePush pruebapush=new ParsePush();
-        pruebapush.setMessage("me cago en la leche merche");
-        pruebapush.sendInBackground();
         Toast.makeText(this, "Enviando...", Toast.LENGTH_LONG).show();
+        this.enviarATodos(v);
     }
 
     public void recuperarObjeto(View v) throws ParseException {
         ParseObject a;
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Reunion");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Urgencia");
         Toast.makeText(this, "Consultando...", Toast.LENGTH_LONG).show();
         List<ParseObject> lista=query.find();
+
+
+    }
+
+    public void enviarATodos(View v){
+        EditText edit=(EditText) findViewById(R.id.editText);
+
+        ParsePush pruebapush=new ParsePush();
+        pruebapush.setMessage(edit.getText().toString());
+        pruebapush.sendInBackground();
+    }
+    public void reuniones(View v){
+        Intent i = new Intent(this, Reuniones.class );
+        startActivity(i);
 
     }
 }

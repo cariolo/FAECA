@@ -10,11 +10,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/editText"
         android:inputType="text"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView2"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -22,9 +22,8 @@
         android:text="Enviar"
         android:id="@+id/Enviar"
         android:onClick="enviarPushManual"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="148dp" />
+        android:layout_below="@+id/editText"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,9 +31,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Asunto"
         android:id="@+id/textView"
-        android:layout_above="@+id/spinner"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="43dp" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,26 +40,45 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Mensaje"
         android:id="@+id/textView2"
-        android:layout_above="@+id/editText"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/spinner"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
 
     <Spinner
         android:entries="@array/asuntos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner"
-        android:layout_above="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:spinnerMode="dialog" />
+        android:spinnerMode="dialog"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Consultar"
         android:id="@+id/consultar"
+        android:onClick="recuperarObjeto"
+        android:layout_below="@+id/Enviar"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enviar a todos"
+        android:id="@+id/button"
+        android:layout_below="@+id/consultar"
+        android:layout_centerHorizontal="true"
+        android:onClick="enviarATodos" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reuniones"
+        android:id="@+id/button2"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="recuperarObjeto" />
+        android:onClick="reuniones" />
 
 </RelativeLayout>
