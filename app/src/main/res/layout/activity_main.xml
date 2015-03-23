@@ -30,7 +30,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Asunto"
-        android:id="@+id/textView"
+        android:id="@+id/asunto"
+        android:layout_marginTop="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -41,8 +42,8 @@
         android:text="Mensaje"
         android:id="@+id/textView2"
         android:layout_below="@+id/spinner"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
+        android:layout_alignLeft="@+id/asunto"
+        android:layout_alignStart="@+id/asunto" />
 
     <Spinner
         android:entries="@array/asuntos"
@@ -50,25 +51,18 @@
         android:layout_height="wrap_content"
         android:id="@+id/spinner"
         android:spinnerMode="dialog"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/asunto"
+        android:layout_marginTop="40dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Consultar"
-        android:id="@+id/consultar"
-        android:onClick="recuperarObjeto"
-        android:layout_below="@+id/Enviar"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Enviar a todos"
         android:id="@+id/button"
-        android:layout_below="@+id/consultar"
+        android:layout_below="@+id/Enviar"
+        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:onClick="enviarATodos" />
 
@@ -77,6 +71,7 @@
         android:layout_height="wrap_content"
         android:text="Consulta de Push"
         android:id="@+id/button2"
+        android:layout_marginTop="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="reuniones" />

@@ -70,12 +70,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void enviarPushManual(View v){
-        EditText edit=(EditText) findViewById(R.id.editText);
-        final Spinner spinnerLayout = (Spinner) findViewById((R.id.spinner));
-        final String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
+        EditText campoTexto = (EditText) findViewById(R.id.editText);
+        Spinner spinnerLayout = (Spinner) findViewById((R.id.spinner));
+        String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
 
         ParseObject push = new ParseObject(valorSpin);
-        push.put("Mensaje", edit.getText().toString());
+        push.put("Mensaje", campoTexto.getText().toString());
 
         //push.pinInBackground(); solo habilitado para la base de datos local activa
 
@@ -85,20 +85,12 @@ public class MainActivity extends ActionBarActivity {
         this.enviarATodos(v);
     }
 
-    public void recuperarObjeto(View v) throws ParseException {
-        ParseObject a;
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Urgencia");
-        Toast.makeText(this, "Consultando...", Toast.LENGTH_LONG).show();
-        List<ParseObject> lista = query.find();
-
-
-    }
-
     public void enviarATodos(View v){
         EditText edit=(EditText) findViewById(R.id.editText);
 
         ParsePush pruebapush = new ParsePush();
         pruebapush.setMessage(edit.getText().toString());
+
         pruebapush.sendInBackground();
     }
     public void reuniones(View v){
