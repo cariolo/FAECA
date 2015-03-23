@@ -29,7 +29,7 @@ public class Reuniones extends Activity {
         ListView listview=(ListView) findViewById(R.id.listView);
 
         ParseObject a;
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Urgencia");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Reunion");
         Toast.makeText(this, "Consultando...", Toast.LENGTH_LONG).show();
         try {
             List<ParseObject> lista=query.find();
