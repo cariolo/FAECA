@@ -28,7 +28,9 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Parse.enableLocalDatastore(this);
+
+        //Parse.enableLocalDatastore(this); Al habilitar la BD local, no se logea bien al servidor parse (se envian los push, pero no hay constancia de quien)
+
         Parse.initialize(this,"IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR","xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof");
 
         ParsePush.subscribeInBackground("", new SaveCallback() {
@@ -69,13 +71,16 @@ public class MainActivity extends ActionBarActivity {
 
     public void enviarPushManual(View v){
         EditText edit=(EditText) findViewById(R.id.editText);
-        final Spinner spin = (Spinner) findViewById((R.id.spinner));
-        final String spinVal = String.valueOf(spin.getSelectedItem());
+        final Spinner spinnerLayout = (Spinner) findViewById((R.id.spinner));
+        final String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
 
-        ParseObject push = new ParseObject(spinVal);
+        ParseObject push = new ParseObject(valorSpin);
         push.put("Mensaje", edit.getText().toString());
-        push.pinInBackground();
-        push.saveEventually();
+
+        //push.pinInBackground(); solo habilitado para la base de datos local activa
+
+        push.saveEventually(); //igual que saveInBackground pero si no hay conexion, en cuanto la encuentre se hara el push
+
         Toast.makeText(this, "Enviando...", Toast.LENGTH_LONG).show();
         this.enviarATodos(v);
     }
@@ -84,7 +89,7 @@ public class MainActivity extends ActionBarActivity {
         ParseObject a;
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Urgencia");
         Toast.makeText(this, "Consultando...", Toast.LENGTH_LONG).show();
-        List<ParseObject> lista=query.find();
+        List<ParseObject> lista = query.find();
 
 
     }
@@ -92,13 +97,17 @@ public class MainActivity extends ActionBarActivity {
     public void enviarATodos(View v){
         EditText edit=(EditText) findViewById(R.id.editText);
 
-        ParsePush pruebapush=new ParsePush();
+        ParsePush pruebapush = new ParsePush();
         pruebapush.setMessage(edit.getText().toString());
         pruebapush.sendInBackground();
     }
     public void reuniones(View v){
-        Intent i = new Intent(this, Reuniones.class );
-        startActivity(i);
+        final Spinner spinnerLayout = (Spinner) findViewById((R.id.spinner));
+        final String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
 
+
+        Intent i = new Intent(this, Reuniones.class );
+        i.putExtra("ValorSpin", valorSpin);
+        startActivity(i);
     }
 }

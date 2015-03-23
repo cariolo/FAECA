@@ -2,6 +2,7 @@ package com.example.soke.faeca;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,21 +26,22 @@ public class Reuniones extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reuniones);
-
-        ListView listview=(ListView) findViewById(R.id.listView);
+        Bundle elPrimero = getIntent().getExtras();
+        String valorSpin = elPrimero.getString("ValorSpin");
+        ListView vistaResultadosConsulta = (ListView) findViewById(R.id.listView);
 
         ParseObject a;
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Reunion");
-        Toast.makeText(this, "Consultando...", Toast.LENGTH_LONG).show();
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(valorSpin);
+        Toast.makeText(this, "Consultando " + valorSpin, Toast.LENGTH_LONG).show();
         try {
             List<ParseObject> lista=query.find();
             Log.d("yo que se", "conteo: "+query.count());
-            ArrayList<String> prueba=new ArrayList<>();
-            for(int i=0; i<lista.size(); i++){
-                prueba.add(lista.get(i).getString("Mensaje"));
+            ArrayList<String> listaResultado = new ArrayList<>();
+            for(int i = 0; i < lista.size(); i++){
+                listaResultado.add(lista.get(i).getString("Mensaje"));
             }
-            ArrayAdapter<String> arrayAdapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_single_choice, prueba);
-            listview.setAdapter(arrayAdapter);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_single_choice, listaResultado);
+            vistaResultadosConsulta.setAdapter(arrayAdapter);
         } catch (ParseException e) {
             e.printStackTrace();
         }
