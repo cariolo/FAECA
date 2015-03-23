@@ -29,7 +29,7 @@ public class Consulta extends Activity {
         Bundle elPrimero = getIntent().getExtras();
         String valorSpin = elPrimero.getString("ValorSpin");
         ListView vistaResultadosConsulta = (ListView) findViewById(R.id.listaResultados);
-
+//p
         ParseObject a;
         ParseQuery<ParseObject> query = ParseQuery.getQuery(valorSpin);
         Toast.makeText(this, "Consultando " + valorSpin, Toast.LENGTH_LONG).show();
