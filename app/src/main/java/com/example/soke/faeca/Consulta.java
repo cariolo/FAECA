@@ -28,7 +28,7 @@ public class Consulta extends Activity {
         setContentView(R.layout.activity_reuniones);
         Bundle elPrimero = getIntent().getExtras();
         String valorSpin = elPrimero.getString("ValorSpin");
-        ListView vistaResultadosConsulta = (ListView) findViewById(R.id.listView);
+        ListView vistaResultadosConsulta = (ListView) findViewById(R.id.listaResultados);
 
         ParseObject a;
         ParseQuery<ParseObject> query = ParseQuery.getQuery(valorSpin);
