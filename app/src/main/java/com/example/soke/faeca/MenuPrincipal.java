@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
-import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
@@ -36,10 +35,7 @@ public class MenuPrincipal extends ActionBarActivity {
 
         Parse.initialize(this,"IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR","xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof");
 
-        ParseInstallation.getCurrentInstallation().put("user", "Carlos");
-
-
-        ParsePush.subscribeInBackground("Administradores", new SaveCallback() {
+        ParsePush.subscribeInBackground("", new SaveCallback() {
 
             @Override
             public void done(ParseException e) {
@@ -73,6 +69,22 @@ public class MenuPrincipal extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void enviarPushManual(View v){
+        EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
+        Spinner spinnerLayout = (Spinner) findViewById((R.id.spinnerTipoPush));
+        String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
+
+        ParseObject push = new ParseObject(valorSpin);
+        push.put("Mensaje", campoTexto.getText().toString());
+
+        //push.pinInBackground(); solo habilitado para la base de datos local activa
+
+        push.saveEventually(); //igual que saveInBackground pero si no hay conexion, en cuanto la encuentre se hara el push
+
+        Toast.makeText(this, "Enviando...", Toast.LENGTH_LONG).show();
+        this.enviarATodos(v);
     }
 
     public void enviarATodos(View v){
