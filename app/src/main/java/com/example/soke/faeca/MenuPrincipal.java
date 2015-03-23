@@ -11,23 +11,19 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
-import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
-import java.util.List;
 
-
-public class MainActivity extends ActionBarActivity {
+public class MenuPrincipal extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_menuprincipal);
 
         //Parse.enableLocalDatastore(this); Al habilitar la BD local, no se logea bien al servidor parse (se envian los push, pero no hay constancia de quien)
 
@@ -98,7 +94,7 @@ public class MainActivity extends ActionBarActivity {
         String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
 
 
-        Intent i = new Intent(this, Reuniones.class );
+        Intent i = new Intent(this, Consulta.class );
         i.putExtra("ValorSpin", valorSpin);
         startActivity(i);
     }

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Reuniones extends Activity {
+public class Consulta extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
