@@ -102,8 +102,8 @@ public class MainActivity extends ActionBarActivity {
         pruebapush.sendInBackground();
     }
     public void reuniones(View v){
-        final Spinner spinnerLayout = (Spinner) findViewById((R.id.spinner));
-        final String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
+        Spinner spinnerLayout = (Spinner) findViewById((R.id.spinner));
+        String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
 
 
         Intent i = new Intent(this, Reuniones.class );
