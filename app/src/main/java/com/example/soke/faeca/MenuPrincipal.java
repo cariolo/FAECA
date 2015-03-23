@@ -16,7 +16,11 @@ import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
+import com.parse.ParseQuery;
 import com.parse.SaveCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MenuPrincipal extends ActionBarActivity {
@@ -25,6 +29,7 @@ public class MenuPrincipal extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menuprincipal);
+
 
         //Parse.enableLocalDatastore(this); Al habilitar la BD local, no se logea bien al servidor parse (se envian los push, pero no hay constancia de quien)
 
@@ -84,15 +89,29 @@ public class MenuPrincipal extends ActionBarActivity {
 
     public void enviarATodos(View v){
         EditText mensaje = (EditText) findViewById(R.id.mensajeCaja);
+        Spinner spinnerLayout = (Spinner) findViewById((R.id.spinnerTipoPush));
+        String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
+        EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
+        ParsePush pushAtodos = new ParsePush();
 
-        ParsePush pruebapush = new ParsePush();
-        pruebapush.setMessage(mensaje.getText().toString());
+        pushAtodos.setMessage("\n" + valorSpin.toUpperCase() + ": " + mensaje.getText().toString());
 
-        pruebapush.sendInBackground();
+        pushAtodos.sendInBackground();
+
+        ParseObject push = new ParseObject(valorSpin);
+        push.put("Mensaje", campoTexto.getText().toString());
+        push.saveEventually();
     }
 
     public void enviarA(View v){
         EditText edit=(EditText) findViewById(R.id.mensajeCaja);
+        Spinner spinnerUsuario = (Spinner) findViewById((R.id.spinnerUsuario));
+        List <String> usuarios = new ArrayList<>();
+        spinnerUsuario.setVisibility(View.VISIBLE);
+
+       // ParseQuery<ParseObject> consulta = ;
+
+        String usuario_destino = String.valueOf(spinnerUsuario.getSelectedItem());
 
         ParsePush pruebapush = new ParsePush();
         pruebapush.setMessage(edit.getText().toString());
@@ -100,8 +119,8 @@ public class MenuPrincipal extends ActionBarActivity {
         pruebapush.sendInBackground();
     }
     public void consulta(View v){
-        Spinner spinnerLayout = (Spinner) findViewById((R.id.spinnerTipoPush));
-        String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
+        Spinner spinnerTipoPush = (Spinner) findViewById((R.id.spinnerTipoPush));
+        String valorSpin = String.valueOf(spinnerTipoPush.getSelectedItem());
 
 
         Intent i = new Intent(this, Consulta.class );

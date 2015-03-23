@@ -16,15 +16,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enviar"
-        android:id="@+id/Enviar"
-        android:onClick="enviarPushManual"
-        android:layout_below="@+id/mensajeCaja"
-        android:layout_centerHorizontal="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,15 +47,26 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerUsuario"
+        android:visibility="invisible"
+        android:spinnerMode="dialog"
+        android:layout_below="@+id/spinnerTipoPush"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enviar a.."
         android:id="@+id/enviarA"
-        android:layout_below="@+id/Enviar"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:onClick="enviarATodos" />
+        android:onClick="enviarATodos"
+        android:layout_below="@+id/mensajeCaja" />
 
     <Button
         android:layout_width="wrap_content"
