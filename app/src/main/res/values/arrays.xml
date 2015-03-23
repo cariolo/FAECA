@@ -4,6 +4,8 @@
     <string-array name="asuntos">
         <item>Reunion</item>
         <item>Urgencia</item>
+        <item>Conferencia</item>
+        <item>Recordatorio</item>
     </string-array>
 
 </resources>
