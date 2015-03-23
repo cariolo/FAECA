@@ -41,6 +41,7 @@ public class MenuPrincipal extends ActionBarActivity {
                 }
             }
         });
+
         ParseAnalytics.trackAppOpened(getIntent());
     }
 
