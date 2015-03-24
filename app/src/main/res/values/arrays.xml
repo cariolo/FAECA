@@ -8,4 +8,8 @@
         <item>Recordatorio</item>
     </string-array>
 
+    <string-array name="grupos">
+        <item>Selecciona un grupo</item>
+    </string-array>
+
 </resources>

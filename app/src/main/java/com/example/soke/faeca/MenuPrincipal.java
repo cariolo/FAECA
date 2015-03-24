@@ -19,7 +19,9 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.parse.SignUpCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +70,7 @@ public class MenuPrincipal extends ActionBarActivity {
         Parse.initialize(this,"IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR","xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof");
         ParseInstallation.getCurrentInstallation().put("user", "JoseLuis");
 
+
         ParsePush.subscribeInBackground("Administradores", new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -89,7 +92,20 @@ public class MenuPrincipal extends ActionBarActivity {
                 if(usuario!=null) {
                     shared.edit().putBoolean("my_first_time", false).commit();
                     shared.edit().putString("usuario", usuario).commit();
+                    ParseUser user=new ParseUser();
+                    user.setUsername(usuario);
+                    user.setPassword("no_pass");
+                    user.signUpInBackground(new SignUpCallback() {
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                // Hooray! Let them use the app now.
 
+                            } else {
+                                // Sign up didn't succeed. Look at the ParseException
+                                // to figure out what went wrong
+                            }
+                        }
+                    });
                 }
             }
             if (resultCode == RESULT_CANCELED) {
@@ -148,7 +164,7 @@ public class MenuPrincipal extends ActionBarActivity {
     }
 
     public void enviarA(View v){
-        EditText edit=(EditText) findViewById(R.id.mensajeCaja);
+        /*EditText edit=(EditText) findViewById(R.id.mensajeCaja);
         Spinner spinnerUsuario = (Spinner) findViewById((R.id.spinnerUsuario));
         List <String> usuarios = new ArrayList<>();
         spinnerUsuario.setVisibility(View.VISIBLE);
@@ -160,12 +176,13 @@ public class MenuPrincipal extends ActionBarActivity {
         ParsePush pruebapush = new ParsePush();
         pruebapush.setMessage(edit.getText().toString());
 
-        pruebapush.sendInBackground();
+        pruebapush.sendInBackground();*/
+        Intent i=new Intent(this, EnviarA.class);
+        startActivity(i);
     }
     public void consulta(View v){
         Spinner spinnerTipoPush = (Spinner) findViewById((R.id.spinnerTipoPush));
         String valorSpin = String.valueOf(spinnerTipoPush.getSelectedItem());
-
 
         Intent i = new Intent(this, Consulta.class );
         i.putExtra("ValorSpin", valorSpin);
