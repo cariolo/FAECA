@@ -2,6 +2,10 @@
     <string name="app_name">FAECA</string>
 
     <string name="hello_world">Hello world!</string>
-        <string name="action_settings">Opciones</string>
+    <string name="Opciones">Opciones</string>
+    <string name="Acercade">Acerca de...</string>
+    <string name="Salir">Salir</string>
     <string name="title_activity_reuniones">Reuniones</string>
+    <string name="title_activity_identificacion">Identificacion</string>
+    <string name="action_settings">Settings</string>
 </resources>

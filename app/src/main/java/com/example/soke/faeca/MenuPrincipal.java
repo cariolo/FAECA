@@ -27,22 +27,37 @@ import java.util.List;
 
 public class MenuPrincipal extends ActionBarActivity {
 
+    public static String usuario=null;
+    public int USUARIO=-1;
+    public SharedPreferences shared;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        final int USUARIO_REQUEST_CODE = 1;
+        USUARIO=USUARIO_REQUEST_CODE;
         final String PREFS_NAME = "MyPrefsFile";
 
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        shared=settings;
         if (settings.getBoolean("my_first_time", true)) {
-            //the app is being launched for first time, do something
-            Toast.makeText(this, "Primera vez que se abre la app!!", Toast.LENGTH_LONG).show();
-            // first time task.
+
+            String usuario=null;
+            Bundle extras=new Bundle();
+            extras.putString("usuario", usuario);
+
+            Intent i=new Intent(this, Identificacion.class);
+            i.putExtras(extras);
+            startActivityForResult(i, USUARIO_REQUEST_CODE);
+
 
             // record the fact that the app has been started at least once
-            settings.edit().putBoolean("my_first_time", false).commit();
         }
         else{
-            Toast.makeText(this, "No es la primera vez", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Bienvenido/a "+shared.getString("usuario","1"), Toast.LENGTH_LONG).show();
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menuprincipal);
@@ -65,6 +80,26 @@ public class MenuPrincipal extends ActionBarActivity {
         });
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+
+        if (requestCode == USUARIO) {
+            if (resultCode == RESULT_OK) {
+                usuario=data.getStringExtra("usuario");
+                Toast.makeText(this, "Hola "+usuario, Toast.LENGTH_LONG).show();
+                if(usuario!=null) {
+                    shared.edit().putBoolean("my_first_time", false).commit();
+                    shared.edit().putString("usuario", usuario).commit();
+
+                }
+            }
+            if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Lo sentimos, sin identificacion no puedes continuar", Toast.LENGTH_LONG).show();
+                super.finish();
+                finish();
+            }
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -81,8 +116,16 @@ public class MenuPrincipal extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.Opciones) {
+            Toast.makeText(this, "Opciones seleccionado", Toast.LENGTH_SHORT).show();
             return true;
+        }
+        if (id == R.id.Salir) {
+            this.finish();
+            super.finish();
+        }
+        if (id == R.id.Acercade___) {
+            Toast.makeText(this, "App desarrollada por Carlos Martinez y Jose Luis Martinez", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
