@@ -1,35 +1,51 @@
 package com.example.soke.faeca;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class EnviarA extends ActionBarActivity {
 
+    public final ArrayList<String> usuarios=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar);
-
-
         ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
-        ParseInstallation.getCurrentInstallation().get("username");
-        String cuenta= null;
-        try {
-            cuenta = String.valueOf(query.count());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Toast.makeText(this,"usuarios totales: "+cuenta,Toast.LENGTH_LONG).show();
+
+        //Me he quedado recibiendo el mensaje del campo de texto del activity anterior como extra
+        //
+        //
+        //Codigo aqui copon
+        //
+        //
+        //
+
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> users, ParseException e) {
+                if (e == null) {
+                    for (int i = 0; i < users.size(); i++) {
+                        usuarios.add(users.get(i).get("username").toString());
+                    }
+                } else {
+                }
+            }
+        });
     }
 
 

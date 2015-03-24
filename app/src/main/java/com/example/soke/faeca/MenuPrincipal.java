@@ -164,20 +164,9 @@ public class MenuPrincipal extends ActionBarActivity {
     }
 
     public void enviarA(View v){
-        /*EditText edit=(EditText) findViewById(R.id.mensajeCaja);
-        Spinner spinnerUsuario = (Spinner) findViewById((R.id.spinnerUsuario));
-        List <String> usuarios = new ArrayList<>();
-        spinnerUsuario.setVisibility(View.VISIBLE);
-
-       // ParseQuery<ParseObject> consulta = ;
-
-        String usuario_destino = String.valueOf(spinnerUsuario.getSelectedItem());
-
-        ParsePush pruebapush = new ParsePush();
-        pruebapush.setMessage(edit.getText().toString());
-
-        pruebapush.sendInBackground();*/
+        EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
         Intent i=new Intent(this, EnviarA.class);
+        i.putExtra("mensaje", campoTexto.getText().toString());
         startActivity(i);
     }
     public void consulta(View v){
