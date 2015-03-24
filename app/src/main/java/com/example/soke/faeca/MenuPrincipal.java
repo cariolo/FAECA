@@ -1,6 +1,7 @@
 package com.example.soke.faeca;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
@@ -27,6 +29,21 @@ public class MenuPrincipal extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final String PREFS_NAME = "MyPrefsFile";
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+
+        if (settings.getBoolean("my_first_time", true)) {
+            //the app is being launched for first time, do something
+            Toast.makeText(this, "Primera vez que se abre la app!!", Toast.LENGTH_LONG).show();
+            // first time task.
+
+            // record the fact that the app has been started at least once
+            settings.edit().putBoolean("my_first_time", false).commit();
+        }
+        else{
+            Toast.makeText(this, "No es la primera vez", Toast.LENGTH_LONG).show();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menuprincipal);
 
@@ -34,9 +51,9 @@ public class MenuPrincipal extends ActionBarActivity {
         //Parse.enableLocalDatastore(this); Al habilitar la BD local, no se logea bien al servidor parse (se envian los push, pero no hay constancia de quien)
 
         Parse.initialize(this,"IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR","xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof");
+        ParseInstallation.getCurrentInstallation().put("user", "JoseLuis");
 
-        ParsePush.subscribeInBackground("", new SaveCallback() {
-
+        ParsePush.subscribeInBackground("Administradores", new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
@@ -69,22 +86,6 @@ public class MenuPrincipal extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void enviarPushManual(View v){
-        EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
-        Spinner spinnerLayout = (Spinner) findViewById((R.id.spinnerTipoPush));
-        String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
-
-        ParseObject push = new ParseObject(valorSpin);
-        push.put("Mensaje", campoTexto.getText().toString());
-
-        //push.pinInBackground(); solo habilitado para la base de datos local activa
-
-        push.saveEventually(); //igual que saveInBackground pero si no hay conexion, en cuanto la encuentre se hara el push
-
-        Toast.makeText(this, "Enviando...", Toast.LENGTH_LONG).show();
-        this.enviarATodos(v);
     }
 
     public void enviarATodos(View v){
