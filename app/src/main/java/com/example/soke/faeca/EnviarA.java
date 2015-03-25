@@ -26,7 +26,6 @@ import java.util.List;
 
 public class EnviarA extends ActionBarActivity {
 
-    public LinkedList<String> usuarios=new LinkedList<>();
     public Spinner selectorUsuarios;
     public Spinner selectorGrupos;
     String mensaje;
@@ -55,6 +54,8 @@ public class EnviarA extends ActionBarActivity {
 
 
         //Busco todos los usuarios de la aplicacion para poder mandarles push
+
+        final LinkedList<String> usuarios=new LinkedList<>();
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> users, ParseException e) {
                 if (e == null) {
@@ -101,7 +102,6 @@ public class EnviarA extends ActionBarActivity {
         ParseQuery query=ParseInstallation.getQuery();
         query.whereEqualTo("_User", selectorUsuarios.getSelectedItem().toString());
 
-        Toast.makeText(this, selectorUsuarios.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
         ParsePush push=new ParsePush();
         push.setQuery(query);
         push.setMessage(mensaje);
