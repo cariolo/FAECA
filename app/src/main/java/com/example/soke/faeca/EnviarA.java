@@ -26,7 +26,7 @@ import java.util.List;
 
 public class EnviarA extends ActionBarActivity {
 
-    public final LinkedList<String> usuarios=new LinkedList<>();
+    public LinkedList<String> usuarios=new LinkedList<>();
     public Spinner selectorUsuarios;
     public Spinner selectorGrupos;
     String mensaje;
@@ -90,7 +90,6 @@ public class EnviarA extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -102,6 +101,7 @@ public class EnviarA extends ActionBarActivity {
         ParseQuery query=ParseInstallation.getQuery();
         query.whereEqualTo("_User", selectorUsuarios.getSelectedItem().toString());
 
+        Toast.makeText(this, selectorUsuarios.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
         ParsePush push=new ParsePush();
         push.setQuery(query);
         push.setMessage(mensaje);
