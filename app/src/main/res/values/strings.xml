@@ -9,4 +9,5 @@
     <string name="title_activity_identificacion">Identificacion</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_enviar">EnviarA</string>
+    <string name="title_activity_application">Application</string>
 </resources>

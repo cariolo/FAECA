@@ -1,25 +1,20 @@
 package com.example.soke.faeca;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,8 +33,21 @@ public class EnviarA extends ActionBarActivity {
         selectorGrupos=(Spinner) findViewById(R.id.grupos);
         mensaje=getIntent().getStringExtra("mensaje");
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
-
+        ParseQuery query = ParseInstallation.getQuery();
+        //
+        //
+        //
+        //
+        //
+        //Me quedo trasteando el query para que funcione como el del metodo Enviar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
         //Busco los canales a los que estoy suscrito
         List<String> subscribedChannels = ParseInstallation.getCurrentInstallation().getList("channels");
         LinkedList<String> canales=new LinkedList<>();
@@ -100,7 +108,7 @@ public class EnviarA extends ActionBarActivity {
 
     public void enviar(View v){
         ParseQuery query=ParseInstallation.getQuery();
-        query.whereEqualTo("_User", selectorUsuarios.getSelectedItem().toString());
+        query.whereEqualTo("user", /*selectorUsuarios.getSelectedItem().toString()*/"Zeon");
 
         ParsePush push=new ParsePush();
         push.setQuery(query);

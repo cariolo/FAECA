@@ -2,8 +2,8 @@ package com.example.soke.faeca;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,18 +13,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.parse.Parse;
-import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MenuPrincipal extends ActionBarActivity {
@@ -37,7 +32,7 @@ public class MenuPrincipal extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
+        super.onCreate(savedInstanceState);
         final int USUARIO_REQUEST_CODE = 1;
         USUARIO=USUARIO_REQUEST_CODE;
         final String PREFS_NAME = "MyPrefsFile";
@@ -58,7 +53,6 @@ public class MenuPrincipal extends ActionBarActivity {
         else{
             Toast.makeText(this, "Bienvenido/a "+shared.getString("usuario","1"), Toast.LENGTH_LONG).show();
         }
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menuprincipal);
 
 
