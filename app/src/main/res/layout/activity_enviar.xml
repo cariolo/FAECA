@@ -17,10 +17,82 @@
 
     <Spinner
         android:entries="@array/grupos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/grupos"
+        android:longClickable="true"
+        android:spinnerMode="dropdown"
+        android:layout_above="@+id/usuarios"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="61dp" />
+
+    <Spinner
+        android:entries="@array/usuarios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
-        android:layout_below="@+id/textView4"
+        android:id="@+id/usuarios"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:spinnerMode="dropdown"
+        android:layout_toStartOf="@+id/textView4"
+        android:layout_alignRight="@+id/grupos"
+        android:layout_alignEnd="@+id/grupos"
+        android:longClickable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Grupos"
+        android:id="@+id/textView5"
+        android:layout_above="@+id/grupos"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Usuarios"
+        android:id="@+id/textView6"
+        android:layout_above="@+id/usuarios"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/grupos"
+        android:layout_alignEnd="@+id/grupos"
+        android:layout_below="@+id/textView5"
+        android:layout_alignBottom="@+id/usuarios"
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grupos"
+            android:id="@+id/gruposRB"
+            android:layout_gravity="right"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Usuarios"
+            android:id="@+id/usuariosRB"
+            android:checked="false" />
+    </RadioGroup>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enviar"
+        android:id="@+id/button"
+        android:layout_below="@+id/radioGroup"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp" />
+        android:onClick="enviar" />
+
 </RelativeLayout>

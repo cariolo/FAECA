@@ -54,9 +54,6 @@ public class MenuPrincipal extends ActionBarActivity {
             Intent i=new Intent(this, Identificacion.class);
             i.putExtras(extras);
             startActivityForResult(i, USUARIO_REQUEST_CODE);
-
-
-            // record the fact that the app has been started at least once
         }
         else{
             Toast.makeText(this, "Bienvenido/a "+shared.getString("usuario","1"), Toast.LENGTH_LONG).show();
@@ -70,17 +67,28 @@ public class MenuPrincipal extends ActionBarActivity {
         Parse.initialize(this,"IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR","xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof");
         ParseInstallation.getCurrentInstallation().put("user", "JoseLuis");
 
-
         ParsePush.subscribeInBackground("Administradores", new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
-                    Log.d("com.parse.push", "Conexión exitosa");
                 } else {
-                    Log.e("com.parse.push", "Conexión fallida", e);
+                    Log.d("ERROR AL SUSCRIBIR", "Ha habido un error al suscribirte");
+                    e.printStackTrace();
                 }
             }
         });
+        ParsePush.subscribeInBackground("Todos", new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                } else {
+                    Log.d("ERROR AL SUSCRIBIR", "Ha habido un error al suscribirte");
+                    e.printStackTrace();
+
+                }
+            }
+        });
+
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -101,8 +109,7 @@ public class MenuPrincipal extends ActionBarActivity {
                                 // Hooray! Let them use the app now.
 
                             } else {
-                                // Sign up didn't succeed. Look at the ParseException
-                                // to figure out what went wrong
+                                e.printStackTrace();
                             }
                         }
                     });
@@ -177,4 +184,5 @@ public class MenuPrincipal extends ActionBarActivity {
         i.putExtra("ValorSpin", valorSpin);
         startActivity(i);
     }
+
 }
