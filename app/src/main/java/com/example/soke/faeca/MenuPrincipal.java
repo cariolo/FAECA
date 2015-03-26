@@ -60,7 +60,7 @@ public class MenuPrincipal extends ActionBarActivity {
 
 
         Parse.initialize(this,"IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR","xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof");
-        ParseInstallation.getCurrentInstallation().put("user", "JoseLuis");
+        ParseInstallation.getCurrentInstallation().put("user", shared.getString("usuario","1"));
 
         ParsePush.subscribeInBackground("Administradores", new SaveCallback() {
             @Override

@@ -74,8 +74,10 @@ public class EnviarA extends ActionBarActivity {
                 adapterUsuarios.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 selectorUsuarios = (Spinner) findViewById(R.id.usuarios);
                 selectorUsuarios.setAdapter(adapterUsuarios);
+                Log.e("$$$$$$$","Terminado el while de dentro!!!");
                 terminado = false;
             }
+            Log.e("$$$$$","while true");
             break;
         }
 
