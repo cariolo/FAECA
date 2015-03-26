@@ -2,6 +2,7 @@ package com.example.soke.faeca;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class EnviarA extends ActionBarActivity {
 
     public Spinner selectorUsuarios;
     public Spinner selectorGrupos;
+    public boolean terminado=false;
     String mensaje;
     @Override
 
@@ -31,13 +34,15 @@ public class EnviarA extends ActionBarActivity {
 
         //Busco todos los usuarios de la aplicacion para poder mandarles push
         ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
-        final LinkedList<String> usuarios=new LinkedList<>();
+        final ArrayList<String> usuarios=new ArrayList<>();
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> users, ParseException e) {
                 if (e == null) {
                     for (int i = 0; i < users.size(); i++) {
                         usuarios.add(users.get(i).get("username").toString());
+                        Log.e("$$$$$$$$$", "usuario: "+usuarios.get(i).toString()+" cuenta: "+usuarios.size());
                     }
+                    terminado=true;
                 } else {
                     e.printStackTrace();
                 }
@@ -63,11 +68,18 @@ public class EnviarA extends ActionBarActivity {
         selectorGrupos.setAdapter(grupos);
 
         //Lleno el Spinner con los usuarios registrados
-        ArrayAdapter<String> adapterUsuarios=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, usuarios);
-        adapterUsuarios.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        selectorUsuarios=(Spinner) findViewById(R.id.usuarios);
-        selectorUsuarios.setAdapter(adapterUsuarios);
+        while(true) {
+            while (terminado) {
+                ArrayAdapter<String> adapterUsuarios = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, usuarios);
+                adapterUsuarios.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                selectorUsuarios = (Spinner) findViewById(R.id.usuarios);
+                selectorUsuarios.setAdapter(adapterUsuarios);
+                terminado = false;
+            }
+            break;
+        }
 
+        Log.e("$$$$$$$$$", "cuenta usuarios totales: "+usuarios.size());
     }
 
 
