@@ -12,14 +12,19 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MenuPrincipal extends ActionBarActivity {
@@ -27,7 +32,7 @@ public class MenuPrincipal extends ActionBarActivity {
     public static String usuario=null;
     public int USUARIO=-1;
     public SharedPreferences shared;
-
+    public static boolean terminado = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,11 +170,22 @@ public class MenuPrincipal extends ActionBarActivity {
         push.saveEventually();
     }
 
-    public void enviarA(View v){
+    public void enviarA(View v) throws ParseException {
         EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
-        Intent i=new Intent(this, EnviarA.class);
-        i.putExtra("mensaje", campoTexto.getText().toString());
-        startActivity(i);
+
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        ArrayList<String> usuarios=new ArrayList<>();
+        ArrayList<ParseUser> users =new ArrayList<>();
+        users = (ArrayList<ParseUser>) query.find();
+
+        for (int i = 0; i < users.size(); i++)
+            usuarios.add(users.get(i).getUsername());
+
+
+            Intent i = new Intent(this, EnviarA.class);
+            i.putExtra("mensaje", campoTexto.getText().toString());
+            i.putExtra("usuarios", usuarios);
+            startActivity(i);
     }
     public void consulta(View v){
         Spinner spinnerTipoPush = (Spinner) findViewById((R.id.spinnerTipoPush));

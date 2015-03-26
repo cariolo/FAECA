@@ -16,7 +16,7 @@
         android:layout_centerHorizontal="true" />
 
     <Spinner
-        android:entries="@array/grupos"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/grupos"
@@ -28,7 +28,7 @@
         android:layout_marginBottom="61dp" />
 
     <Spinner
-        android:entries="@array/usuarios"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/usuarios"
