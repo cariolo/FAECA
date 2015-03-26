@@ -87,7 +87,7 @@ public class EnviarA extends ActionBarActivity {
 
     public void enviar(View v){
         ParseQuery query=ParseInstallation.getQuery();
-        query.whereEqualTo("user", /*selectorUsuarios.getSelectedItem().toString()*/"Zeon");
+        query.whereEqualTo("user", selectorUsuarios.getSelectedItem().toString());
 
         ParsePush push=new ParsePush();
         push.setQuery(query);
