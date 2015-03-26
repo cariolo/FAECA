@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
@@ -24,7 +23,6 @@ import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MenuPrincipal extends ActionBarActivity {
@@ -63,9 +61,8 @@ public class MenuPrincipal extends ActionBarActivity {
 
         //Parse.enableLocalDatastore(this); Al habilitar la BD local, no se logea bien al servidor parse (se envian los push, pero no hay constancia de quien)
 
-
         Parse.initialize(this,"IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR","xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof");
-        ParseInstallation.getCurrentInstallation().put("user", shared.getString("usuario","1"));
+        ParseInstallation.getCurrentInstallation().put("user", "JoseLuis");
 
         ParsePush.subscribeInBackground("Administradores", new SaveCallback() {
             @Override

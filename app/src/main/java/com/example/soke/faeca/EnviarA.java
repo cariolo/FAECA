@@ -2,17 +2,14 @@ package com.example.soke.faeca;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import com.parse.FindCallback;
-import com.parse.ParseException;
 import com.parse.ParseInstallation;
-import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 
@@ -31,9 +28,6 @@ public class EnviarA extends ActionBarActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //Busco todos los usuarios de la aplicacion para poder mandarles push
-
 
         //Busco los canales a los que estoy suscrito
         List<String> subscribedChannels = ParseInstallation.getCurrentInstallation().getList("channels");
@@ -86,12 +80,23 @@ public class EnviarA extends ActionBarActivity {
     }
 
     public void enviar(View v){
-        ParseQuery query=ParseInstallation.getQuery();
-        query.whereEqualTo("user", selectorUsuarios.getSelectedItem().toString());
 
-        ParsePush push=new ParsePush();
-        push.setQuery(query);
-        push.setMessage(mensaje);
-        push.sendInBackground();
+        RadioButton grupo=(RadioButton) findViewById(R.id.gruposRB);
+        RadioButton usuario=(RadioButton) findViewById(R.id.usuariosRB);
+        ParsePush push = new ParsePush();
+
+        if(usuario.isChecked()) {
+            ParseQuery query = ParseInstallation.getQuery();
+            query.whereEqualTo("user", selectorUsuarios.getSelectedItem().toString());
+
+            push.setQuery(query);
+            push.setMessage(mensaje);
+            push.sendInBackground();
+        }
+        else if(grupo.isChecked()){
+            push.setChannel(selectorGrupos.getSelectedItem().toString());
+            push.setMessage(mensaje);
+            push.sendInBackground();
+        }
     }
 }
