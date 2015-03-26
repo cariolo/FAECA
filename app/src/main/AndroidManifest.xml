@@ -31,6 +31,10 @@
             </intent-filter>
         </activity>
 
+        <application
+            android:name="com.example.soke.faeca.MenuPrincipal">
+
+            </application>
         <service android:name="com.parse.PushService" />
 
         <receiver android:name="com.parse.ParseBroadcastReceiver" >

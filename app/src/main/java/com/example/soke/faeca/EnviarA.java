@@ -2,6 +2,7 @@ package com.example.soke.faeca;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,7 +69,8 @@ public class EnviarA extends ActionBarActivity {
             public void done(List<ParseObject> users, ParseException e) {
                 if (e == null) {
                     for (int i = 0; i < users.size(); i++) {
-                        usuarios.add(users.get(i).get("username").toString());
+                        usuarios.add(users.get(i).get("user").toString());
+                        Log.d("$$$$$$$$$$$","usuario: "+usuarios.get(i).toString());
                     }
                 } else {
                     e.printStackTrace();
