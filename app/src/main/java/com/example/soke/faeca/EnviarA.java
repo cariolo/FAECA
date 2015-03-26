@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.parse.ParseInstallation;
 import com.parse.ParsePush;
@@ -40,8 +41,7 @@ public class EnviarA extends ActionBarActivity {
         selectorUsuarios=(Spinner) findViewById(R.id.usuarios);
         selectorGrupos=(Spinner) findViewById(R.id.grupos);
         mensaje = getIntent().getStringExtra("mensaje");
-        ArrayList<String> usuarios = new ArrayList<>();
-        usuarios = getIntent().getStringArrayListExtra("usuarios");
+        ArrayList<String> usuarios = getIntent().getStringArrayListExtra("usuarios");
 
         //Lleno el Spinner con los canales a los que estoy suscrito
         ArrayAdapter<String> grupos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, canales);
@@ -92,11 +92,13 @@ public class EnviarA extends ActionBarActivity {
             push.setQuery(query);
             push.setMessage(mensaje);
             push.sendInBackground();
+            Toast.makeText(this, "Enviando a "+selectorUsuarios.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
         }
         else if(grupo.isChecked()){
-            push.setChannel(selectorGrupos.getSelectedItem().toString());
+            push.setChannel("Administradores");
             push.setMessage(mensaje);
             push.sendInBackground();
+            Toast.makeText(this, "Enviando a "+selectorGrupos.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
         }
     }
 }

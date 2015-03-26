@@ -62,7 +62,7 @@ public class MenuPrincipal extends ActionBarActivity {
         //Parse.enableLocalDatastore(this); Al habilitar la BD local, no se logea bien al servidor parse (se envian los push, pero no hay constancia de quien)
 
         Parse.initialize(this,"IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR","xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof");
-        ParseInstallation.getCurrentInstallation().put("user", "JoseLuis");
+        ParseInstallation.getCurrentInstallation().put("user", shared.getString("usuario","1"));
 
         ParsePush.subscribeInBackground("Administradores", new SaveCallback() {
             @Override
