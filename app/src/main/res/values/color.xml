@@ -1,0 +1,4 @@
+<resources>
+    <color name="primaryColor"> #CDDC39 </color>
+    <color name="primaryColorDark"> #AFB42B </color>
+</resources>
