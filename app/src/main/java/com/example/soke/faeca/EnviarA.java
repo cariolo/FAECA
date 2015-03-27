@@ -102,6 +102,7 @@ public class EnviarA extends Activity {
             push.setMessage(mensaje);
             push.sendInBackground();
             Toast.makeText(this, "Enviando a "+selectorGrupos.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+
         }
     }
 }
