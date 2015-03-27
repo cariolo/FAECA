@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +40,7 @@ public class MenuPrincipal extends Activity {
         USUARIO=USUARIO_REQUEST_CODE;
         final String PREFS_NAME = "MyPrefsFile";
 
+        Parse.setLogLevel(Parse.LOG_LEVEL_VERBOSE);
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         shared=settings;
@@ -65,6 +65,7 @@ public class MenuPrincipal extends Activity {
         Parse.initialize(this,"IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR","xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof");
         ParseInstallation.getCurrentInstallation().put("user", shared.getString("usuario","1"));
 
+
         ParsePush.subscribeInBackground("Administradores", new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -86,6 +87,7 @@ public class MenuPrincipal extends Activity {
                 }
             }
         });
+        ParseInstallation.getCurrentInstallation().saveInBackground();
 
     }
 
@@ -120,6 +122,7 @@ public class MenuPrincipal extends Activity {
             }
         }
     }
+
 
 
     @Override
@@ -193,5 +196,4 @@ public class MenuPrincipal extends Activity {
         i.putExtra("ValorSpin", valorSpin);
         startActivity(i);
     }
-
 }

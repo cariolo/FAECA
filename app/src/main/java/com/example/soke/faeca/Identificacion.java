@@ -1,8 +1,7 @@
 package com.example.soke.faeca;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-public class Identificacion extends ActionBarActivity {
+public class Identificacion extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

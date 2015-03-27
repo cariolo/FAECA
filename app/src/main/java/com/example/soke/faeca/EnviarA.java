@@ -2,20 +2,17 @@ package com.example.soke.faeca;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
-import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -44,8 +41,7 @@ public class EnviarA extends Activity {
         selectorUsuarios=(Spinner) findViewById(R.id.usuarios);
         selectorGrupos=(Spinner) findViewById(R.id.grupos);
         mensaje = getIntent().getStringExtra("mensaje");
-        ArrayList<String> usuarios = new ArrayList<>();
-        usuarios = getIntent().getStringArrayListExtra("usuarios");
+        ArrayList<String> usuarios = getIntent().getStringArrayListExtra("usuarios");
 
         //Lleno el Spinner con los canales a los que estoy suscrito
         ArrayAdapter<String> grupos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, canales);
@@ -87,21 +83,26 @@ public class EnviarA extends Activity {
 
         RadioButton grupo=(RadioButton) findViewById(R.id.gruposRB);
         RadioButton usuario=(RadioButton) findViewById(R.id.usuariosRB);
-        ParsePush push = new ParsePush();
+
 
         if(usuario.isChecked()) {
+            ParsePush push = new ParsePush();
             ParseQuery query = ParseInstallation.getQuery();
             query.whereEqualTo("user", selectorUsuarios.getSelectedItem().toString());
 
             push.setQuery(query);
             push.setMessage(mensaje);
             push.sendInBackground();
+            Toast.makeText(this, "Enviando a "+selectorUsuarios.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
         }
-        if(grupo.isChecked()){
+        else if(grupo.isChecked()){
+            ParsePush push = new ParsePush();
 
-                push.setChannel(selectorGrupos.getSelectedItem().toString());
-                push.setMessage(mensaje);
-                push.sendInBackground();
-            }
+            push.setChannel("Administradores");
+            push.setMessage(mensaje);
+            push.sendInBackground();
+            Toast.makeText(this, "Enviando a "+selectorGrupos.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+
         }
-        }
+    }
+}
