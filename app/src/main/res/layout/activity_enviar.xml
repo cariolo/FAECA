@@ -64,11 +64,10 @@
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/grupos"
-        android:layout_alignEnd="@+id/grupos"
-        android:layout_below="@+id/textView5"
-        android:layout_alignBottom="@+id/usuarios"
-        android:id="@+id/radioGroup">
+        android:id="@+id/radioGroup"
+        android:layout_below="@+id/usuarios"
+        android:layout_alignRight="@+id/button"
+        android:layout_alignEnd="@+id/button">
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -91,8 +90,9 @@
         android:layout_height="wrap_content"
         android:text="Enviar"
         android:id="@+id/button"
-        android:layout_below="@+id/radioGroup"
+        android:onClick="enviar"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="enviar" />
+        android:layout_marginBottom="64dp" />
 
 </RelativeLayout>

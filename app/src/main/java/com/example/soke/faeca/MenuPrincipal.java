@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -41,6 +40,7 @@ public class MenuPrincipal extends Activity {
         USUARIO=USUARIO_REQUEST_CODE;
         final String PREFS_NAME = "MyPrefsFile";
 
+        Parse.setLogLevel(Parse.LOG_LEVEL_VERBOSE);
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         shared=settings;
@@ -57,7 +57,6 @@ public class MenuPrincipal extends Activity {
         else{
             Toast.makeText(this, "Bienvenido/a "+shared.getString("usuario","1"), Toast.LENGTH_LONG).show();
         }
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         setContentView(R.layout.activity_menuprincipal);
 
 
@@ -65,6 +64,7 @@ public class MenuPrincipal extends Activity {
 
         Parse.initialize(this,"IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR","xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof");
         ParseInstallation.getCurrentInstallation().put("user", shared.getString("usuario","1"));
+
 
         ParsePush.subscribeInBackground("Administradores", new SaveCallback() {
             @Override
@@ -87,6 +87,7 @@ public class MenuPrincipal extends Activity {
                 }
             }
         });
+        ParseInstallation.getCurrentInstallation().saveInBackground();
 
     }
 
@@ -195,5 +196,4 @@ public class MenuPrincipal extends Activity {
         i.putExtra("ValorSpin", valorSpin);
         startActivity(i);
     }
-
 }
