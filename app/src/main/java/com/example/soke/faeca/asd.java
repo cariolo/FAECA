@@ -12,5 +12,6 @@ public class asd extends Application {
     public void onCreate() {
         super.onCreate();
         Parse.initialize(this, "IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR", "xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof");
+
     }
 }
