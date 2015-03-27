@@ -1,7 +1,9 @@
 package com.example.soke.faeca;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,16 +11,18 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
+import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 
-public class EnviarA extends ActionBarActivity {
+public class EnviarA extends Activity {
 
     public Spinner selectorUsuarios;
     public Spinner selectorGrupos;
@@ -93,10 +97,11 @@ public class EnviarA extends ActionBarActivity {
             push.setMessage(mensaje);
             push.sendInBackground();
         }
-        else if(grupo.isChecked()){
-            push.setChannel(selectorGrupos.getSelectedItem().toString());
-            push.setMessage(mensaje);
-            push.sendInBackground();
+        if(grupo.isChecked()){
+
+                push.setChannel(selectorGrupos.getSelectedItem().toString());
+                push.setMessage(mensaje);
+                push.sendInBackground();
+            }
         }
-    }
-}
+        }
