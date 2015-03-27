@@ -1,7 +1,7 @@
 package com.example.soke.faeca;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class EnviarA extends ActionBarActivity {
+public class EnviarA extends Activity {
 
     public Spinner selectorUsuarios;
     public Spinner selectorGrupos;
@@ -83,9 +83,10 @@ public class EnviarA extends ActionBarActivity {
 
         RadioButton grupo=(RadioButton) findViewById(R.id.gruposRB);
         RadioButton usuario=(RadioButton) findViewById(R.id.usuariosRB);
-        ParsePush push = new ParsePush();
+
 
         if(usuario.isChecked()) {
+            ParsePush push = new ParsePush();
             ParseQuery query = ParseInstallation.getQuery();
             query.whereEqualTo("user", selectorUsuarios.getSelectedItem().toString());
 
@@ -95,6 +96,8 @@ public class EnviarA extends ActionBarActivity {
             Toast.makeText(this, "Enviando a "+selectorUsuarios.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
         }
         else if(grupo.isChecked()){
+            ParsePush push = new ParsePush();
+
             push.setChannel("Administradores");
             push.setMessage(mensaje);
             push.sendInBackground();

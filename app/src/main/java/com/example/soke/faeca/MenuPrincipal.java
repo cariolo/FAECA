@@ -1,13 +1,14 @@
 package com.example.soke.faeca;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -25,7 +26,7 @@ import com.parse.SignUpCallback;
 import java.util.ArrayList;
 
 
-public class MenuPrincipal extends ActionBarActivity {
+public class MenuPrincipal extends Activity {
 
     public static String usuario=null;
     public int USUARIO=-1;
@@ -56,6 +57,7 @@ public class MenuPrincipal extends ActionBarActivity {
         else{
             Toast.makeText(this, "Bienvenido/a "+shared.getString("usuario","1"), Toast.LENGTH_LONG).show();
         }
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         setContentView(R.layout.activity_menuprincipal);
 
 
@@ -119,6 +121,7 @@ public class MenuPrincipal extends ActionBarActivity {
             }
         }
     }
+
 
 
     @Override
