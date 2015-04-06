@@ -29,7 +29,7 @@
 
     <Spinner
 
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/usuarios"
         android:layout_centerVertical="true"
@@ -64,15 +64,14 @@
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/radioGroup"
+        android:layout_alignRight="@+id/grupos"
         android:layout_below="@+id/usuarios"
-        android:layout_alignRight="@+id/button"
-        android:layout_alignEnd="@+id/button">
+        android:id="@+id/radioGroup">
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Grupos"
+            android:text="Grupos   "
             android:id="@+id/gruposRB"
             android:layout_gravity="right"
             android:checked="false" />
@@ -90,9 +89,9 @@
         android:layout_height="wrap_content"
         android:text="Enviar"
         android:id="@+id/button"
-        android:onClick="enviar"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/radioGroup"
+        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="64dp" />
+        android:onClick="enviar" />
 
 </RelativeLayout>

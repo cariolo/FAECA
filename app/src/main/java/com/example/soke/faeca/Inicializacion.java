@@ -7,7 +7,7 @@ import com.parse.Parse;
 /**
  * Created by soke on 27/03/2015.
  */
-public class asd extends Application {
+public class Inicializacion extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
