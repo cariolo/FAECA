@@ -42,6 +42,7 @@ public class MenuPrincipal extends Activity {
 
         Parse.setLogLevel(Parse.LOG_LEVEL_VERBOSE);
 
+
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         shared=settings;
         if (settings.getBoolean("my_first_time", true)) {
