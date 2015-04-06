@@ -4,7 +4,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.soke.faeca.Identificacion">
+    tools:context="com.example.soke.faeca.Identificacion"
+    android:background="@mipmap/prueba_fondo">
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,6 +22,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Identificate en la aplicacion con tu nombre para que todos puedan reconocerte."
         android:id="@+id/textView3"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
 
@@ -43,4 +45,5 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:onClick="guardarNombre" />
+
 </RelativeLayout>

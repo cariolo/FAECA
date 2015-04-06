@@ -64,9 +64,6 @@ public class EnviarA extends Activity {
 
     public void enviar(View v){
 
-        RadioButton grupo=(RadioButton) findViewById(R.id.gruposRB);
-        RadioButton usuario=(RadioButton) findViewById(R.id.usuariosRB);
-
         ParsePush push = new ParsePush();
         ParseQuery query = ParseInstallation.getQuery();
         query.whereEqualTo("user", selectorUsuarios.getSelectedItem().toString());
