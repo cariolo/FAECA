@@ -162,14 +162,18 @@ public class MenuPrincipal extends Activity {
         String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
         EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
         ParsePush pushAtodos = new ParsePush();
+        if (campoTexto.getText().toString() == "" || campoTexto.getText().toString() == " " || campoTexto.getText().toString() == null || campoTexto.getText().length() == 0){
+            Toast.makeText(this, "Campo de texto vacío o incompleto, inténtelo de nuevo", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            pushAtodos.setMessage("\n" + valorSpin.toUpperCase() + ": " + mensaje.getText().toString());
 
-        pushAtodos.setMessage("\n" + valorSpin.toUpperCase() + ": " + mensaje.getText().toString());
+            pushAtodos.sendInBackground();
 
-        pushAtodos.sendInBackground();
-
-        ParseObject push = new ParseObject(valorSpin);
-        push.put("Mensaje", campoTexto.getText().toString());
-        push.saveEventually();
+            ParseObject push = new ParseObject(valorSpin);
+            push.put("Mensaje", campoTexto.getText().toString());
+            push.saveEventually();
+        }
     }
 
     public void enviarA(View v) throws ParseException {
@@ -179,15 +183,19 @@ public class MenuPrincipal extends Activity {
         ArrayList<String> usuarios=new ArrayList<>();
         ArrayList<ParseUser> users =new ArrayList<>();
         users = (ArrayList<ParseUser>) query.find();
-
-        for (int i = 0; i < users.size(); i++)
-            usuarios.add(users.get(i).getUsername());
+        if (campoTexto.getText().toString() == "" || campoTexto.getText().toString() == " " || campoTexto.getText().toString() == null || campoTexto.getText().length() == 0){
+            Toast.makeText(this, "Campo de texto vacío o incompleto, inténtelo de nuevo", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            for (int i = 0; i < users.size(); i++)
+                usuarios.add(users.get(i).getUsername());
 
 
             Intent i = new Intent(this, EnviarA.class);
             i.putExtra("mensaje", campoTexto.getText().toString());
             i.putExtra("usuarios", usuarios);
             startActivity(i);
+        }
     }
     public void consulta(View v){
         Spinner spinnerTipoPush = (Spinner) findViewById((R.id.spinnerTipoPush));

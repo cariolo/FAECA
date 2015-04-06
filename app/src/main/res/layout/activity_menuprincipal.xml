@@ -44,7 +44,7 @@
         android:id="@+id/spinnerTipoPush"
         android:spinnerMode="dialog"
         android:layout_below="@+id/asunto"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
