@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -26,11 +27,12 @@ public class EnviarA extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_enviar);
         selectorUsuarios=(Spinner) findViewById(R.id.usuarios);
         mensaje = getIntent().getStringExtra("mensaje");
         ArrayList<String> usuarios = getIntent().getStringArrayListExtra("usuarios");
+
+        setTitle("Push individual");
 
         //Lleno el Spinner con los usuarios registrados
         ArrayAdapter<String> adapterUsuarios = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, usuarios);
@@ -74,4 +76,8 @@ public class EnviarA extends Activity {
         Toast.makeText(this, "Enviando a "+selectorUsuarios.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
 
     }
+    public void onBackPressed(){
+        finish();
+        overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
+            }
 }

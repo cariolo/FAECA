@@ -8,10 +8,11 @@
     android:background="@mipmap/prueba_fondo">
 
     <TextView
+        android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="¿A quien deseas notificar?"
+        android:text="¿A quién deseas notificar?"
         android:id="@+id/portada"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -29,6 +30,7 @@
         android:longClickable="true" />
 
     <TextView
+        android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"

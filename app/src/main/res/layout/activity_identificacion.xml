@@ -11,7 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Por favor:"
+        android:text="Por favor"
+        android:textColor="@android:color/white"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -19,8 +20,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Identificate en la aplicacion con tu nombre para que todos puedan reconocerte."
+        android:text="Identifícate en la aplicación con tu nombre para que todos puedan reconocerte"
         android:id="@+id/textView3"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/textView"

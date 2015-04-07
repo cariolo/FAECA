@@ -1,5 +1,6 @@
 package com.example.soke.faeca;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -39,6 +41,8 @@ public class MenuPrincipal extends Activity {
         final int USUARIO_REQUEST_CODE = 1;
         USUARIO=USUARIO_REQUEST_CODE;
         final String PREFS_NAME = "MyPrefsFile";
+
+        setTitle("Menú principal");
 
         Parse.setLogLevel(Parse.LOG_LEVEL_VERBOSE);
 
@@ -162,8 +166,8 @@ public class MenuPrincipal extends Activity {
         String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
         EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
         ParsePush pushAtodos = new ParsePush();
-        if (campoTexto.getText().toString() == "" || campoTexto.getText().toString() == " " || campoTexto.getText().toString() == null || campoTexto.getText().length() == 0){
-            Toast.makeText(this, "Campo de texto vacío o incompleto, inténtelo de nuevo", Toast.LENGTH_SHORT).show();
+        if(campoTexto.getText().toString().length() == 0){
+            Toast.makeText(this, "Campo de texto vacío, rellénelo e inténtelo de nuevo", Toast.LENGTH_SHORT).show();
         }
         else {
             pushAtodos.setMessage("\n" + valorSpin.toUpperCase() + ": " + mensaje.getText().toString());
@@ -183,8 +187,8 @@ public class MenuPrincipal extends Activity {
         ArrayList<String> usuarios=new ArrayList<>();
         ArrayList<ParseUser> users =new ArrayList<>();
         users = (ArrayList<ParseUser>) query.find();
-        if (campoTexto.getText().toString() == "" || campoTexto.getText().toString() == " " || campoTexto.getText().toString() == null || campoTexto.getText().length() == 0){
-            Toast.makeText(this, "Campo de texto vacío o incompleto, inténtelo de nuevo", Toast.LENGTH_SHORT).show();
+        if(campoTexto.getText().toString().length() == 0){
+            Toast.makeText(this, "Campo de texto vacío, rellénelo e inténtelo de nuevo", Toast.LENGTH_SHORT).show();
         }
         else {
             for (int i = 0; i < users.size(); i++)
@@ -195,6 +199,7 @@ public class MenuPrincipal extends Activity {
             i.putExtra("mensaje", campoTexto.getText().toString());
             i.putExtra("usuarios", usuarios);
             startActivity(i);
+            overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
         }
     }
     public void consulta(View v){
@@ -204,5 +209,6 @@ public class MenuPrincipal extends Activity {
         Intent i = new Intent(this, Consulta.class );
         i.putExtra("ValorSpin", valorSpin);
         startActivity(i);
+        overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
     }
 }

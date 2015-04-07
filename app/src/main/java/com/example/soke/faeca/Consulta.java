@@ -1,13 +1,10 @@
 package com.example.soke.faeca;
 
 import android.app.Activity;
-import android.app.ListActivity;
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -25,19 +22,23 @@ public class Consulta extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reuniones);
+        setContentView(R.layout.activity_consulta_push);
         Bundle elPrimero = getIntent().getExtras();
         String valorSpin = elPrimero.getString("ValorSpin");
         ListView vistaResultadosConsulta = (ListView) findViewById(R.id.listaResultados);
 
-        ParseObject a;
         ParseQuery<ParseObject> query = ParseQuery.getQuery(valorSpin);
         Toast.makeText(this, "Consultando " + valorSpin + "...", Toast.LENGTH_LONG).show();
+
+
+        setTitle("Consulta de " + valorSpin);
+
+
         try {
             List<ParseObject> lista=query.find();
             ArrayList<String> listaResultado = new ArrayList<>();
             for(int i = 0; i < lista.size(); i++){
-                listaResultado.add(lista.get(i).getString("Mensaje"));
+                listaResultado.add("Mensaje: "+lista.get(i).getString("Mensaje") + "\nFecha: " + lista.get(i).getCreatedAt().toString());
             }
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_single_choice, listaResultado);
             vistaResultadosConsulta.setAdapter(arrayAdapter);
@@ -71,6 +72,6 @@ public class Consulta extends Activity {
     @Override
     public void onBackPressed(){
         finish();
-        return;
+        overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
     }
 }
