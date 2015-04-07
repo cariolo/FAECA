@@ -15,11 +15,9 @@ public class NotificacionCompleta extends Activity {
         setTitle("Detalles de Notificación");
 
 
-        TextView texto=(TextView) findViewById(R.id.textView4);
+        TextView texto=(TextView) findViewById(R.id.detalles_notificacion);
         texto.setText(getIntent().getStringExtra("notificacion"));
     }
-
-
     @Override
     public void onBackPressed(){
         finish();

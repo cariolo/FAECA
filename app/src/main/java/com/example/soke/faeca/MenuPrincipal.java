@@ -170,11 +170,12 @@ public class MenuPrincipal extends Activity {
             Toast.makeText(this, "Campo de texto vacío, rellénelo e inténtelo de nuevo", Toast.LENGTH_SHORT).show();
         }
         else {
-            pushAtodos.setMessage("\n" + valorSpin.toUpperCase() + ": " + mensaje.getText().toString() + "Enviado por: "+shared.getString("usuario","1"));
+            pushAtodos.setMessage("\n" + valorSpin.toUpperCase() + ": " + mensaje.getText().toString());
 
             pushAtodos.sendInBackground();
 
             ParseObject push = new ParseObject(valorSpin);
+
             push.put("Mensaje", campoTexto.getText().toString());
             push.put("Sender", "Enviado por: "+shared.getString("usuario","1"));
             push.saveEventually();
