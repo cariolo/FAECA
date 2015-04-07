@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>Consulta.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(0,128,0); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(128,128,128); font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Consulta.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">com.example.soke.faeca; 
+ 
+</span><span class="s0">import </span><span class="s1">android.app.Activity; 
+</span><span class="s0">import </span><span class="s1">android.app.ListActivity; 
+</span><span class="s0">import </span><span class="s1">android.content.Intent; 
+</span><span class="s0">import </span><span class="s1">android.support.v7.app.ActionBarActivity; 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle; 
+</span><span class="s0">import </span><span class="s1">android.util.Log; 
+</span><span class="s0">import </span><span class="s1">android.view.Menu; 
+</span><span class="s0">import </span><span class="s1">android.view.MenuItem; 
+</span><span class="s0">import </span><span class="s1">android.widget.ArrayAdapter; 
+</span><span class="s0">import </span><span class="s1">android.widget.ListView; 
+</span><span class="s0">import </span><span class="s1">android.widget.Toast; 
+ 
+</span><span class="s0">import </span><span class="s1">com.parse.ParseException; 
+</span><span class="s0">import </span><span class="s1">com.parse.ParseObject; 
+</span><span class="s0">import </span><span class="s1">com.parse.ParseQuery; 
+ 
+</span><span class="s0">import </span><span class="s1">java.util.ArrayList; 
+</span><span class="s0">import </span><span class="s1">java.util.List; 
+ 
+ 
+</span><span class="s0">public class </span><span class="s1">Consulta </span><span class="s0">extends </span><span class="s1">Activity { 
+ 
+    @Override 
+    </span><span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState); 
+        setContentView(R.layout.activity_reuniones); 
+        Bundle elPrimero = getIntent().getExtras(); 
+        String valorSpin = elPrimero.getString(</span><span class="s2">&quot;ValorSpin&quot;</span><span class="s1">); 
+        ListView vistaResultadosConsulta = (ListView) findViewById(R.id.listaResultados); 
+ 
+        ParseObject a; 
+        ParseQuery&lt;ParseObject&gt; query = ParseQuery.getQuery(valorSpin); 
+        Toast.makeText(</span><span class="s0">this</span><span class="s1">, </span><span class="s2">&quot;Consultando &quot; </span><span class="s1">+ valorSpin + </span><span class="s2">&quot;...&quot;</span><span class="s1">, Toast.LENGTH_LONG).show(); 
+        </span><span class="s0">try </span><span class="s1">{ 
+            List&lt;ParseObject&gt; lista=query.find(); 
+            ArrayList&lt;String&gt; listaResultado = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;(); 
+            </span><span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s3">0</span><span class="s1">; i &lt; lista.size(); i++){ 
+                listaResultado.add(lista.get(i).getString(</span><span class="s2">&quot;Mensaje&quot;</span><span class="s1">)); 
+            } 
+            ArrayAdapter&lt;String&gt; arrayAdapter = </span><span class="s0">new </span><span class="s1">ArrayAdapter&lt;&gt;(</span><span class="s0">this</span><span class="s1">,android.R.layout.simple_list_item_single_choice, listaResultado); 
+            vistaResultadosConsulta.setAdapter(arrayAdapter); 
+        } </span><span class="s0">catch </span><span class="s1">(ParseException e) { 
+            e.printStackTrace(); 
+        } 
+    } 
+ 
+ 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">onCreateOptionsMenu(Menu menu) { 
+        </span><span class="s4">// Inflate the menu; this adds items to the action bar if it is present.</span><span class="s1"> 
+        getMenuInflater().inflate(R.menu.menu_reuniones, menu); 
+        </span><span class="s0">return true</span><span class="s1">; 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">onOptionsItemSelected(MenuItem item) { 
+        </span><span class="s4">// Handle action bar item clicks here. The action bar will</span><span class="s1"> 
+        </span><span class="s4">// automatically handle clicks on the Home/Up button, so long</span><span class="s1"> 
+        </span><span class="s4">// as you specify a parent activity in AndroidManifest.xml.</span><span class="s1"> 
+        </span><span class="s0">int </span><span class="s1">id = item.getItemId(); 
+ 
+        </span><span class="s4">//noinspection SimplifiableIfStatement</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(id == R.id.action_settings) { 
+            </span><span class="s0">return true</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">return super</span><span class="s1">.onOptionsItemSelected(item); 
+    } 
+    @Override 
+    </span><span class="s0">public void </span><span class="s1">onBackPressed(){ 
+        finish(); 
+        </span><span class="s0">return</span><span class="s1">; 
+    } 
+} 
+</span></pre>
+</body>
+</html>

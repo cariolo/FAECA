@@ -1,0 +1,220 @@
+<html>
+<head>
+<title>MenuPrincipal.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(0,0,255); }
+.s3 { color: rgb(0,128,0); font-weight: bold; }
+.s4 { color: rgb(128,128,128); font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+MenuPrincipal.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">com.example.soke.faeca; 
+ 
+</span><span class="s0">import </span><span class="s1">android.content.Intent; 
+</span><span class="s0">import </span><span class="s1">android.content.SharedPreferences; 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle; 
+</span><span class="s0">import </span><span class="s1">android.support.v7.app.ActionBarActivity; 
+</span><span class="s0">import </span><span class="s1">android.util.Log; 
+</span><span class="s0">import </span><span class="s1">android.view.Menu; 
+</span><span class="s0">import </span><span class="s1">android.view.MenuItem; 
+</span><span class="s0">import </span><span class="s1">android.view.View; 
+</span><span class="s0">import </span><span class="s1">android.widget.EditText; 
+</span><span class="s0">import </span><span class="s1">android.widget.Spinner; 
+</span><span class="s0">import </span><span class="s1">android.widget.Toast; 
+ 
+</span><span class="s0">import </span><span class="s1">com.parse.Parse; 
+</span><span class="s0">import </span><span class="s1">com.parse.ParseException; 
+</span><span class="s0">import </span><span class="s1">com.parse.ParseInstallation; 
+</span><span class="s0">import </span><span class="s1">com.parse.ParseObject; 
+</span><span class="s0">import </span><span class="s1">com.parse.ParsePush; 
+</span><span class="s0">import </span><span class="s1">com.parse.ParseQuery; 
+</span><span class="s0">import </span><span class="s1">com.parse.ParseUser; 
+</span><span class="s0">import </span><span class="s1">com.parse.SaveCallback; 
+</span><span class="s0">import </span><span class="s1">com.parse.SignUpCallback; 
+ 
+</span><span class="s0">import </span><span class="s1">java.util.ArrayList; 
+ 
+ 
+</span><span class="s0">public class </span><span class="s1">MenuPrincipal </span><span class="s0">extends </span><span class="s1">ActionBarActivity { 
+ 
+    </span><span class="s0">public static </span><span class="s1">String usuario=</span><span class="s0">null</span><span class="s1">; 
+    </span><span class="s0">public int </span><span class="s1">USUARIO=-</span><span class="s2">1</span><span class="s1">; 
+    </span><span class="s0">public </span><span class="s1">SharedPreferences shared; 
+    </span><span class="s0">public static boolean </span><span class="s1">terminado = </span><span class="s0">false</span><span class="s1">; 
+ 
+    @Override 
+    </span><span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+ 
+        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState); 
+        </span><span class="s0">final int </span><span class="s1">USUARIO_REQUEST_CODE = </span><span class="s2">1</span><span class="s1">; 
+        USUARIO=USUARIO_REQUEST_CODE; 
+        </span><span class="s0">final </span><span class="s1">String PREFS_NAME = </span><span class="s3">&quot;MyPrefsFile&quot;</span><span class="s1">; 
+ 
+ 
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, </span><span class="s2">0</span><span class="s1">); 
+        shared=settings; 
+        </span><span class="s0">if </span><span class="s1">(settings.getBoolean(</span><span class="s3">&quot;my_first_time&quot;</span><span class="s1">, </span><span class="s0">true</span><span class="s1">)) { 
+ 
+            String usuario=</span><span class="s0">null</span><span class="s1">; 
+            Bundle extras=</span><span class="s0">new </span><span class="s1">Bundle(); 
+            extras.putString(</span><span class="s3">&quot;usuario&quot;</span><span class="s1">, usuario); 
+ 
+            Intent i=</span><span class="s0">new </span><span class="s1">Intent(</span><span class="s0">this</span><span class="s1">, Identificacion.</span><span class="s0">class</span><span class="s1">); 
+            i.putExtras(extras); 
+            startActivityForResult(i, USUARIO_REQUEST_CODE); 
+        } 
+        </span><span class="s0">else</span><span class="s1">{ 
+            Toast.makeText(</span><span class="s0">this</span><span class="s1">, </span><span class="s3">&quot;Bienvenido/a &quot;</span><span class="s1">+shared.getString(</span><span class="s3">&quot;usuario&quot;</span><span class="s1">,</span><span class="s3">&quot;1&quot;</span><span class="s1">), Toast.LENGTH_LONG).show(); 
+        } 
+        setContentView(R.layout.activity_menuprincipal); 
+ 
+ 
+        </span><span class="s4">//Parse.enableLocalDatastore(this); Al habilitar la BD local, no se logea bien al servidor parse (se envian los push, pero no hay constancia de quien)</span><span class="s1"> 
+ 
+        Parse.initialize(</span><span class="s0">this</span><span class="s1">,</span><span class="s3">&quot;IGPp8uUXyGziD2kGBcLPhfzk5KqYyliY3gzjH3RR&quot;</span><span class="s1">,</span><span class="s3">&quot;xb0pfIjxiZgZhMgNt93b51J00HFOQTrUWe4NjJof&quot;</span><span class="s1">); 
+        ParseInstallation.getCurrentInstallation().put(</span><span class="s3">&quot;user&quot;</span><span class="s1">, </span><span class="s3">&quot;JoseLuis&quot;</span><span class="s1">); 
+ 
+        ParsePush.subscribeInBackground(</span><span class="s3">&quot;Administradores&quot;</span><span class="s1">, </span><span class="s0">new </span><span class="s1">SaveCallback() { 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">done(ParseException e) { 
+                </span><span class="s0">if </span><span class="s1">(e == </span><span class="s0">null</span><span class="s1">) { 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    Log.d(</span><span class="s3">&quot;ERROR AL SUSCRIBIR&quot;</span><span class="s1">, </span><span class="s3">&quot;Ha habido un error al suscribirte&quot;</span><span class="s1">); 
+                    e.printStackTrace(); 
+                } 
+            } 
+        }); 
+        ParsePush.subscribeInBackground(</span><span class="s3">&quot;Todos&quot;</span><span class="s1">, </span><span class="s0">new </span><span class="s1">SaveCallback() { 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">done(ParseException e) { 
+                </span><span class="s0">if </span><span class="s1">(e == </span><span class="s0">null</span><span class="s1">) { 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    Log.d(</span><span class="s3">&quot;ERROR AL SUSCRIBIR&quot;</span><span class="s1">, </span><span class="s3">&quot;Ha habido un error al suscribirte&quot;</span><span class="s1">); 
+                    e.printStackTrace(); 
+ 
+                } 
+            } 
+        }); 
+ 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">onActivityResult(</span><span class="s0">int </span><span class="s1">requestCode, </span><span class="s0">int </span><span class="s1">resultCode, Intent data){ 
+ 
+        </span><span class="s0">if </span><span class="s1">(requestCode == USUARIO) { 
+            </span><span class="s0">if </span><span class="s1">(resultCode == RESULT_OK) { 
+                usuario=data.getStringExtra(</span><span class="s3">&quot;usuario&quot;</span><span class="s1">); 
+                Toast.makeText(</span><span class="s0">this</span><span class="s1">, </span><span class="s3">&quot;Hola &quot;</span><span class="s1">+usuario, Toast.LENGTH_LONG).show(); 
+                </span><span class="s0">if</span><span class="s1">(usuario!=</span><span class="s0">null</span><span class="s1">) { 
+                    shared.edit().putBoolean(</span><span class="s3">&quot;my_first_time&quot;</span><span class="s1">, </span><span class="s0">false</span><span class="s1">).commit(); 
+                    shared.edit().putString(</span><span class="s3">&quot;usuario&quot;</span><span class="s1">, usuario).commit(); 
+                    ParseUser user=</span><span class="s0">new </span><span class="s1">ParseUser(); 
+                    user.setUsername(usuario); 
+                    user.setPassword(</span><span class="s3">&quot;no_pass&quot;</span><span class="s1">); 
+                    user.signUpInBackground(</span><span class="s0">new </span><span class="s1">SignUpCallback() { 
+                        </span><span class="s0">public void </span><span class="s1">done(ParseException e) { 
+                            </span><span class="s0">if </span><span class="s1">(e == </span><span class="s0">null</span><span class="s1">) { 
+                                </span><span class="s4">// Hooray! Let them use the app now.</span><span class="s1"> 
+ 
+                            } </span><span class="s0">else </span><span class="s1">{ 
+                                e.printStackTrace(); 
+                            } 
+                        } 
+                    }); 
+                } 
+            } 
+            </span><span class="s0">if </span><span class="s1">(resultCode == RESULT_CANCELED) { 
+                Toast.makeText(</span><span class="s0">this</span><span class="s1">, </span><span class="s3">&quot;Lo sentimos, sin identificacion no puedes continuar&quot;</span><span class="s1">, Toast.LENGTH_LONG).show(); 
+                </span><span class="s0">super</span><span class="s1">.finish(); 
+                finish(); 
+            } 
+        } 
+    } 
+ 
+ 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">onCreateOptionsMenu(Menu menu) { 
+        </span><span class="s4">// Inflate the menu; this adds items to the action bar if it is present.</span><span class="s1"> 
+        getMenuInflater().inflate(R.menu.menu_main, menu); 
+        </span><span class="s0">return true</span><span class="s1">; 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">onOptionsItemSelected(MenuItem item) { 
+        </span><span class="s4">// Handle action bar item clicks here. The action bar will</span><span class="s1"> 
+        </span><span class="s4">// automatically handle clicks on the Home/Up button, so long</span><span class="s1"> 
+        </span><span class="s4">// as you specify a parent activity in AndroidManifest.xml.</span><span class="s1"> 
+        </span><span class="s0">int </span><span class="s1">id = item.getItemId(); 
+ 
+        </span><span class="s4">//noinspection SimplifiableIfStatement</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(id == R.id.Opciones) { 
+            Toast.makeText(</span><span class="s0">this</span><span class="s1">, </span><span class="s3">&quot;Opciones seleccionado&quot;</span><span class="s1">, Toast.LENGTH_SHORT).show(); 
+            </span><span class="s0">return true</span><span class="s1">; 
+        } 
+        </span><span class="s0">if </span><span class="s1">(id == R.id.Salir) { 
+            </span><span class="s0">this</span><span class="s1">.finish(); 
+            </span><span class="s0">super</span><span class="s1">.finish(); 
+        } 
+        </span><span class="s0">if </span><span class="s1">(id == R.id.Acercade___) { 
+            Toast.makeText(</span><span class="s0">this</span><span class="s1">, </span><span class="s3">&quot;App desarrollada por Carlos Martinez y Jose Luis Martinez&quot;</span><span class="s1">, Toast.LENGTH_SHORT).show(); 
+        } 
+ 
+        </span><span class="s0">return super</span><span class="s1">.onOptionsItemSelected(item); 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">enviarATodos(View v){ 
+        EditText mensaje = (EditText) findViewById(R.id.mensajeCaja); 
+        Spinner spinnerLayout = (Spinner) findViewById((R.id.spinnerTipoPush)); 
+        String valorSpin = String.valueOf(spinnerLayout.getSelectedItem()); 
+        EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja); 
+        ParsePush pushAtodos = </span><span class="s0">new </span><span class="s1">ParsePush(); 
+ 
+        pushAtodos.setMessage(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">&quot; </span><span class="s1">+ valorSpin.toUpperCase() + </span><span class="s3">&quot;: &quot; </span><span class="s1">+ mensaje.getText().toString()); 
+ 
+        pushAtodos.sendInBackground(); 
+ 
+        ParseObject push = </span><span class="s0">new </span><span class="s1">ParseObject(valorSpin); 
+        push.put(</span><span class="s3">&quot;Mensaje&quot;</span><span class="s1">, campoTexto.getText().toString()); 
+        push.saveEventually(); 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">enviarA(View v) </span><span class="s0">throws </span><span class="s1">ParseException { 
+        EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja); 
+ 
+        ParseQuery&lt;ParseUser&gt; query = ParseUser.getQuery(); 
+        ArrayList&lt;String&gt; usuarios=</span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;(); 
+        ArrayList&lt;ParseUser&gt; users =</span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;(); 
+        users = (ArrayList&lt;ParseUser&gt;) query.find(); 
+ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; users.size(); i++) 
+            usuarios.add(users.get(i).getUsername()); 
+ 
+ 
+            Intent i = </span><span class="s0">new </span><span class="s1">Intent(</span><span class="s0">this</span><span class="s1">, EnviarA.</span><span class="s0">class</span><span class="s1">); 
+            i.putExtra(</span><span class="s3">&quot;mensaje&quot;</span><span class="s1">, campoTexto.getText().toString()); 
+            i.putExtra(</span><span class="s3">&quot;usuarios&quot;</span><span class="s1">, usuarios); 
+            startActivity(i); 
+    } 
+    </span><span class="s0">public void </span><span class="s1">consulta(View v){ 
+        Spinner spinnerTipoPush = (Spinner) findViewById((R.id.spinnerTipoPush)); 
+        String valorSpin = String.valueOf(spinnerTipoPush.getSelectedItem()); 
+ 
+        Intent i = </span><span class="s0">new </span><span class="s1">Intent(</span><span class="s0">this</span><span class="s1">, Consulta.</span><span class="s0">class </span><span class="s1">); 
+        i.putExtra(</span><span class="s3">&quot;ValorSpin&quot;</span><span class="s1">, valorSpin); 
+        startActivity(i); 
+    } 
+ 
+} 
+</span></pre>
+</body>
+</html>

@@ -19,4 +19,10 @@ public class NotificacionCompleta extends Activity {
         texto.setText(getIntent().getStringExtra("notificacion"));
     }
 
+
+    @Override
+    public void onBackPressed(){
+        finish();
+        overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
+    }
 }

@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>Identificacion.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Identificacion.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">com.example.soke.faeca; 
+ 
+</span><span class="s0">import </span><span class="s1">android.content.Intent; 
+</span><span class="s0">import </span><span class="s1">android.content.SharedPreferences; 
+</span><span class="s0">import </span><span class="s1">android.support.v7.app.ActionBarActivity; 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle; 
+</span><span class="s0">import </span><span class="s1">android.view.Menu; 
+</span><span class="s0">import </span><span class="s1">android.view.MenuItem; 
+</span><span class="s0">import </span><span class="s1">android.view.View; 
+</span><span class="s0">import </span><span class="s1">android.widget.EditText; 
+</span><span class="s0">import </span><span class="s1">android.widget.Toast; 
+ 
+ 
+</span><span class="s0">public class </span><span class="s1">Identificacion </span><span class="s0">extends </span><span class="s1">ActionBarActivity { 
+ 
+    @Override 
+    </span><span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState); 
+        setContentView(R.layout.activity_identificacion); 
+    } 
+ 
+ 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">onCreateOptionsMenu(Menu menu) { 
+        </span><span class="s2">// Inflate the menu; this adds items to the action bar if it is present.</span><span class="s1"> 
+        getMenuInflater().inflate(R.menu.menu_identificacion, menu); 
+        </span><span class="s0">return true</span><span class="s1">; 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">onOptionsItemSelected(MenuItem item) { 
+        </span><span class="s2">// Handle action bar item clicks here. The action bar will</span><span class="s1"> 
+        </span><span class="s2">// automatically handle clicks on the Home/Up button, so long</span><span class="s1"> 
+        </span><span class="s2">// as you specify a parent activity in AndroidManifest.xml.</span><span class="s1"> 
+        </span><span class="s0">int </span><span class="s1">id = item.getItemId(); 
+ 
+        </span><span class="s2">//noinspection SimplifiableIfStatement</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(id == R.id.action_settings) { 
+            </span><span class="s0">return true</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">return super</span><span class="s1">.onOptionsItemSelected(item); 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">guardarNombre(View v){ 
+        EditText n=(EditText) findViewById(R.id.CampoNombre); 
+        String usuario=n.getText().toString(); 
+ 
+        </span><span class="s0">if</span><span class="s1">(usuario.length()&lt;</span><span class="s3">1</span><span class="s1">) { 
+            Toast.makeText(</span><span class="s0">this</span><span class="s1">, </span><span class="s4">&quot;Debes introducir tu nombre para identificarte&quot;</span><span class="s1">, Toast.LENGTH_LONG).show(); 
+        } 
+        </span><span class="s0">else</span><span class="s1">{ 
+            Intent i = </span><span class="s0">new </span><span class="s1">Intent(); 
+            i.putExtra(</span><span class="s4">&quot;usuario&quot;</span><span class="s1">, usuario); 
+            setResult(RESULT_OK, i); 
+            finish(); 
+        } 
+    } 
+} 
+</span></pre>
+</body>
+</html>

@@ -170,7 +170,7 @@ public class MenuPrincipal extends Activity {
             Toast.makeText(this, "Campo de texto vacío, rellénelo e inténtelo de nuevo", Toast.LENGTH_SHORT).show();
         }
         else {
-            pushAtodos.setMessage("\n" + valorSpin.toUpperCase() + ": " + mensaje.getText().toString());
+            pushAtodos.setMessage("\n" + valorSpin.toUpperCase() + ": " + mensaje.getText().toString() + "Enviado por: "+shared.getString("usuario","1"));
 
             pushAtodos.sendInBackground();
 
@@ -211,6 +211,7 @@ public class MenuPrincipal extends Activity {
 
         Intent i = new Intent(this, Consulta.class );
         i.putExtra("ValorSpin", valorSpin);
+        i.putExtra("usuario", shared.getString("usuario","1"));
         startActivity(i);
         overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
     }

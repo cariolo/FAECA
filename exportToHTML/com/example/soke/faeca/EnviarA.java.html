@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>EnviarA.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+.s3 { color: rgb(0,128,0); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+EnviarA.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">com.example.soke.faeca; 
+ 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle; 
+</span><span class="s0">import </span><span class="s1">android.support.v7.app.ActionBarActivity; 
+</span><span class="s0">import </span><span class="s1">android.view.Menu; 
+</span><span class="s0">import </span><span class="s1">android.view.MenuItem; 
+</span><span class="s0">import </span><span class="s1">android.view.View; 
+</span><span class="s0">import </span><span class="s1">android.widget.ArrayAdapter; 
+</span><span class="s0">import </span><span class="s1">android.widget.Spinner; 
+ 
+</span><span class="s0">import </span><span class="s1">com.parse.ParseInstallation; 
+</span><span class="s0">import </span><span class="s1">com.parse.ParsePush; 
+</span><span class="s0">import </span><span class="s1">com.parse.ParseQuery; 
+ 
+</span><span class="s0">import </span><span class="s1">java.util.ArrayList; 
+</span><span class="s0">import </span><span class="s1">java.util.LinkedList; 
+</span><span class="s0">import </span><span class="s1">java.util.List; 
+ 
+ 
+</span><span class="s0">public class </span><span class="s1">EnviarA </span><span class="s0">extends </span><span class="s1">ActionBarActivity { 
+ 
+    </span><span class="s0">public </span><span class="s1">Spinner selectorUsuarios; 
+    </span><span class="s0">public </span><span class="s1">Spinner selectorGrupos; 
+    </span><span class="s0">public boolean </span><span class="s1">terminado=</span><span class="s0">false</span><span class="s1">; 
+    String mensaje; 
+    @Override 
+ 
+    </span><span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState); 
+ 
+        </span><span class="s2">//Busco los canales a los que estoy suscrito</span><span class="s1"> 
+        List&lt;String&gt; subscribedChannels = ParseInstallation.getCurrentInstallation().getList(</span><span class="s3">&quot;channels&quot;</span><span class="s1">); 
+        LinkedList&lt;String&gt; canales = </span><span class="s0">new </span><span class="s1">LinkedList&lt;&gt;(); 
+ 
+        </span><span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i=</span><span class="s4">0</span><span class="s1">; i&lt;subscribedChannels.size(); i++) 
+            canales.add(subscribedChannels.get(i)); 
+ 
+        setContentView(R.layout.activity_enviar); 
+        selectorUsuarios=(Spinner) findViewById(R.id.usuarios); 
+        selectorGrupos=(Spinner) findViewById(R.id.grupos); 
+        mensaje = getIntent().getStringExtra(</span><span class="s3">&quot;mensaje&quot;</span><span class="s1">); 
+        ArrayList&lt;String&gt; usuarios = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;(); 
+        usuarios = getIntent().getStringArrayListExtra(</span><span class="s3">&quot;usuarios&quot;</span><span class="s1">); 
+ 
+        </span><span class="s2">//Lleno el Spinner con los canales a los que estoy suscrito</span><span class="s1"> 
+        ArrayAdapter&lt;String&gt; grupos = </span><span class="s0">new </span><span class="s1">ArrayAdapter&lt;&gt;(</span><span class="s0">this</span><span class="s1">, android.R.layout.simple_spinner_item, canales); 
+        grupos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
+        selectorGrupos=(Spinner) findViewById(R.id.grupos); 
+        selectorGrupos.setAdapter(grupos); 
+ 
+        </span><span class="s2">//Lleno el Spinner con los usuarios registrados</span><span class="s1"> 
+        ArrayAdapter&lt;String&gt; adapterUsuarios = </span><span class="s0">new </span><span class="s1">ArrayAdapter&lt;&gt;(</span><span class="s0">this</span><span class="s1">, android.R.layout.simple_spinner_item, usuarios); 
+        adapterUsuarios.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
+        selectorUsuarios = (Spinner) findViewById(R.id.usuarios); 
+        selectorUsuarios.setAdapter(adapterUsuarios); 
+        terminado = </span><span class="s0">false</span><span class="s1">; 
+    } 
+ 
+ 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">onCreateOptionsMenu(Menu menu) { 
+        </span><span class="s2">// Inflate the menu; this adds items to the action bar if it is present.</span><span class="s1"> 
+        getMenuInflater().inflate(R.menu.menu_enviar, menu); 
+        </span><span class="s0">return true</span><span class="s1">; 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">onOptionsItemSelected(MenuItem item) { 
+        </span><span class="s2">// Handle action bar item clicks here. The action bar will</span><span class="s1"> 
+        </span><span class="s2">// automatically handle clicks on the Home/Up button, so long</span><span class="s1"> 
+        </span><span class="s2">// as you specify a parent activity in AndroidManifest.xml.</span><span class="s1"> 
+        </span><span class="s0">int </span><span class="s1">id = item.getItemId(); 
+ 
+        </span><span class="s0">if </span><span class="s1">(id == R.id.action_settings) { 
+            </span><span class="s0">return true</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">return super</span><span class="s1">.onOptionsItemSelected(item); 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">enviar(View v){ 
+        ParseQuery query=ParseInstallation.getQuery(); 
+        query.whereEqualTo(</span><span class="s3">&quot;user&quot;</span><span class="s1">, selectorUsuarios.getSelectedItem().toString()); 
+ 
+        ParsePush push=</span><span class="s0">new </span><span class="s1">ParsePush(); 
+        push.setQuery(query); 
+        push.setMessage(mensaje); 
+        push.sendInBackground(); 
+    } 
+} 
+</span></pre>
+</body>
+</html>
