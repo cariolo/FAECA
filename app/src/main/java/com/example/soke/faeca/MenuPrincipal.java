@@ -1,6 +1,5 @@
 package com.example.soke.faeca;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,7 +8,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -36,6 +34,7 @@ public class MenuPrincipal extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
 
         super.onCreate(savedInstanceState);
         final int USUARIO_REQUEST_CODE = 1;
@@ -63,7 +62,6 @@ public class MenuPrincipal extends Activity {
             Toast.makeText(this, "Bienvenido/a "+shared.getString("usuario","1"), Toast.LENGTH_LONG).show();
         }
         setContentView(R.layout.activity_menuprincipal);
-
 
         //Parse.enableLocalDatastore(this); Al habilitar la BD local, no se logea bien al servidor parse (se envian los push, pero no hay constancia de quien)
 
@@ -111,7 +109,6 @@ public class MenuPrincipal extends Activity {
                     user.signUpInBackground(new SignUpCallback() {
                         public void done(ParseException e) {
                             if (e == null) {
-                                // Hooray! Let them use the app now.
 
                             } else {
                                 e.printStackTrace();
@@ -126,6 +123,7 @@ public class MenuPrincipal extends Activity {
                 finish();
             }
         }
+        overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
     }
 
 
@@ -210,5 +208,10 @@ public class MenuPrincipal extends Activity {
         i.putExtra("ValorSpin", valorSpin);
         startActivity(i);
         overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
+    }
+
+    public void onBackPressed(){
+        finish();
+        overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
     }
 }
