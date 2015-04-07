@@ -5,7 +5,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.soke.faeca.EnviarA"
-    android:background="@mipmap/prueba_fondo">
+    android:background="@mipmap/prueba">
 
     <TextView
         android:textColor="@android:color/white"

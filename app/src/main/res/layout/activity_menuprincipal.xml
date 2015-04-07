@@ -6,7 +6,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-    android:background="@mipmap/prueba_fondo">
+    android:background="@mipmap/prueba">
 
     <EditText
         android:textColor="@android:color/white"
@@ -54,30 +54,31 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <Button
+    <ImageButton
+        android:src="@drawable/button_enabled"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enviar a.."
         android:id="@+id/enviarA"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:onClick="enviarA"
-        android:layout_below="@+id/mensajeCaja" />
+        android:layout_below="@+id/mensajeCaja"
+        android:background="@mipmap/enviar_a" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enviar a todos"
+        android:background="@mipmap/enviar_todos"
         android:id="@+id/enviarTodos"
         android:layout_below="@+id/enviarA"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:onClick="enviarATodos" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Consulta de Push"
+        android:background="@mipmap/ver_notificaciones"
         android:id="@+id/consulta"
         android:layout_marginTop="20dp"
         android:layout_alignParentBottom="true"
