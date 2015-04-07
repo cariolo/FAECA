@@ -14,6 +14,7 @@ public class NotificacionCompleta extends Activity {
 
         setTitle("Detalles de Notificación");
 
+
         TextView texto=(TextView) findViewById(R.id.textView4);
         texto.setText(getIntent().getStringExtra("notificacion"));
     }
