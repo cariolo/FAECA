@@ -1,10 +1,10 @@
 package com.example.soke.faeca;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.Window;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Consulta extends Activity {
+public class Consulta extends Activity implements AdapterView.OnItemClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,35 +40,21 @@ public class Consulta extends Activity {
             for(int i = 0; i < lista.size(); i++){
                 listaResultado.add("Mensaje: "+lista.get(i).getString("Mensaje") + "\nFecha: " + lista.get(i).getCreatedAt().toString());
             }
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_single_choice, listaResultado);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_expandable_list_item_1, listaResultado);
             vistaResultadosConsulta.setAdapter(arrayAdapter);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        ListView listview = (ListView) findViewById(R.id.listaResultados);
+        listview.setOnItemClickListener(this);
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_reuniones, menu);
-        return true;
+    public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+        Intent intent = new Intent(this, NotificacionCompleta.class);
+        intent.putExtra("notificacion", l.getItemAtPosition(position).toString());
+        startActivity(intent);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up boton_enviar_a, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
     @Override
     public void onBackPressed(){
         finish();
