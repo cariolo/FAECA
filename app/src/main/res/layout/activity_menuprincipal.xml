@@ -62,6 +62,7 @@
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:onClick="enviarA"
+
         android:layout_below="@+id/mensajeCaja"
         android:background="@mipmap/enviar_a" />
 

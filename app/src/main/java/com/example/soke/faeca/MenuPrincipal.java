@@ -33,6 +33,7 @@ public class MenuPrincipal extends Activity {
     public SharedPreferences shared;
     public static boolean terminado = false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);

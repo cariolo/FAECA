@@ -38,6 +38,7 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
             List<ParseObject> lista=query.find();
             ArrayList<String> listaResultado = new ArrayList<>();
             for(int i = 0; i < lista.size(); i++){
+
                 listaResultado.add("Mensaje: "+lista.get(i).getString("Mensaje") + "\nFecha: " + lista.get(i).getCreatedAt().toString());
             }
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_expandable_list_item_1, listaResultado);
