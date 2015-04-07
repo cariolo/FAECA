@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 
 public class MenuPrincipal extends Activity {
 
-    public static String usuario=null;
+    public static String usuario = null;
     public int USUARIO=-1;
     public SharedPreferences shared;
     public static boolean terminado = false;
@@ -180,8 +181,11 @@ public class MenuPrincipal extends Activity {
 
     public void enviarA(View v) throws ParseException {
         EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
-
+        ImageButton enviarA = (ImageButton) findViewById(R.id.enviarA);
         ParseQuery<ParseUser> query = ParseUser.getQuery();
+
+
+
         ArrayList<String> usuarios=new ArrayList<>();
         ArrayList<ParseUser> users =new ArrayList<>();
         users = (ArrayList<ParseUser>) query.find();
