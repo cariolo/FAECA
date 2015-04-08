@@ -65,7 +65,6 @@ public class MenuPrincipal extends Activity {
         }
         setContentView(R.layout.activity_menuprincipal);
 
-        //Parse.enableLocalDatastore(this); Al habilitar la BD local, no se logea bien al servidor parse (se envian los push, pero no hay constancia de quien)
 
 
         ParseInstallation.getCurrentInstallation().put("user", shared.getString("usuario","1"));
@@ -177,7 +176,7 @@ public class MenuPrincipal extends Activity {
             ParseObject push = new ParseObject(valorSpin);
 
             push.put("Mensaje", campoTexto.getText().toString());
-            push.put("Sender", "Enviado por: "+shared.getString("usuario","1"));
+            push.put("Sender", shared.getString("usuario","1"));
             push.saveEventually();
         }
     }
