@@ -43,7 +43,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.parse.ParsePushBroadcastReceiver"
+            android:name="com.example.soke.faeca.Lanzador"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
@@ -77,6 +77,10 @@
         <activity
             android:name=".NotificacionCompleta"
             android:label="@string/title_activity_notificacion_completa" >
+        </activity>
+        <activity
+            android:name=".Lanzador"
+            android:label="@string/title_activity_lanzador" >
         </activity>
     </application>
 
