@@ -15,11 +15,12 @@ public class NotificacionCompleta extends Activity {
         setTitle("Detalles de Notificación");
 
 
-        TextView texto=(TextView) findViewById(R.id.detalles_notificacion);
+        TextView texto = (TextView) findViewById(R.id.detalles_notificacion);
         texto.setText(getIntent().getStringExtra("notificacion"));
     }
+
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         finish();
         overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
     }

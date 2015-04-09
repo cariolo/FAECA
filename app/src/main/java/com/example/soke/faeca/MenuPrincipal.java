@@ -29,10 +29,9 @@ import java.util.ArrayList;
 public class MenuPrincipal extends Activity {
 
     public static String usuario = null;
-    public int USUARIO=-1;
-    public SharedPreferences shared;
     public static boolean terminado = false;
-
+    public int USUARIO = -1;
+    public SharedPreferences shared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,10 +164,14 @@ public class MenuPrincipal extends Activity {
         String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
         EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
         ParsePush pushAtodos = new ParsePush();
+
         if(campoTexto.getText().toString().length() == 0){
             Toast.makeText(this, "Campo de texto vacío, rellénelo e inténtelo de nuevo", Toast.LENGTH_SHORT).show();
         }
         else {
+            Intent i = new Intent(this, Consulta.class);
+            i.putExtra("tipo", valorSpin);
+
             pushAtodos.setMessage("\n" + valorSpin.toUpperCase() + ": " + mensaje.getText().toString());
 
             pushAtodos.sendInBackground();
@@ -189,15 +192,15 @@ public class MenuPrincipal extends Activity {
 
 
         ArrayList<String> usuarios=new ArrayList<>();
-        ArrayList<ParseUser> users =new ArrayList<>();
+        ArrayList<ParseUser> users = new ArrayList<>();
         users = (ArrayList<ParseUser>) query.find();
         if(campoTexto.getText().toString().length() == 0){
             Toast.makeText(this, "Campo de texto vacío, rellénelo e inténtelo de nuevo", Toast.LENGTH_SHORT).show();
         }
         else {
-            for (int i = 0; i < users.size(); i++)
+            for (int i = 0; i < users.size(); i++) {
                 usuarios.add(users.get(i).getUsername());
-
+            }
 
             Intent i = new Intent(this, EnviarA.class);
             i.putExtra("mensaje", campoTexto.getText().toString());
@@ -206,7 +209,8 @@ public class MenuPrincipal extends Activity {
             overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
         }
     }
-    public void consulta(View v){
+
+    public void consulta(View v) {
         Spinner spinnerTipoPush = (Spinner) findViewById((R.id.spinnerTipoPush));
         String valorSpin = String.valueOf(spinnerTipoPush.getSelectedItem());
 
@@ -215,6 +219,19 @@ public class MenuPrincipal extends Activity {
         i.putExtra("usuario", shared.getString("usuario","1"));
         startActivity(i);
         overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
+    }
+
+    public void enviarGrupo(View v) throws ParseException {
+        EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
+
+        if (campoTexto.getText().toString().length() == 0) {
+            Toast.makeText(this, "Campo de texto vacío, rellénelo e inténtelo de nuevo", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent i = new Intent(this, enviarGrupo.class);
+            i.putExtra("mensaje", campoTexto.getText().toString());
+            startActivity(i);
+            overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
+        }
     }
 
     public void onBackPressed(){

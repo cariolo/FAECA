@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.soke.faeca" >
+    package="com.example.soke.faeca">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -21,10 +21,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MenuPrincipal"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,7 +34,7 @@
 
         <service android:name="com.parse.PushService" />
 
-        <receiver android:name="com.parse.ParseBroadcastReceiver" >
+        <receiver android:name="com.parse.ParseBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -43,8 +43,8 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.example.soke.faeca.Lanzador"
-            android:exported="false" >
+            android:name=".Lanzador"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
                 <action android:name="com.parse.push.intent.DELETE" />
@@ -53,7 +53,7 @@
         </receiver>
         <receiver
             android:name="com.parse.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
@@ -64,24 +64,22 @@
 
         <activity
             android:name=".Consulta"
-            android:label="@string/title_activity_reuniones" >
-        </activity>
+            android:label="@string/title_activity_reuniones"></activity>
         <activity
             android:name=".Identificacion"
-            android:label="@string/title_activity_identificacion" >
-        </activity>
+            android:label="@string/title_activity_identificacion"></activity>
         <activity
             android:name=".EnviarA"
-            android:label="@string/title_activity_enviar" >
-        </activity>
+            android:label="@string/title_activity_enviar"></activity>
         <activity
             android:name=".NotificacionCompleta"
-            android:label="@string/title_activity_notificacion_completa" >
-        </activity>
+            android:label="@string/title_activity_notificacion_completa"></activity>
         <activity
             android:name=".Lanzador"
-            android:label="@string/title_activity_lanzador" >
-        </activity>
+            android:label="@string/title_activity_lanzador"></activity>
+        <activity
+            android:name=".enviarGrupo"
+            android:label="@string/title_activity_enviar_grupo"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="asuntos">
+    <string-array name="asuntosEnviar">
         <item>Reunion</item>
         <item>Urgencia</item>
         <item>Conferencia</item>
@@ -9,7 +9,10 @@
     </string-array>
 
     <string-array name="grupos">
-        <item>Selecciona un grupo</item>
+        <item>Grupo 1, (Zeon, JoseLuis y Virtual)</item>
+        <item>Grupo 2, (Nombres...)</item>
+        <item>Grupo 3, (Nombres...)</item>
+        <item>Grupo 4, (Nombres...)</item>
     </string-array>
 
     <string-array name="usuarios">

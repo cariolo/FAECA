@@ -28,7 +28,7 @@ public class EnviarA extends Activity {
         mensaje = getIntent().getStringExtra("mensaje");
         ArrayList<String> usuarios = getIntent().getStringArrayListExtra("usuarios");
 
-        setTitle("Push individual");
+        setTitle("Notificación individual");
 
         //Lleno el Spinner con los usuarios registrados
         ArrayAdapter<String> adapterUsuarios = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, usuarios);

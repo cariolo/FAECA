@@ -12,4 +12,5 @@
     <string name="title_activity_application">Application</string>
     <string name="title_activity_notificacion_completa">NotificacionCompleta</string>
     <string name="title_activity_lanzador">Lanzador</string>
+    <string name="title_activity_enviar_grupo">enviarGrupo</string>
 </resources>
