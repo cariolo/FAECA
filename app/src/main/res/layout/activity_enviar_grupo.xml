@@ -51,6 +51,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"
         android:background="@mipmap/enviar"
-        android:onClick="enviarGrupoNotificacion" />
+        android:onClick="enviarGrupoNotificacion"
+        android:src="@drawable/enviar_a_2" />
 
 </RelativeLayout>

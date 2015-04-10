@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,7 +66,6 @@ public class MenuPrincipal extends Activity {
         setContentView(R.layout.activity_menuprincipal);
 
 
-
         ParseInstallation.getCurrentInstallation().put("user", shared.getString("usuario","1"));
 
 
@@ -92,8 +92,49 @@ public class MenuPrincipal extends Activity {
         });
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
+        ImageButton env=(ImageButton) findViewById(R.id.enviarA);
+        registerForContextMenu(env);
     }
 
+    public void dummyClick(View v){
+        ImageButton env=(ImageButton) findViewById(R.id.enviarA);
+
+        openContextMenu(env);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,ContextMenu.ContextMenuInfo menuInfo){
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        getMenuInflater().inflate(R.menu.menu_enviara, menu);
+
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.enviarausuario:
+                try {
+                    enviarA();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            case R.id.enviaratodos:
+                enviarATodos();
+                return true;
+            case R.id.enviaragrupo:
+                try {
+                    enviarGrupo();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
     public void onActivityResult(int requestCode, int resultCode, Intent data){
 
         if (requestCode == USUARIO) {
@@ -158,7 +199,7 @@ public class MenuPrincipal extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void enviarATodos(View v){
+    public void enviarATodos(){
         EditText mensaje = (EditText) findViewById(R.id.mensajeCaja);
         Spinner spinnerLayout = (Spinner) findViewById((R.id.spinnerTipoPush));
         String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
@@ -184,7 +225,7 @@ public class MenuPrincipal extends Activity {
         }
     }
 
-    public void enviarA(View v) throws ParseException {
+    public void enviarA() throws ParseException {
         EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
         ImageButton enviarA = (ImageButton) findViewById(R.id.enviarA);
         ParseQuery<ParseUser> query = ParseUser.getQuery();
@@ -221,7 +262,7 @@ public class MenuPrincipal extends Activity {
         overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
     }
 
-    public void enviarGrupo(View v) throws ParseException {
+    public void enviarGrupo() throws ParseException {
         EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
 
         if (campoTexto.getText().toString().length() == 0) {

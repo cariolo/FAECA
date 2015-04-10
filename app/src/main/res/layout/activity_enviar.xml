@@ -50,6 +50,7 @@
         android:layout_centerHorizontal="true"
         android:onClick="enviar"
         android:layout_below="@+id/usuarios"
-        android:background="@mipmap/enviar" />
+        android:background="@mipmap/enviar"
+        android:src="@drawable/enviar_a_2" />
 
 </RelativeLayout>

@@ -12,8 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/listaResultados"
-        android:layout_marginTop="20dp"
-        android:visibility="invisible" />
+        android:layout_marginTop="20dp" />
 
     <ListView
         android:id="@+id/listaResultados"

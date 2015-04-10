@@ -17,7 +17,7 @@
 
 
     </shape>
-    <item android:drawable="@mipmap/enviar_grupo_press"
+    <item android:drawable="@mipmap/enviar_press"
         android:state_pressed="true" />
-    <item android:drawable="@mipmap/enviar_a_grupo" />
+    <item android:drawable="@mipmap/enviar" />
 </selector>
