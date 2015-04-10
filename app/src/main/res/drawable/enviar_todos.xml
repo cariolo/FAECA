@@ -17,7 +17,7 @@
 
 
     </shape>
-    <item android:drawable="@mipmap/enviar_a_press"
+    <item android:drawable="@mipmap/enviar_todos_press"
         android:state_pressed="true" />
-    <item android:drawable="@mipmap/enviar_a" />
+    <item android:drawable="@mipmap/enviar_todos" />
 </selector>

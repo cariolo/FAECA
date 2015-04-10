@@ -23,23 +23,24 @@
 
     <TextView
         android:id="@+id/asunto"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="49dp"
         android:text="Asunto"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="#ff146f03" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/asunto"
         android:layout_alignStart="@+id/asunto"
         android:layout_below="@+id/spinnerTipoPush"
         android:text="Mensaje"
+        android:background="#ff146f03"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/white" />
 
@@ -74,7 +75,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:background="@mipmap/enviar_todos"
-        android:onClick="enviarATodos" />
+        android:onClick="enviarATodos"
+        android:src="@drawable/enviar_todos" />
 
     <ImageButton
         android:id="@+id/enviarGrupo"
@@ -84,7 +86,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:background="@mipmap/enviar_grupo"
-        android:onClick="enviarGrupo" />
+        android:onClick="enviarGrupo"
+        android:src="@drawable/enviar_grupo" />
 
     <ImageButton
         android:id="@+id/consulta"
@@ -94,5 +97,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@mipmap/ver_notificaciones"
-        android:onClick="consulta" />
+        android:onClick="consulta"
+        android:src="@drawable/ver_notificaciones" />
 </RelativeLayout>
