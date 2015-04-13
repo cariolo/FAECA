@@ -28,7 +28,7 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consulta_push);
 
-        yo=getIntent().getStringExtra("yo");
+        yo=getIntent().getStringExtra("usuario");
 
         LinkedList<String> lista = new LinkedList<String>();
             final Spinner spiner_oculto = (Spinner) findViewById(R.id.consulta_oculta);
@@ -84,7 +84,7 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
 
 
         try {
-            ParseQuery<ParseObject> consulta=query.whereEqualTo("receiver", yo);
+            ParseQuery<ParseObject> consulta=ParseQuery.getQuery(valorSpin).whereEqualTo("receiver", yo);
             List<ParseObject> lista=consulta.find();
             ArrayList<String> listaResultado = new ArrayList<>();
 

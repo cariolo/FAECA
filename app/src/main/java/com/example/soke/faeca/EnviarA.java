@@ -51,11 +51,11 @@ public class EnviarA extends Activity {
         ParseQuery query = ParseInstallation.getQuery();
         query.whereEqualTo("user", selectorUsuarios.getSelectedItem().toString());
 
-        push_respaldo.add("Mensaje", mensaje);
+        push_respaldo.put("Mensaje", mensaje);
 
-        push_respaldo.add("receiver", selectorUsuarios.getSelectedItem().toString());
+        push_respaldo.put("receiver", selectorUsuarios.getSelectedItem().toString());
 
-        push_respaldo.add("Sender", usuario);
+        push_respaldo.put("Sender", usuario);
 
         push_respaldo.saveEventually();
 
