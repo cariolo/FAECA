@@ -40,7 +40,7 @@ public class MenuPrincipal extends Activity {
 
         super.onCreate(savedInstanceState);
         final int USUARIO_REQUEST_CODE = 1;
-        USUARIO=USUARIO_REQUEST_CODE;
+        USUARIO = USUARIO_REQUEST_CODE;
         final String PREFS_NAME = "MyPrefsFile";
 
         setTitle("Menú principal");
@@ -49,24 +49,23 @@ public class MenuPrincipal extends Activity {
 
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        shared=settings;
+        shared = settings;
         if (settings.getBoolean("my_first_time", true)) {
 
-            String usuario=null;
-            Bundle extras=new Bundle();
+            String usuario = null;
+            Bundle extras = new Bundle();
             extras.putString("usuario", usuario);
 
-            Intent i=new Intent(this, Identificacion.class);
+            Intent i = new Intent(this, Identificacion.class);
             i.putExtras(extras);
             startActivityForResult(i, USUARIO_REQUEST_CODE);
-        }
-        else{
-            Toast.makeText(this, "Bienvenido/a "+shared.getString("usuario","1"), Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Bienvenido/a " + shared.getString("usuario", "1"), Toast.LENGTH_LONG).show();
         }
         setContentView(R.layout.activity_menuprincipal);
 
 
-        ParseInstallation.getCurrentInstallation().put("user", shared.getString("usuario","1"));
+        ParseInstallation.getCurrentInstallation().put("user", shared.getString("usuario", "1"));
 
 
         ParsePush.subscribeInBackground("Administradores", new SaveCallback() {
@@ -92,18 +91,18 @@ public class MenuPrincipal extends Activity {
         });
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
-        ImageButton env=(ImageButton) findViewById(R.id.enviarA);
+        ImageButton env = (ImageButton) findViewById(R.id.enviarA);
         registerForContextMenu(env);
     }
 
-    public void dummyClick(View v){
-        ImageButton env=(ImageButton) findViewById(R.id.enviarA);
+    public void dummyClick(View v) {
+        ImageButton env = (ImageButton) findViewById(R.id.enviarA);
 
         openContextMenu(env);
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,ContextMenu.ContextMenuInfo menuInfo){
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
         getMenuInflater().inflate(R.menu.menu_enviara, menu);
@@ -135,16 +134,17 @@ public class MenuPrincipal extends Activity {
                 return super.onContextItemSelected(item);
         }
     }
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == USUARIO) {
             if (resultCode == RESULT_OK) {
-                usuario=data.getStringExtra("usuario");
-                Toast.makeText(this, "Hola "+usuario, Toast.LENGTH_LONG).show();
-                if(usuario!=null) {
+                usuario = data.getStringExtra("usuario");
+                Toast.makeText(this, "Hola " + usuario, Toast.LENGTH_LONG).show();
+                if (usuario != null) {
                     shared.edit().putBoolean("my_first_time", false).commit();
                     shared.edit().putString("usuario", usuario).commit();
-                    ParseUser user=new ParseUser();
+                    ParseUser user = new ParseUser();
                     user.setUsername(usuario);
                     user.setPassword("no_pass");
                     user.signUpInBackground(new SignUpCallback() {
@@ -166,7 +166,6 @@ public class MenuPrincipal extends Activity {
         }
         overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
     }
-
 
 
     @Override
@@ -199,17 +198,16 @@ public class MenuPrincipal extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void enviarATodos(){
+    public void enviarATodos() {
         EditText mensaje = (EditText) findViewById(R.id.mensajeCaja);
         Spinner spinnerLayout = (Spinner) findViewById((R.id.spinnerTipoPush));
         String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
         EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
         ParsePush pushAtodos = new ParsePush();
 
-        if(campoTexto.getText().toString().length() == 0){
+        if (campoTexto.getText().toString().length() == 0) {
             Toast.makeText(this, "Campo de texto vacío, rellénelo e inténtelo de nuevo", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             Intent i = new Intent(this, Consulta.class);
             i.putExtra("tipo", valorSpin);
 
@@ -220,7 +218,7 @@ public class MenuPrincipal extends Activity {
             ParseObject push = new ParseObject(valorSpin);
 
             push.put("Mensaje", campoTexto.getText().toString());
-            push.put("Sender", shared.getString("usuario","1"));
+            push.put("Sender", shared.getString("usuario", "1"));
             push.saveEventually();
         }
     }
@@ -232,11 +230,10 @@ public class MenuPrincipal extends Activity {
         Spinner spinnerLayout = (Spinner) findViewById((R.id.spinnerTipoPush));
         String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
 
-
-        ArrayList<String> usuarios=new ArrayList<>();
+        ArrayList<String> usuarios = new ArrayList<>();
         ArrayList<ParseUser> users = new ArrayList<>();
         users = (ArrayList<ParseUser>) query.find();
-        if(campoTexto.getText().toString().length() == 0){
+        if (campoTexto.getText().toString().length() == 0) {
             Toast.makeText(this, "Campo de texto vacío, rellénelo e inténtelo de nuevo", Toast.LENGTH_SHORT).show();
         } else {
             for (int i = 0; i < users.size(); i++) {
@@ -257,9 +254,9 @@ public class MenuPrincipal extends Activity {
         Spinner spinnerTipoPush = (Spinner) findViewById((R.id.spinnerTipoPush));
         String valorSpin = String.valueOf(spinnerTipoPush.getSelectedItem());
 
-        Intent i = new Intent(this, Consulta.class );
+        Intent i = new Intent(this, Consulta.class);
         i.putExtra("ValorSpin", valorSpin);
-        i.putExtra("usuario", shared.getString("usuario","1"));
+        i.putExtra("usuario", shared.getString("usuario", "1"));
         startActivity(i);
         overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
     }
@@ -277,7 +274,7 @@ public class MenuPrincipal extends Activity {
         }
     }
 
-    public void onBackPressed(){
+    public void onBackPressed() {
         finish();
         overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
     }

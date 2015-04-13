@@ -6,6 +6,7 @@
         <item>Urgencia</item>
         <item>Conferencia</item>
         <item>Recordatorio</item>
+        <item>Privado</item>
     </string-array>
 
     <string-array name="grupos">

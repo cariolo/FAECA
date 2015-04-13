@@ -69,23 +69,22 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
     }
 
     public void poblarSpinner(String valorSpin){
-
-        if (valorSpin.equals("Mensajes enviados")) {
-
-        }
-        if (valorSpin.equals("Mensajes recibidos")) {
-
+        ParseQuery<ParseObject> consulta = null;
+        if (valorSpin.equals("Privado")) {
+            consulta = ParseQuery.getQuery(valorSpin).whereEqualTo("receiver", yo);
         }
 
         ListView vistaResultadosConsulta = (ListView) findViewById(R.id.listaResultados);
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(valorSpin);
 
         setTitle("Consulta de " + valorSpin.toLowerCase());
 
 
         try {
-            ParseQuery<ParseObject> consulta=ParseQuery.getQuery(valorSpin).whereEqualTo("receiver", yo);
-            List<ParseObject> lista=consulta.find();
+
+            if (!valorSpin.equals("Privado")) {
+                consulta = ParseQuery.getQuery(valorSpin);
+            }
+            List<ParseObject> lista = consulta.find();
             ArrayList<String> listaResultado = new ArrayList<>();
 
             for (int i = lista.size() - 1; i >= 0; i--) {
