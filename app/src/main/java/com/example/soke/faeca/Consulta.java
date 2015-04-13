@@ -36,9 +36,7 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
             lista.add("Urgencia");
             lista.add("Conferencia");
             lista.add("Recordatorio");
-            lista.add("Mensajes enviados");
-            lista.add("Mensajes recibidos");
-
+            lista.add("Privados ");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, lista);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spiner_oculto.setAdapter(adapter);
