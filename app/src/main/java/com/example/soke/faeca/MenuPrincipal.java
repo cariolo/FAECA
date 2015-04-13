@@ -229,7 +229,8 @@ public class MenuPrincipal extends Activity {
         EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
         ImageButton enviarA = (ImageButton) findViewById(R.id.enviarA);
         ParseQuery<ParseUser> query = ParseUser.getQuery();
-
+        Spinner spinnerLayout = (Spinner) findViewById((R.id.spinnerTipoPush));
+        String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
 
 
         ArrayList<String> usuarios=new ArrayList<>();
@@ -237,8 +238,7 @@ public class MenuPrincipal extends Activity {
         users = (ArrayList<ParseUser>) query.find();
         if(campoTexto.getText().toString().length() == 0){
             Toast.makeText(this, "Campo de texto vacío, rellénelo e inténtelo de nuevo", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             for (int i = 0; i < users.size(); i++) {
                 usuarios.add(users.get(i).getUsername());
             }
@@ -246,6 +246,8 @@ public class MenuPrincipal extends Activity {
             Intent i = new Intent(this, EnviarA.class);
             i.putExtra("mensaje", campoTexto.getText().toString());
             i.putExtra("usuarios", usuarios);
+            i.putExtra("tipo", valorSpin);
+            i.putExtra("yo", shared.getString("usuario", "1"));
             startActivity(i);
             overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
         }

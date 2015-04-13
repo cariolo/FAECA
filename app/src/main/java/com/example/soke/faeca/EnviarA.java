@@ -8,6 +8,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.parse.ParseInstallation;
+import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 
@@ -18,7 +19,8 @@ public class EnviarA extends Activity {
 
     public Spinner selectorUsuarios;
     public boolean terminado=false;
-    String mensaje;
+    public String mensaje, tipo, usuario;
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +28,10 @@ public class EnviarA extends Activity {
         setContentView(R.layout.activity_enviar);
         selectorUsuarios=(Spinner) findViewById(R.id.usuarios);
         mensaje = getIntent().getStringExtra("mensaje");
+        tipo = getIntent().getStringExtra("tipo");
+        usuario = getIntent().getStringExtra("yo");
         ArrayList<String> usuarios = getIntent().getStringArrayListExtra("usuarios");
+
 
         setTitle("Notificación individual");
 
@@ -42,13 +47,22 @@ public class EnviarA extends Activity {
     public void enviar(View v){
 
         ParsePush push = new ParsePush();
+        ParseObject push_respaldo = new ParseObject(tipo);
         ParseQuery query = ParseInstallation.getQuery();
         query.whereEqualTo("user", selectorUsuarios.getSelectedItem().toString());
+
+        push_respaldo.add("Mensaje", mensaje);
+
+        push_respaldo.add("receiver", selectorUsuarios.getSelectedItem().toString());
+
+        push_respaldo.add("Sender", usuario);
+
+        push_respaldo.saveEventually();
 
         push.setQuery(query);
         push.setMessage(mensaje);
         push.sendInBackground();
-        Toast.makeText(this, "Enviando a "+selectorUsuarios.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Enviando a " + selectorUsuarios.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
 
     }
     public void onBackPressed(){
