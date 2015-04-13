@@ -20,6 +20,7 @@ import java.util.List;
 
 public class Consulta extends Activity implements AdapterView.OnItemClickListener{
     static String valorSpin = null;
+    private String yo;
 
 
     @Override
@@ -27,6 +28,7 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consulta_push);
 
+        yo=getIntent().getStringExtra("yo");
 
         LinkedList<String> lista = new LinkedList<String>();
             final Spinner spiner_oculto = (Spinner) findViewById(R.id.consulta_oculta);
@@ -82,7 +84,8 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
 
 
         try {
-            List<ParseObject> lista=query.find();
+            ParseQuery<ParseObject> consulta=query.whereEqualTo("receiver", yo);
+            List<ParseObject> lista=consulta.find();
             ArrayList<String> listaResultado = new ArrayList<>();
 
             for (int i = lista.size() - 1; i >= 0; i--) {

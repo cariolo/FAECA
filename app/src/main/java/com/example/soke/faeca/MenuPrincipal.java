@@ -246,6 +246,7 @@ public class MenuPrincipal extends Activity {
             Intent i = new Intent(this, EnviarA.class);
             i.putExtra("mensaje", campoTexto.getText().toString());
             i.putExtra("usuarios", usuarios);
+            i.putExtra("yo", shared.getString("usuario","1"));
             startActivity(i);
             overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
         }
