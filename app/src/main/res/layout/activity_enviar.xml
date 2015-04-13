@@ -1,56 +1,61 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent"
+    android:background="@mipmap/prueba"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.soke.faeca.EnviarA"
-    android:background="@mipmap/prueba">
+    tools:context="com.example.soke.faeca.EnviarA">
 
     <TextView
-        android:textColor="@android:color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="¿A quién deseas notificar?"
         android:id="@+id/portada"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="#ff146f03"
+        android:paddingLeft="20dp"
+        android:text="¿A quién deseas notificar?"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffffff" />
 
     <Spinner
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/usuarios"
-        android:layout_below="@+id/usuariosTexto"
-        android:layout_marginTop="20dp"
-        android:layout_centerVertical="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:spinnerMode="dropdown"
-        android:longClickable="true" />
+        android:layout_below="@+id/usuariosTexto"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="20dp"
+        android:longClickable="true"
+        android:spinnerMode="dropdown" />
 
     <TextView
-        android:textColor="@android:color/white"
+        android:id="@+id/usuariosTexto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Usuarios"
-        android:id="@+id/usuariosTexto"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/portada"
         android:layout_marginTop="100dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:background="#ff146f03"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Usuarios"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#ffffffff" />
 
     <ImageButton
 
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:layout_marginTop="40dp"
-        android:layout_centerHorizontal="true"
-        android:onClick="enviar"
         android:layout_below="@+id/usuarios"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
         android:background="@mipmap/enviar"
+        android:onClick="enviar"
         android:src="@drawable/enviar_a_2" />
 
 </RelativeLayout>

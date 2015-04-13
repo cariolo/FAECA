@@ -18,7 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class Consulta extends Activity implements AdapterView.OnItemClickListener{
+public class Consulta extends Activity implements AdapterView.OnItemClickListener {
     static String valorSpin = null;
     private String yo;
 
@@ -28,37 +28,39 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consulta_push);
 
-        yo=getIntent().getStringExtra("usuario");
+        yo = getIntent().getStringExtra("usuario");
 
         LinkedList<String> lista = new LinkedList<String>();
-            final Spinner spiner_oculto = (Spinner) findViewById(R.id.consulta_oculta);
-            lista.add("Reunion");
-            lista.add("Urgencia");
-            lista.add("Conferencia");
-            lista.add("Recordatorio");
-            lista.add("Privados ");
+        final Spinner spiner_oculto = (Spinner) findViewById(R.id.consulta_oculta);
+        lista.add("Reunion");
+        lista.add("Urgencia");
+        lista.add("Conferencia");
+        lista.add("Recordatorio");
+        lista.add("Privado");
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, lista);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spiner_oculto.setAdapter(adapter);
-            spiner_oculto.setVisibility(View.VISIBLE);
-            spiner_oculto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spiner_oculto.setAdapter(adapter);
+        spiner_oculto.setVisibility(View.VISIBLE);
+        spiner_oculto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-                public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
-                                           int position, long id) {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
+                                       int position, long id) {
 
-                    valorSpin = (String) spiner_oculto.getSelectedItem();
-                    if (valorSpin != null) {
-                            poblarSpinner(valorSpin);
-                    }
+                valorSpin = (String) spiner_oculto.getSelectedItem();
+                if (valorSpin != null) {
+                    poblarListView(valorSpin);
                 }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    if (valorSpin != null) {
-                        poblarSpinner(valorSpin);
-                    }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                if (valorSpin != null) {
+                    poblarListView(valorSpin);
                 }
-            });
-        }
+            }
+        });
+    }
 
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
         Intent intent = new Intent(this, NotificacionCompleta.class);
@@ -66,7 +68,7 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
         startActivity(intent);
     }
 
-    public void poblarSpinner(String valorSpin){
+    public void poblarListView(String valorSpin) {
         ParseQuery<ParseObject> consulta = null;
         if (valorSpin.equals("Privado")) {
             consulta = ParseQuery.getQuery(valorSpin).whereEqualTo("receiver", yo);
@@ -86,10 +88,10 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
             ArrayList<String> listaResultado = new ArrayList<>();
 
             for (int i = lista.size() - 1; i >= 0; i--) {
-                listaResultado.add("Mensaje: \n" + lista.get(i).getString("Mensaje") + "\n\nFecha: \n" + lista.get(i).getCreatedAt().toString() + "\n\nEnviado por:  " + lista.get(i).getString("Sender"));
+                listaResultado.add(lista.get(i).getString("Sender") + ":\n\t\t" + lista.get(i).getString("Mensaje") + "\n\nFecha: \n" + lista.get(i).getCreatedAt().toString());
             }
 
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_expandable_list_item_1, listaResultado);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, listaResultado);
             vistaResultadosConsulta.setAdapter(arrayAdapter);
 
         } catch (ParseException e) {
@@ -101,7 +103,7 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         finish();
         overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
     }

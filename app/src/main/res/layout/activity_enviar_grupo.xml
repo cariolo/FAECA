@@ -11,13 +11,15 @@
 
     <TextView
         android:id="@+id/portadaGrupo"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:background="#ff146f03"
+        android:paddingLeft="20dp"
         android:text="Escoja un grupo"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white" />
+        android:textColor="#ffffffff" />
 
     <Spinner
         android:id="@+id/grupos"
@@ -39,9 +41,12 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/portada"
         android:layout_marginTop="100dp"
+        android:background="#ff146f03"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="Grupos:"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@android:color/white" />
+        android:textColor="#ffffffff" />
 
     <ImageButton
         android:id="@+id/enviarGrupos"
