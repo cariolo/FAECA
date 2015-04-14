@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.Arrays;
+
 
 public class Identificacion extends Activity {
 
@@ -25,8 +27,10 @@ public class Identificacion extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_identificacion);
+        buscador=(EditText) findViewById(R.id.CampoNombre);
 
         String[] coops=getResources().getStringArray(R.array.cooperativas);
+        Arrays.sort(coops);
         adapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, coops);
 
         lv=(ListView) findViewById(R.id.Cooperativas);
@@ -36,11 +40,11 @@ public class Identificacion extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                buscador.setText(lv.getSelectedItem().toString());
             }
         });
 
 
-        buscador=(EditText) findViewById(R.id.CampoNombre);
 
         buscador.addTextChangedListener(new TextWatcher() {
             @Override
@@ -88,8 +92,7 @@ public class Identificacion extends Activity {
     }
 
     public void guardarNombre(View v){
-        EditText n=(EditText) findViewById(R.id.CampoNombre);
-        String usuario=n.getText().toString();
+        String usuario=lv.getSelectedItem().toString();
 
         if(usuario.length()<1) {
             Toast.makeText(this, "Debes introducir tu nombre para identificarte", Toast.LENGTH_LONG).show();
