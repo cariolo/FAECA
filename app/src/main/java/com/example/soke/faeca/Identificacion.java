@@ -3,20 +3,64 @@ package com.example.soke.faeca;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 
 public class Identificacion extends Activity {
 
+    ListView lv=null;
+    EditText buscador=null;
+    ArrayAdapter<String> adapter=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_identificacion);
+
+        adapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, R.array.cooperativas);
+
+
+        lv=(ListView) findViewById(R.id.Cooperativas);
+        lv.setAdapter(adapter);
+        lv.setTextFilterEnabled(true);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+
+
+        buscador=(EditText) findViewById(R.id.CampoNombre);
+
+        buscador.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                Identificacion.this.adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
         setTitle("Registro del usuario");
     }
 
