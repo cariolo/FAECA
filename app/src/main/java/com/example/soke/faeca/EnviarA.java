@@ -38,7 +38,7 @@ public class EnviarA extends Activity {
 
         setTitle("Notificación individual");
 
-        //Lleno el Spinner con los usuarios registrados
+
         ArrayAdapter<String> adapterUsuarios = new ArrayAdapter<>(this, android.R.layout.simple_list_item_single_choice, usuarios);
         selectorUsuarios = (ListView) findViewById(R.id.usuarios);
         selectorUsuarios.setAdapter(adapterUsuarios);

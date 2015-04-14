@@ -11,23 +11,24 @@
     </string-array>
 
     <string-array name="cooperativas">
+        <item>**ACEITE DE OLIVA (ALMAZARAS)**</item>
         <item>SAN SEBASTIAN DE ALFACAR</item>
-        <item>ACEITES ALGARINEJO</item>
+        <item>ACEITES ALDARINEJO</item>
         <item>AGRICOLA LOS TAJOS</item>
         <item>AGRICOLA SANTA BARBARA DE BAZA</item>
         <item>SAN SEBASTIAN DE BENALUA</item>
         <item>SANTA ISABEL DE CAMPOTEJAS</item>
         <item>NTRA. SRA. DE LOS REMEDIOS DE CAMPOTEJAS</item>
-        <item>NTRA. SRA. DEL ROSARIO DE CASTRIL</item>
+        <item>NTRA. SRA. DEL ROSARIO CASTRIL</item>
         <item>SAN ANTONIO DE COGOLLOS</item>
         <item>NTRA. SRA. DEL PILAR DE COLOMERA</item>
         <item>LA ESPERANZA DEL CAMPO</item>
         <item>NTRA. SRA. DE LA CABEZA DE CULLAR</item>
-        <item>NTRA. SRA. DEL ROSARIO DE DEHESAS V.</item>
+        <item>NTRA. SRA. DEL ROSARIO DE DEHESAS</item>
         <item>NTRA. SRA. DE LOS DOLORES</item>
         <item>SAN ISIDRO DE DEIFONTES</item>
         <item>S.A.T. NTRA. SRA. DEL PERPETUO SOCORRO</item>
-        <item>VARAILA DE DOMINGO PEREZ</item>
+        <item>BARAILA DE DOMINGO PEREZ</item>
         <item>NTRA. SRA. DE LOS DOLORES DE FREILA</item>
         <item>ACEITES FUENTES DE CESNA</item>
         <item>SAN FRANCISCO SERRANO</item>
@@ -46,69 +47,68 @@
         <item>SANTA MONICA DE PIÑAR</item>
         <item>PUERTO LOPE</item>
         <item>SANTA ANA DE SALAR</item>
-        <item>ACEITE EL CORTIJILLO</item>
+        <item>ACEITES EL CORTIJILLO</item>
         <item>OLEOTROPIC</item>
-        <item>TEMPLEOLIVA</item>
+        <item>TEMPLE OLIVA</item>
         <item>CAMPO-AGRO OLIVARERA</item>
         <item>AGRARIA CERRO GORDO</item>
         <item>SAN LORENZO DE ZAGRA</item>
         <item>NTRA. SRA. DE LA CABEZA DE ZUJAR</item>
-
+        <item>**ACEITE DE OLIVA OLIVARERAS (OLIVARERAS)**</item>
         <item>AGRICOLA ALOMARTEÑA</item>
         <item>ARAMA</item>
         <item>LA SANTA CRUZ</item>
         <item>EL LLANETE</item>
         <item>NTRA. SRA. DE LA FE DE TOZAR</item>
-
-        <item>AGROINDUSTRIAS DE ACEITUNAS DE MESA Y ENCURTIDOS</item>
-
-        <item>PRODUCTO CAÑA AZUCAR Y REMOLACHA DEL LTRAL. GRANADINO</item>
-
+        <item>**ACEITUNA DE MESA**</item>
+        <item>AGROINDUSTRIAS DE ACEITUNA DE MESA Y ENCURTIDOS (OLIVARTIS)</item>
+        <item>**CAÑA DE AZUCAR**</item>
+        <item>PRODUCT. CAÑA DE AZUCAR Y REMOLACHA DEL LTRAL. GRANADINO</item>
+        <item>**FRUTAS Y HORTALIZAS**</item>
         <item>HERCO-FRUT</item>
         <item>PROD. AGRAR. DE BENALUA DE GUADIX "BENAFRU"</item>
         <item>GRANADA LA PALMA</item>
         <item>EL GRUPO</item>
         <item>VEGACHAUCHINA</item>
-        <item>SOTO DE FUENTE VAQUEROS</item>
         <item>HNOS. GARCIA GUTIERREZ</item>
-        <item>ESZOSAL</item>
+        <item>ESPALORQUIANA</item>
+        <item>SOTO DE FUENTEVAQUEROS</item>
         <item>MAITENA DEL GENIL</item>
-        <item>AGRICOLA SAN FRANCISCO</item>
-        <item>CENTRO SUR "CESURCA"</item>
+        <item>CENTROSUR "CESURCA"</item>
+        <item>AGRICOLA SAN FRANCISCO "COSAFRA"</item>
         <item>ESPARRAGO DE GRANADA</item>
         <item>AGROLACHAR</item>
         <item>S.A.T. TRAMA Y AZAHAR</item>
-        <item>AGRUPA-EL VALLE DE LECRIN</item>
+        <item>AGRUPACION EL VALLE DE LECRIN</item>
         <item>BARRANCO DEL CIGARRAL</item>
-        <item>ESPAFRON</item>
+        <item>ESPAFROM</item>
         <item>PROCAM</item>
         <item>BIO DON FADRIQUE</item>
-        <item>GRANAGENIL</item>
-        <item>S.A.T. SOL DEL FARDES</item>
+        <item>GRANA GENIL</item>
+        <item>S.A.T. SOL DE FARDES</item>
         <item>LOS FRESNOS</item>
         <item>S.A.T. HORTOVENTAS</item>
         <item>LOS GALLOMBARES</item>
-        <item>AGROMESIA</item>
         <item>HORTOVILLA</item>
-        <item>NTR. SR. DE LAS TRES MARIAS</item>
-
-        <item>ECOALTIPLANO</item>
-
+        <item>AGROMESIA</item>
+        <item>NTRO. SR. DDE LAS TRES MARIAS</item>
+        <item>**FRUTOS SECOS**</item>
         <item>LA UNION DE ANDALUCIA</item>
         <item>S.A.T. ALMENCASTRIL</item>
         <item>ALMENDRAS ALHAMBRA</item>
+        <item>ALMENDRAS GRANADA</item>
         <item>ALMENDRAS DEL NORTE DE GRANADA</item>
-
+        <item>**LACTEO**</item>
         <item>SANTIAGO APOSTOL</item>
-
+        <item>OVINO-CAPRINO</item>
         <item>COMERCIALIZADORA SEGUREÑA</item>
         <item>COVECOL</item>
-
+        <item>**SUMINISTROS**</item>
         <item>LOS PALMARES</item>
-
+        <item>**TABACO**</item>
         <item>COUAGA VEGAS DE GRANADA</item>
-        <item>S.A.T. TABACOS GRANADA</item>
-
+        <item>S.A.T. TABACOS GRANADA ASOCIACION</item>
+        <item>**VITIVINICOLA**</item>
         <item>VINICOLA ALHAMEÑA SIERRA DE TEJEDA</item>
     </string-array>
 
