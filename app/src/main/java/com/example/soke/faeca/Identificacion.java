@@ -19,9 +19,10 @@ import java.util.Arrays;
 
 public class Identificacion extends Activity {
 
-    ListView lv=null;
-    EditText buscador=null;
-    ArrayAdapter<String> adapter=null;
+    public static String usuario = null;
+    public ListView lv = null;
+    public EditText buscador = null;
+    public ArrayAdapter<String> adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class Identificacion extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 buscador.setText(lv.getItemAtPosition(position).toString());
+                usuario = String.valueOf(lv.getItemAtPosition(position));
             }
         });
 
@@ -98,18 +100,17 @@ public class Identificacion extends Activity {
     }
 
     public void guardarNombre(View v){
-        String usuario=null;
 
-        if(lv.getSelectedItemPosition()==-1) {
-            Toast.makeText(this, "Debes introducir tu nombre para identificarte", Toast.LENGTH_LONG).show();
+        if (usuario.equals(null)) {
+            Toast.makeText(this, "Seleccione su cooperativa con la que darse de alta", Toast.LENGTH_LONG).show();
         }
         else{
-            usuario=lv.getSelectedItem().toString();
-
             Intent i = new Intent();
             i.putExtra("usuario", usuario);
             setResult(RESULT_OK, i);
+            Toast.makeText(this, "Cooperativa registrada con éxito", Toast.LENGTH_LONG).show();
             finish();
+
         }
     }
 }

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.parse.ParseInstallation;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class EnviarA extends Activity {
 
-    public Spinner selectorUsuarios;
+    public ListView selectorUsuarios;
     public boolean terminado=false;
     public String mensaje, tipo, usuario;
 
@@ -26,7 +26,7 @@ public class EnviarA extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar);
-        selectorUsuarios=(Spinner) findViewById(R.id.usuarios);
+        selectorUsuarios = (ListView) findViewById(R.id.usuarios);
         mensaje = getIntent().getStringExtra("mensaje");
         tipo = getIntent().getStringExtra("tipo");
         usuario = getIntent().getStringExtra("yo");
@@ -37,8 +37,8 @@ public class EnviarA extends Activity {
 
         //Lleno el Spinner con los usuarios registrados
         ArrayAdapter<String> adapterUsuarios = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, usuarios);
-        adapterUsuarios.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        selectorUsuarios = (Spinner) findViewById(R.id.usuarios);
+        adapterUsuarios.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        selectorUsuarios = (ListView) findViewById(R.id.usuarios);
         selectorUsuarios.setAdapter(adapterUsuarios);
         terminado = false;
     }
