@@ -40,7 +40,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView3"
-        android:layout_marginTop="55dp" />
+        android:layout_marginTop="20dp" />
 
     <ImageButton
         android:id="@+id/Nombre"
@@ -49,9 +49,17 @@
         android:layout_below="@id/CampoNombre"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="20dp"
         android:background="@mipmap/nombre"
         android:onClick="guardarNombre"
         android:src="@drawable/nombre" />
 
+    <ListView
+        android:id="@+id/Cooperativas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Nombre"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp" />
 </RelativeLayout>
