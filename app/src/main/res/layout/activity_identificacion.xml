@@ -35,31 +35,30 @@
 
     <EditText
         android:id="@+id/CampoNombre"
-        android:hint="Busqueda..."
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView3"
+        android:hint="Busqueda..." />
 
     <ImageButton
         android:id="@+id/Nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/nombre"
-        android:onClick="guardarNombre"
-        android:src="@drawable/nombre"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/boton_registro_cooperativa"
+        android:onClick="guardarNombre"
+        android:src="@drawable/nombre" />
 
     <ListView
         android:id="@+id/Cooperativas"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/CampoNombre"
         android:layout_above="@+id/Nombre"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/CampoNombre"
         android:choiceMode="singleChoice" />
 </RelativeLayout>
