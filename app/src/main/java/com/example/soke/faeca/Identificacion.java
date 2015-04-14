@@ -40,7 +40,7 @@ public class Identificacion extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                buscador.setText(lv.getSelectedItem().toString());
+                buscador.setText(lv.getItemAtPosition(position).toString());
             }
         });
 
