@@ -13,6 +13,7 @@ import com.parse.ParsePush;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class EnviarA extends Activity {
@@ -32,6 +33,7 @@ public class EnviarA extends Activity {
         usuario = getIntent().getStringExtra("yo");
         ArrayList<String> usuarios = getIntent().getStringArrayListExtra("usuarios");
 
+        Collections.sort(usuarios);
 
         setTitle("Notificación individual");
 
