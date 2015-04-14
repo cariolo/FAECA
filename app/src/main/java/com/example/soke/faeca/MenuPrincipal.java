@@ -156,10 +156,11 @@ public class MenuPrincipal extends Activity {
                             }
                         }
                     });
+                    Toast.makeText(getApplicationContext(), "La aplicacion se ha reiniciado para realizar los cambios", Toast.LENGTH_LONG).show();
+
                     super.finish();
                     this.finish();
                     startActivity(getIntent());
-                    Toast.makeText(getApplicationContext(), "La aplicacion se ha reiniciado para realizar los cambios", Toast.LENGTH_LONG).show();
 
                 }
             }
