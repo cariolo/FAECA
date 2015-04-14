@@ -45,7 +45,6 @@ public class Identificacion extends Activity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 buscador.setText(lv.getItemAtPosition(position).toString());
             }
         });
