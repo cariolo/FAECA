@@ -24,8 +24,6 @@ public class EnviarA extends Activity {
     public String mensaje, tipo, usuario, usuario_destino;
 
     @Override
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar);
@@ -53,7 +51,7 @@ public class EnviarA extends Activity {
     }
 
 
-    public void enviar(View v){
+    public void enviar(View v) {
 
         ParsePush push = new ParsePush();
         ParseObject push_respaldo = new ParseObject(tipo);
@@ -61,13 +59,10 @@ public class EnviarA extends Activity {
         query.whereEqualTo("user", usuario_destino);
 
         push_respaldo.put("Mensaje", mensaje);
-
         push_respaldo.put("receiver", usuario_destino.toString());
-
         push_respaldo.put("Sender", usuario);
 
         push_respaldo.saveEventually();
-
 
         push.setQuery(query);
         push.setMessage(mensaje);
@@ -75,8 +70,9 @@ public class EnviarA extends Activity {
         Toast.makeText(this, "Enviando a " + usuario_destino, Toast.LENGTH_LONG).show();
 
     }
-    public void onBackPressed(){
+
+    public void onBackPressed() {
         finish();
         overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
-            }
+    }
 }
