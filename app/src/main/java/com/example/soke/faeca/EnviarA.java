@@ -68,6 +68,7 @@ public class EnviarA extends Activity {
 
         push_respaldo.saveEventually();
 
+
         push.setQuery(query);
         push.setMessage(mensaje);
         push.sendInBackground();
