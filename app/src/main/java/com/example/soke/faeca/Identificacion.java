@@ -26,8 +26,8 @@ public class Identificacion extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_identificacion);
 
-        adapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, R.array.cooperativas);
-
+        String[] coops=getResources().getStringArray(R.array.cooperativas);
+        adapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, coops);
 
         lv=(ListView) findViewById(R.id.Cooperativas);
         lv.setAdapter(adapter);
