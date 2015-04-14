@@ -3,6 +3,7 @@ package com.example.soke.faeca;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -18,9 +19,9 @@ import java.util.Collections;
 
 public class EnviarA extends Activity {
 
-    public ListView selectorUsuarios;
-    public boolean terminado=false;
-    public String mensaje, tipo, usuario;
+    public ListView selectorUsuarios = null;
+    public boolean terminado = false;
+    public String mensaje, tipo, usuario, usuario_destino;
 
     @Override
 
@@ -38,11 +39,16 @@ public class EnviarA extends Activity {
         setTitle("Notificación individual");
 
         //Lleno el Spinner con los usuarios registrados
-        ArrayAdapter<String> adapterUsuarios = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, usuarios);
-        adapterUsuarios.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        ArrayAdapter<String> adapterUsuarios = new ArrayAdapter<>(this, android.R.layout.simple_list_item_single_choice, usuarios);
         selectorUsuarios = (ListView) findViewById(R.id.usuarios);
         selectorUsuarios.setAdapter(adapterUsuarios);
         terminado = false;
+        selectorUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                usuario_destino = selectorUsuarios.getItemAtPosition(position).toString();
+            }
+        });
     }
 
 
@@ -51,11 +57,11 @@ public class EnviarA extends Activity {
         ParsePush push = new ParsePush();
         ParseObject push_respaldo = new ParseObject(tipo);
         ParseQuery query = ParseInstallation.getQuery();
-        query.whereEqualTo("user", selectorUsuarios.getSelectedItem().toString());
+        query.whereEqualTo("user", usuario_destino);
 
         push_respaldo.put("Mensaje", mensaje);
 
-        push_respaldo.put("receiver", selectorUsuarios.getSelectedItem().toString());
+        push_respaldo.put("receiver", usuario_destino.toString());
 
         push_respaldo.put("Sender", usuario);
 
@@ -64,7 +70,7 @@ public class EnviarA extends Activity {
         push.setQuery(query);
         push.setMessage(mensaje);
         push.sendInBackground();
-        Toast.makeText(this, "Enviando a " + selectorUsuarios.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Enviando a " + usuario_destino, Toast.LENGTH_LONG).show();
 
     }
     public void onBackPressed(){

@@ -28,7 +28,7 @@ public class Identificacion extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_identificacion);
-        buscador=(EditText) findViewById(R.id.CampoNombre);
+        buscador = (EditText) findViewById(R.id.CampoNombre);
 
         buscador.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,11 +36,11 @@ public class Identificacion extends Activity {
                 buscador.setText("");
             }
         });
-        String[] coops=getResources().getStringArray(R.array.cooperativas);
+        String[] coops = getResources().getStringArray(R.array.cooperativas);
         Arrays.sort(coops);
-        adapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, coops);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, coops);
 
-        lv=(ListView) findViewById(R.id.Cooperativas);
+        lv = (ListView) findViewById(R.id.Cooperativas);
         lv.setAdapter(adapter);
         lv.setTextFilterEnabled(true);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -50,7 +50,6 @@ public class Identificacion extends Activity {
                 usuario = String.valueOf(lv.getItemAtPosition(position));
             }
         });
-
 
 
         buscador.addTextChangedListener(new TextWatcher() {
@@ -98,18 +97,16 @@ public class Identificacion extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void guardarNombre(View v){
+    public void guardarNombre(View v) {
 
         if (usuario.equals(null)) {
             Toast.makeText(this, "Seleccione su cooperativa con la que darse de alta", Toast.LENGTH_LONG).show();
-        }
-        else{
+        } else {
             Intent i = new Intent();
             i.putExtra("usuario", usuario);
             setResult(RESULT_OK, i);
             Toast.makeText(this, "Cooperativa registrada con éxito", Toast.LENGTH_LONG).show();
             finish();
-
         }
     }
 }
