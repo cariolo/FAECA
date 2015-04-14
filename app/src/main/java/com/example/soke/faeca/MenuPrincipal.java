@@ -140,7 +140,7 @@ public class MenuPrincipal extends Activity {
         if (requestCode == USUARIO) {
             if (resultCode == RESULT_OK) {
                 usuario = data.getStringExtra("usuario");
-                Toast.makeText(this, "Hola " + usuario, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Bienvenido " + usuario, Toast.LENGTH_LONG).show();
                 if (usuario != null) {
                     shared.edit().putBoolean("my_first_time", false).commit();
                     shared.edit().putString("usuario", usuario).commit();
@@ -156,6 +156,11 @@ public class MenuPrincipal extends Activity {
                             }
                         }
                     });
+                    super.finish();
+                    this.finish();
+                    startActivity(getIntent());
+                    Toast.makeText(getApplicationContext(), "La aplicacion se ha reiniciado para realizar los cambios", Toast.LENGTH_LONG).show();
+
                 }
             }
             if (resultCode == RESULT_CANCELED) {
