@@ -20,7 +20,7 @@ public class enviarGrupo extends Activity {
     public ArrayList<String> almazaras=null;
     public ArrayList<String> olivareras=null;
     public ArrayList<String> ac_de_mesa=null;
-    public ArrayList<String> cana_de_azuar=null;
+    public ArrayList<String> cania_de_azucar=null;
     public ArrayList<String> frutas_hortalizas=null;
     public ArrayList<String> frutos_secos=null;
     public ArrayList<String> lacteo=null;
@@ -44,7 +44,7 @@ public class enviarGrupo extends Activity {
         almazaras=new ArrayList<>(R.array.almazaras);
         olivareras=new ArrayList<>(R.array.olivareras);
         ac_de_mesa=new ArrayList<>(R.array.aceituna_de_mesa);
-        cana_de_azuar=new ArrayList<>(R.array.caña_de_azucar);
+        cania_de_azucar=new ArrayList<>(R.array.cania_de_azucar);
         frutas_hortalizas=new ArrayList<>(R.array.frutas_y_hortalizas);
         frutos_secos=new ArrayList<>(R.array.frutos_secos);
         lacteo=new ArrayList<>(R.array.lacteo);
@@ -55,7 +55,7 @@ public class enviarGrupo extends Activity {
         grupos=new ArrayList<>();
         grupos.add(ac_de_mesa);
         grupos.add(almazaras);
-        grupos.add(cana_de_azuar);
+        grupos.add(cania_de_azucar);
         grupos.add(frutas_hortalizas);
         grupos.add(frutos_secos);
         grupos.add(lacteo);
@@ -83,7 +83,7 @@ public class enviarGrupo extends Activity {
                 destinatarios=almazaras;
                 break;
             case 2:
-                destinatarios=cana_de_azuar;
+                destinatarios=cania_de_azucar;
                 break;
             case 3:
                 destinatarios=frutas_hortalizas;
