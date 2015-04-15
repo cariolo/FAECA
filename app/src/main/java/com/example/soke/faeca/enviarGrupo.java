@@ -18,28 +18,29 @@ import java.util.Collections;
 
 public class enviarGrupo extends Activity {
 
-    public ArrayList<String> almazaras=null;
-    public ArrayList<String> olivareras=null;
-    public ArrayList<String> ac_de_mesa=null;
-    public ArrayList<String> cania_de_azucar=null;
-    public ArrayList<String> frutas_hortalizas=null;
-    public ArrayList<String> frutos_secos=null;
-    public ArrayList<String> lacteo=null;
-    public ArrayList<String> suministros=null;
-    public ArrayList<String> tabaco=null;
-    public ArrayList<String> vitivinicola=null;
-
-    public ArrayList<ArrayList<String>> grupos=null;
-
-
-    public ArrayList<String> destinatarios = null;
-
-    int eleccion=-1;
+    ArrayList<String> destinatarios = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar_grupo);
+
+        ArrayList<String> almazaras=null;
+        ArrayList<String> olivareras=null;
+        ArrayList<String> ac_de_mesa=null;
+        ArrayList<String> cania_de_azucar=null;
+        ArrayList<String> frutas_hortalizas=null;
+        ArrayList<String> frutos_secos=null;
+        ArrayList<String> lacteo=null;
+        ArrayList<String> suministros=null;
+        ArrayList<String> tabaco=null;
+        ArrayList<String> vitivinicola=null;
+
+        ArrayList<ArrayList<String>> grupos=null;
+
+
+
+        int eleccion=-1;
 
         ImageButton crearGrupos = (ImageButton) findViewById(R.id.crearGrupos);
 
@@ -91,7 +92,7 @@ public class enviarGrupo extends Activity {
                 destinatarios=ac_de_mesa;
                 break;
             case 1:
-                destinatarios=almazaras;
+                //destinatarios=almazaras;
                 break;
             case 2:
                 destinatarios=cania_de_azucar;
