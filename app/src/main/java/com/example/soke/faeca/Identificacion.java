@@ -105,7 +105,6 @@ public class Identificacion extends Activity {
             Intent i = new Intent();
             i.putExtra("usuario", usuario);
             setResult(RESULT_OK, i);
-            Toast.makeText(this, "Cooperativa registrada con éxito", Toast.LENGTH_LONG).show();
             finish();
         }
     }

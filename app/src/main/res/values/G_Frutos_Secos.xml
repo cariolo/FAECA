@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="frutos_secos">
+        <item>LA UNION DE ANDALUCIA</item>
+        <item>S.A.T. ALMENCASTRIL</item>
+        <item>ALMENDRAS ALHAMBRA</item>
+        <item>ALMENDRAS GRANADA</item>
+        <item>ALMENDRAS DEL NORTE DE GRANADA</item>
+    </string-array>
+</resources>

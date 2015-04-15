@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="olivareras">
+        <item>AGRICOLA ALOMARTEÑA</item>
+        <item>ARAMA</item>
+        <item>LA SANTA CRUZ</item>
+        <item>EL LLANETE</item>
+        <item>NTRA. SRA. DE LA FE DE TOZAR</item>
+    </string-array>
+</resources>

@@ -11,7 +11,6 @@
     </string-array>
 
     <string-array name="cooperativas">
-        <item>**ACEITE DE OLIVA (ALMAZARAS)**</item>
         <item>SAN SEBASTIAN DE ALFACAR</item>
         <item>ACEITES ALDARINEJO</item>
         <item>AGRICOLA LOS TAJOS</item>
@@ -54,17 +53,13 @@
         <item>AGRARIA CERRO GORDO</item>
         <item>SAN LORENZO DE ZAGRA</item>
         <item>NTRA. SRA. DE LA CABEZA DE ZUJAR</item>
-        <item>**ACEITE DE OLIVA OLIVARERAS (OLIVARERAS)**</item>
         <item>AGRICOLA ALOMARTEÑA</item>
         <item>ARAMA</item>
         <item>LA SANTA CRUZ</item>
         <item>EL LLANETE</item>
         <item>NTRA. SRA. DE LA FE DE TOZAR</item>
-        <item>**ACEITUNA DE MESA**</item>
         <item>AGROINDUSTRIAS DE ACEITUNA DE MESA Y ENCURTIDOS (OLIVARTIS)</item>
-        <item>**CAÑA DE AZUCAR**</item>
         <item>PRODUCT. CAÑA DE AZUCAR Y REMOLACHA DEL LTRAL. GRANADINO</item>
-        <item>**FRUTAS Y HORTALIZAS**</item>
         <item>HERCO-FRUT</item>
         <item>PROD. AGRAR. DE BENALUA DE GUADIX "BENAFRU"</item>
         <item>GRANADA LA PALMA</item>
@@ -92,31 +87,33 @@
         <item>HORTOVILLA</item>
         <item>AGROMESIA</item>
         <item>NTRO. SR. DDE LAS TRES MARIAS</item>
-        <item>**FRUTOS SECOS**</item>
         <item>LA UNION DE ANDALUCIA</item>
         <item>S.A.T. ALMENCASTRIL</item>
         <item>ALMENDRAS ALHAMBRA</item>
         <item>ALMENDRAS GRANADA</item>
         <item>ALMENDRAS DEL NORTE DE GRANADA</item>
-        <item>**LACTEO**</item>
         <item>SANTIAGO APOSTOL</item>
         <item>OVINO-CAPRINO</item>
         <item>COMERCIALIZADORA SEGUREÑA</item>
         <item>COVECOL</item>
-        <item>**SUMINISTROS**</item>
         <item>LOS PALMARES</item>
-        <item>**TABACO**</item>
         <item>COUAGA VEGAS DE GRANADA</item>
         <item>S.A.T. TABACOS GRANADA ASOCIACION</item>
-        <item>**VITIVINICOLA**</item>
         <item>VINICOLA ALHAMEÑA SIERRA DE TEJEDA</item>
     </string-array>
 
     <string-array name="grupos">
-        <item>Grupo 1, (Zeon, JoseLuis y Virtual)</item>
-        <item>Grupo 2, (Nombres...)</item>
-        <item>Grupo 3, (Nombres...)</item>
-        <item>Grupo 4, (Nombres...)</item>
+        <item>ACEITE DE OLIVA (ALMAZARAS)</item>
+        <item>ACEITE DE OLIVA OLIVARERAS (OLIVARERAS)</item>
+        <item>ACEITUNA DE MESA</item>
+        <item>CAÑA DE AZUCAR</item>
+        <item>FRUTAS Y HORTALIZAS</item>
+        <item>FRUTOS SECOS</item>
+        <item>LACTEO</item>
+        <item>SUMINISTROS</item>
+        <item>TABACO</item>
+        <item>VITIVINICOLA</item>
+
     </string-array>
 
     <string-array name="usuarios">

@@ -69,9 +69,19 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
     }
 
     public void poblarListView(String valorSpin) {
-        ParseQuery<ParseObject> consulta = null;
+
+        ParseQuery<ParseObject> receptor = null;
+        ParseQuery<ParseObject> remitente = null;
+        ParseQuery<ParseObject> consulta = ParseQuery.getQuery(valorSpin);
+        List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
         if (valorSpin.equals("Privado")) {
-            consulta = ParseQuery.getQuery(valorSpin).whereEqualTo("receiver", yo);
+            receptor = ParseQuery.getQuery(valorSpin)/*.whereEqualTo("receiver", yo)*/;
+            receptor.whereEqualTo("receiver", yo);
+            remitente = ParseQuery.getQuery(valorSpin)/*.whereEqualTo("receiver", yo)*/;
+            remitente.whereEqualTo("Sender", yo);
+
+            queries.add(receptor);
+            queries.add(remitente);
         }
 
         ListView vistaResultadosConsulta = (ListView) findViewById(R.id.listaResultados);
@@ -83,8 +93,10 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
 
             if (!valorSpin.equals("Privado")) {
                 consulta = ParseQuery.getQuery(valorSpin);
+                queries.add(consulta);
             }
-            List<ParseObject> lista = consulta.find();
+            ParseQuery<ParseObject> general = ParseQuery.or(queries);
+            List<ParseObject> lista = general.find();
             ArrayList<String> listaResultado = new ArrayList<>();
 
             for (int i = lista.size() - 1; i >= 0; i--) {

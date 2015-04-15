@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="frutas_y_hortalizas">
+        <item>HERCO-FRUT</item>
+        <item>PROD. AGRAR. DE BENALUA DE GUADIX "BENAFRU"</item>
+        <item>GRANADA LA PALMA</item>
+        <item>EL GRUPO</item>
+        <item>VEGACHAUCHINA</item>
+        <item>HNOS. GARCIA GUTIERREZ</item>
+        <item>ESPALORQUIANA</item>
+        <item>SOTO DE FUENTEVAQUEROS</item>
+        <item>MAITENA DEL GENIL</item>
+        <item>CENTROSUR "CESURCA"</item>
+        <item>AGRICOLA SAN FRANCISCO "COSAFRA"</item>
+        <item>ESPARRAGO DE GRANADA</item>
+        <item>AGROLACHAR</item>
+        <item>S.A.T. TRAMA Y AZAHAR</item>
+        <item>AGRUPACION EL VALLE DE LECRIN</item>
+        <item>BARRANCO DEL CIGARRAL</item>
+        <item>ESPAFROM</item>
+        <item>PROCAM</item>
+        <item>BIO DON FADRIQUE</item>
+        <item>GRANA GENIL</item>
+        <item>S.A.T. SOL DE FARDES</item>
+        <item>LOS FRESNOS</item>
+        <item>S.A.T. HORTOVENTAS</item>
+        <item>LOS GALLOMBARES</item>
+        <item>HORTOVILLA</item>
+        <item>AGROMESIA</item>
+        <item>NTRO. SR. DDE LAS TRES MARIAS</item>
+    </string-array>
+</resources>

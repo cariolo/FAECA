@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="almazaras">
+        <item>SAN SEBASTIAN DE ALFACAR</item>
+        <item>ACEITES ALDARINEJO</item>
+        <item>AGRICOLA LOS TAJOS</item>
+        <item>AGRICOLA SANTA BARBARA DE BAZA</item>
+        <item>SAN SEBASTIAN DE BENALUA</item>
+        <item>SANTA ISABEL DE CAMPOTEJAS</item>
+        <item>NTRA. SRA. DE LOS REMEDIOS DE CAMPOTEJAS</item>
+        <item>NTRA. SRA. DEL ROSARIO CASTRIL</item>
+        <item>SAN ANTONIO DE COGOLLOS</item>
+        <item>NTRA. SRA. DEL PILAR DE COLOMERA</item>
+        <item>LA ESPERANZA DEL CAMPO</item>
+        <item>NTRA. SRA. DE LA CABEZA DE CULLAR</item>
+        <item>NTRA. SRA. DEL ROSARIO DE DEHESAS</item>
+        <item>NTRA. SRA. DE LOS DOLORES</item>
+        <item>SAN ISIDRO DE DEIFONTES</item>
+        <item>S.A.T. NTRA. SRA. DEL PERPETUO SOCORRO</item>
+        <item>BARAILA DE DOMINGO PEREZ</item>
+        <item>NTRA. SRA. DE LOS DOLORES DE FREILA</item>
+        <item>ACEITES FUENTES DE CESNA</item>
+        <item>SAN FRANCISCO SERRANO</item>
+        <item>AGRO-OLIV NTRA. SRA. SOLEDAD DE HUESCAR</item>
+        <item>AGRICOLA SAN ROGELIO DE ILLORA</item>
+        <item>NTRA. SRA. DE LOS REMEDIOS DE IZNALLOZ</item>
+        <item>OLIJAYENA</item>
+        <item>UNION AGRICOLA SAN JOSE</item>
+        <item>SAN ISIDRO DE LOJA</item>
+        <item>SAN FRANCISCO DE ASIS</item>
+        <item>ALMAZARA NTRA. SRA. DE LOS REMEDIOS</item>
+        <item>VIRGEN DE LA CABEZA</item>
+        <item>ALMAZARA DE MONTILLANA</item>
+        <item>SAN ILDEFONSO DE PELIGROS</item>
+        <item>SAN ROQUE DE PINOS DEL VALLE</item>
+        <item>SANTA MONICA DE PIÑAR</item>
+        <item>PUERTO LOPE</item>
+        <item>SANTA ANA DE SALAR</item>
+        <item>ACEITES EL CORTIJILLO</item>
+        <item>OLEOTROPIC</item>
+        <item>TEMPLE OLIVA</item>
+        <item>CAMPO-AGRO OLIVARERA</item>
+        <item>AGRARIA CERRO GORDO</item>
+        <item>SAN LORENZO DE ZAGRA</item>
+        <item>NTRA. SRA. DE LA CABEZA DE ZUJAR</item>
+    </string-array>
+</resources>
