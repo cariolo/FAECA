@@ -1,6 +1,7 @@
 package com.example.soke.faeca;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -40,6 +41,16 @@ public class enviarGrupo extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar_grupo);
 
+        ImageButton crearGrupos = (ImageButton) findViewById(R.id.crearGrupos);
+
+        crearGrupos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent creacionGrupo = new Intent(getApplicationContext(), crearGrupo.class);
+                startActivity(creacionGrupo);
+                overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
+            }
+        });
 
         almazaras=new ArrayList<>(R.array.almazaras);
         olivareras=new ArrayList<>(R.array.olivareras);

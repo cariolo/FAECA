@@ -59,4 +59,14 @@
         android:onClick="enviarGrupoNotificacion"
         android:src="@drawable/enviar_a_2" />
 
+    <ImageButton
+        android:id="@+id/crearGrupos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/enviarGrupos"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@mipmap/crear_grupo"
+        android:onClick="crearGrupo"
+        android:src="@drawable/nombre" />
 </RelativeLayout>

@@ -64,22 +64,25 @@
 
         <activity
             android:name=".Consulta"
-            android:label="@string/title_activity_reuniones"></activity>
+            android:label="@string/title_activity_reuniones" />
         <activity
             android:name=".Identificacion"
-            android:label="@string/title_activity_identificacion"></activity>
+            android:label="@string/title_activity_identificacion" />
         <activity
             android:name=".EnviarA"
-            android:label="@string/title_activity_enviar"></activity>
+            android:label="@string/title_activity_enviar" />
         <activity
             android:name=".NotificacionCompleta"
-            android:label="@string/title_activity_notificacion_completa"></activity>
+            android:label="@string/title_activity_notificacion_completa" />
         <activity
             android:name=".Lanzador"
-            android:label="@string/title_activity_lanzador"></activity>
+            android:label="@string/title_activity_lanzador" />
         <activity
             android:name=".enviarGrupo"
-            android:label="@string/title_activity_enviar_grupo"></activity>
+            android:label="@string/title_activity_enviar_grupo" />
+        <activity
+            android:name=".crearGrupo"
+            android:label="@string/title_activity_crear_grupo"></activity>
     </application>
 
 </manifest>
