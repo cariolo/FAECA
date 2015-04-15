@@ -17,7 +17,6 @@ import java.util.Collections;
 
 public class enviarGrupo extends Activity {
 
-
     public ArrayList<String> almazaras=null;
     public ArrayList<String> olivareras=null;
     public ArrayList<String> ac_de_mesa=null;
