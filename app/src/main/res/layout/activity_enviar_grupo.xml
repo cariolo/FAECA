@@ -67,6 +67,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:background="@mipmap/crear_grupo"
-        android:onClick="crearGrupo"
+        android:onClick="enviarGrupoCustomizado"
         android:src="@drawable/nombre" />
 </RelativeLayout>

@@ -10,29 +10,38 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.parse.ParseInstallation;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class crearGrupo extends Activity {
+public class EnvioGrupalCustomizado extends Activity {
 
     public ArrayList<String> grupoCooperativas = null;
-    ListView lv = null;
-    ImageButton creacionGrupo = null;
+    public ListView lv = null;
+    public ImageButton creacionGrupo = null;
+    public String mensaje = null;
 
-    public void crearGrupo(ArrayList grupo) {
-        String XML = String.valueOf(getResources().openRawResource(R.array.cooperativas)), newXML;
-        String[] xmlParts;
-        xmlParts = XML.split("</resources>");
-        xmlParts[0] += "\n<string-array name='peisen'>\n";
-        for (int i = 0; i < grupo.size(); i++) {
-            xmlParts[0] += "<item>" + grupo.get(i).toString() + "</item>\n";
+    public void enviarGrupoCustomizado(ArrayList grupo, String mensaje) {
+        if (grupo.size() == 0) {
+            Toast.makeText(getApplicationContext(), "No has seleccionado ninguna cooperativa.", Toast.LENGTH_SHORT).show();
+        } else {
+            ParsePush push = new ParsePush();
+
+            for (int i = 0; i < grupo.size(); i++) {
+                ParseQuery query = ParseInstallation.getQuery();
+                query.whereEqualTo("user", grupo.get(i).toString());
+
+                push.setQuery(query);
+                push.setMessage(mensaje);
+                push.sendInBackground();
+            }
+            Toast.makeText(this, "Mensaje enviado a las cooperativas marcadas", Toast.LENGTH_SHORT).show();
         }
-        xmlParts[0] += "</string-array>\n</resources>";
-        xmlParts[1] = null;
 
-        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, xmlParts);
-        lv.setAdapter(adapter);
     }
 
     @Override
@@ -40,6 +49,7 @@ public class crearGrupo extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_grupo);
 
+        mensaje = getIntent().getStringExtra("mensaje");
         creacionGrupo = (ImageButton) findViewById(R.id.crearGrupo);
         lv = (ListView) findViewById(R.id.Cooperativas);
         grupoCooperativas = new ArrayList<>();
@@ -60,7 +70,6 @@ public class crearGrupo extends Activity {
                 if (!check.isChecked()) {
                     Toast.makeText(getApplicationContext(), "Cooperativa: " + grupoCooperativas.remove(lv.getItemAtPosition(position).toString()) + "eliminada de la lista preliminar correctamente", Toast.LENGTH_SHORT).show();
                     grupoCooperativas.remove(lv.getItemAtPosition(position).toString());
-
                 }
             }
         });
@@ -68,7 +77,7 @@ public class crearGrupo extends Activity {
         creacionGrupo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                crearGrupo(grupoCooperativas);
+                enviarGrupoCustomizado(grupoCooperativas, mensaje);
             }
         });
     }

@@ -109,15 +109,13 @@
         <item>FRUTAS Y HORTALIZAS</item>
         <item>FRUTOS SECOS</item>
         <item>LACTEO</item>
-        <item>OVINO-CAPRINO</item>
+        <item>OVINO_CAPRINO</item>
         <item>SUMINISTROS</item>
         <item>TABACO</item>
         <item>VITIVINICOLA</item>
-
     </string-array>
 
     <string-array name="usuarios">
         <item>Selecciona un usuario</item>
     </string-array>
-
 </resources>

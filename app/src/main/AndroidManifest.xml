@@ -81,7 +81,7 @@
             android:name=".enviarGrupo"
             android:label="@string/title_activity_enviar_grupo" />
         <activity
-            android:name=".crearGrupo"
+            android:name=".EnvioGrupalCustomizado"
             android:label="@string/title_activity_crear_grupo"></activity>
     </application>
 

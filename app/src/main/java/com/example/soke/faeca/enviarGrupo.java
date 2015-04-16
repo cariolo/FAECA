@@ -43,7 +43,8 @@ public class enviarGrupo extends Activity {
         crearGrupos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent creacionGrupo = new Intent(getApplicationContext(), crearGrupo.class);
+                Intent creacionGrupo = new Intent(getApplicationContext(), EnvioGrupalCustomizado.class);
+                creacionGrupo.putExtra("mensaje", getIntent().getStringExtra("mensaje"));
                 startActivity(creacionGrupo);
                 overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
             }
