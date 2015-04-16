@@ -36,22 +36,13 @@
     <ListView
         android:id="@+id/Cooperativas"
         android:layout_width="fill_parent"
-        android:layout_height="275dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/descripcionActividad"
-        android:layout_marginTop="75dp"
-        android:choiceMode="multipleChoice" />
-
-    <EditText
-        android:id="@+id/busqueda"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="325dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/descripcionActividad"
         android:layout_marginTop="20dp"
-        android:hint="Busqueda..." />
+        android:choiceMode="multipleChoice" />
+
 
     <ImageButton
         android:id="@+id/grupoPersonalizado"
@@ -62,6 +53,5 @@
         android:background="@mipmap/crear_grupo"
         android:onClick="guardarGrupo"
         android:src="@drawable/envio_grupo_customizado" />
-
 
 </RelativeLayout>

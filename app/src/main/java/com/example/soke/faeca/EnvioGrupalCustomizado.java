@@ -2,13 +2,10 @@ package com.example.soke.faeca;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -23,7 +20,6 @@ import java.util.Arrays;
 
 public class EnvioGrupalCustomizado extends Activity {
 
-    public EditText buscador = null;
     public ArrayList<String> grupoCooperativas = null;
     public ListView lv = null;
     public ImageButton envioGrupoCustomizado = null;
@@ -58,7 +54,6 @@ public class EnvioGrupalCustomizado extends Activity {
         envioGrupoCustomizado = (ImageButton) findViewById(R.id.grupoPersonalizado);
         lv = (ListView) findViewById(R.id.Cooperativas);
         grupoCooperativas = new ArrayList<>();
-        buscador = (EditText) findViewById(R.id.busqueda);
 
         String[] coops = getResources().getStringArray(R.array.cooperativas);
         Arrays.sort(coops);
@@ -82,23 +77,6 @@ public class EnvioGrupalCustomizado extends Activity {
             }
         });
 
-        buscador.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                EnvioGrupalCustomizado.this.adapter.getFilter().filter(s);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
         envioGrupoCustomizado.setOnClickListener(new View.OnClickListener() {
             @Override

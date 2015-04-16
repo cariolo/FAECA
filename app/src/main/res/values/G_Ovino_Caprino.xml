@@ -2,7 +2,7 @@
 
 <resources>
     <string-array name="ovino_caprino">
-    <item>COMERCIALIZADORA SEGUREÑA</item>
+        <item>COMERCIALIZADORA SEGUREÑA</item>
         <item>COVECOL</item>
     </string-array>
 </resources>

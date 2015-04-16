@@ -19,22 +19,22 @@ import java.util.List;
 
 public class enviarGrupo extends Activity {
 
-    public List<String> destinatarios=null;
-    public String eleccion=null;
+    public List<String> destinatarios = null;
+    public String eleccion = null;
 
-    public List<String> acdemesa= null;
-    public List<String> almazaras= null;
-    public List<String> caniaazucar= null;
-    public List<String> frutas= null;
-    public List<String> frutos= null;
-    public List<String> lacteo= null;
-    public List<String> olivareras= null;
-    public List<String> ovino= null;
-    public List<String> suministros= null;
-    public List<String> tabaco= null;
-    public List<String> vitivinicola= null;
+    public List<String> acdemesa = null;
+    public List<String> almazaras = null;
+    public List<String> caniaazucar = null;
+    public List<String> frutas = null;
+    public List<String> frutos = null;
+    public List<String> lacteo = null;
+    public List<String> olivareras = null;
+    public List<String> ovino = null;
+    public List<String> suministros = null;
+    public List<String> tabaco = null;
+    public List<String> vitivinicola = null;
 
-    public Spinner spinerGrupos=null;
+    public Spinner spinerGrupos = null;
 
 
     @Override
@@ -42,17 +42,17 @@ public class enviarGrupo extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar_grupo);
 
-        acdemesa=Arrays.asList(getResources().getStringArray(R.array.aceituna_de_mesa));
-        almazaras=Arrays.asList(getResources().getStringArray(R.array.almazaras));
-        caniaazucar=Arrays.asList(getResources().getStringArray(R.array.cania_de_azucar));
-        frutas=Arrays.asList(getResources().getStringArray(R.array.frutas_y_hortalizas));
-        frutos=Arrays.asList(getResources().getStringArray(R.array.frutos_secos));
-        lacteo=Arrays.asList(getResources().getStringArray(R.array.lacteo));
-        olivareras=Arrays.asList(getResources().getStringArray(R.array.olivareras));
-        ovino=Arrays.asList(getResources().getStringArray(R.array.ovino_caprino));
-        suministros=Arrays.asList(getResources().getStringArray(R.array.suministros));
-        tabaco=Arrays.asList(getResources().getStringArray(R.array.tabaco));
-        vitivinicola=Arrays.asList(getResources().getStringArray(R.array.vitivinicola));
+        acdemesa = Arrays.asList(getResources().getStringArray(R.array.aceituna_de_mesa));
+        almazaras = Arrays.asList(getResources().getStringArray(R.array.almazaras));
+        caniaazucar = Arrays.asList(getResources().getStringArray(R.array.cania_de_azucar));
+        frutas = Arrays.asList(getResources().getStringArray(R.array.frutas_y_hortalizas));
+        frutos = Arrays.asList(getResources().getStringArray(R.array.frutos_secos));
+        lacteo = Arrays.asList(getResources().getStringArray(R.array.lacteo));
+        olivareras = Arrays.asList(getResources().getStringArray(R.array.olivareras));
+        ovino = Arrays.asList(getResources().getStringArray(R.array.ovino_caprino));
+        suministros = Arrays.asList(getResources().getStringArray(R.array.suministros));
+        tabaco = Arrays.asList(getResources().getStringArray(R.array.tabaco));
+        vitivinicola = Arrays.asList(getResources().getStringArray(R.array.vitivinicola));
 
 
         ImageButton crearGrupos = (ImageButton) findViewById(R.id.crearGrupos);
@@ -73,46 +73,44 @@ public class enviarGrupo extends Activity {
         setTitle("Notificación grupal");
 
 
-
-
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                eleccion=spinerGrupos.getSelectedItem().toString();
+                eleccion = spinerGrupos.getSelectedItem().toString();
 
-                switch (eleccion){
+                switch (eleccion) {
                     case "ACEITE DE OLIVA (ALMAZARAS)":
-                        destinatarios=almazaras;
+                        destinatarios = almazaras;
                         break;
                     case "ACEITE DE OLIVA OLIVARERAS (OLIVARERAS)":
-                        destinatarios=olivareras;
+                        destinatarios = olivareras;
                         break;
                     case "ACEITUNA DE MESA":
-                        destinatarios=acdemesa;
+                        destinatarios = acdemesa;
                         break;
                     case "CAÑA DE AZUCAR":
-                        destinatarios=caniaazucar;
+                        destinatarios = caniaazucar;
                         break;
                     case "FRUTAS Y HORTALIZAS":
-                        destinatarios=frutas;
+                        destinatarios = frutas;
                         break;
                     case "FRUTOS SECOS":
-                        destinatarios=frutos;
+                        destinatarios = frutos;
                         break;
                     case "LACTEO":
-                        destinatarios=lacteo;
+                        destinatarios = lacteo;
                         break;
                     case "OVINO CAPRINO":
-                        destinatarios=ovino;
+                        destinatarios = ovino;
                         break;
                     case "SUMINISTROS":
-                        destinatarios=suministros;
+                        destinatarios = suministros;
                         break;
                     case "TABACO":
-                        destinatarios=tabaco;
+                        destinatarios = tabaco;
                         break;
                     case "VITIVINICOLA":
-                        destinatarios=vitivinicola;
+                        destinatarios = vitivinicola;
                         break;
                 }
 
@@ -126,15 +124,14 @@ public class enviarGrupo extends Activity {
     }
 
     public void enviarGrupoNotificacion(List destinatarios, String mensaje) throws ParseException {
-        if(destinatarios==null){
+        if (destinatarios == null) {
             Toast.makeText(getApplicationContext(), "No has seleccionado ningun grupo.", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
 
-            ParsePush push=new ParsePush();
-            ParseQuery query= ParseInstallation.getQuery();
+            ParsePush push = new ParsePush();
+            ParseQuery query = ParseInstallation.getQuery();
 
-            for(int i=0; i<destinatarios.size(); i++){
+            for (int i = 0; i < destinatarios.size(); i++) {
                 query.whereEqualTo("user", destinatarios.get(i).toString());
 
                 push.setQuery(query);
