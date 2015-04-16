@@ -68,5 +68,5 @@
         android:layout_marginTop="50dp"
         android:background="@mipmap/crear_grupo"
         android:onClick="enviarGrupoCustomizado"
-        android:src="@drawable/nombre" />
+        android:src="@drawable/envio_grupo_customizado" />
 </RelativeLayout>

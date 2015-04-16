@@ -18,7 +18,7 @@
         android:layout_centerHorizontal="true"
         android:background="#ff146f03"
         android:paddingLeft="20dp"
-        android:text="Creación de grupo"
+        android:text="Envio customizado"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffffff" />
 
@@ -29,30 +29,39 @@
         android:layout_below="@+id/titulillo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Marque las cooperativas del nuevo grupo"
+        android:text="Seleccione las cooperativas destinatarias"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ListView
         android:id="@+id/Cooperativas"
         android:layout_width="fill_parent"
-        android:layout_height="400dp"
+        android:layout_height="275dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/descripcionActividad"
+        android:layout_marginTop="75dp"
+        android:choiceMode="multipleChoice" />
+
+    <EditText
+        android:id="@+id/busqueda"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/descripcionActividad"
         android:layout_marginTop="20dp"
-        android:choiceMode="multipleChoice" />
-
+        android:hint="Busqueda..." />
 
     <ImageButton
-        android:id="@+id/crearGrupo"
+        android:id="@+id/grupoPersonalizado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@mipmap/crear_grupo"
         android:onClick="guardarGrupo"
-        android:src="@drawable/crear_grupo" />
+        android:src="@drawable/envio_grupo_customizado" />
 
 
 </RelativeLayout>

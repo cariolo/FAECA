@@ -2,10 +2,13 @@ package com.example.soke.faeca;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -20,10 +23,12 @@ import java.util.Arrays;
 
 public class EnvioGrupalCustomizado extends Activity {
 
+    public EditText buscador = null;
     public ArrayList<String> grupoCooperativas = null;
     public ListView lv = null;
-    public ImageButton creacionGrupo = null;
+    public ImageButton envioGrupoCustomizado = null;
     public String mensaje = null;
+    public ArrayAdapter<String> adapter = null;
 
     public void enviarGrupoCustomizado(ArrayList grupo, String mensaje) {
         if (grupo.size() == 0) {
@@ -47,17 +52,20 @@ public class EnvioGrupalCustomizado extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_grupo);
+        setContentView(R.layout.activity_envio_grupo_personalizado);
 
         mensaje = getIntent().getStringExtra("mensaje");
-        creacionGrupo = (ImageButton) findViewById(R.id.crearGrupo);
+        envioGrupoCustomizado = (ImageButton) findViewById(R.id.grupoPersonalizado);
         lv = (ListView) findViewById(R.id.Cooperativas);
         grupoCooperativas = new ArrayList<>();
+        buscador = (EditText) findViewById(R.id.busqueda);
+
         String[] coops = getResources().getStringArray(R.array.cooperativas);
         Arrays.sort(coops);
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, coops);
 
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, coops);
         lv.setAdapter(adapter);
+        lv.setTextFilterEnabled(true);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -74,7 +82,25 @@ public class EnvioGrupalCustomizado extends Activity {
             }
         });
 
-        creacionGrupo.setOnClickListener(new View.OnClickListener() {
+        buscador.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                EnvioGrupalCustomizado.this.adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        envioGrupoCustomizado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 enviarGrupoCustomizado(grupoCooperativas, mensaje);
