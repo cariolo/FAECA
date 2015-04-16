@@ -2,9 +2,11 @@ package com.example.soke.faeca;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.parse.ParseInstallation;
@@ -16,29 +18,28 @@ import java.util.ArrayList;
 
 public class enviarGrupo extends Activity {
 
-    ArrayList<String> destinatarios = null;
+    public ArrayList<String[]> almazaras=null;
+    public ArrayList<String[]> olivareras=null;
+    public ArrayList<String[]> ac_de_mesa=null;
+    public ArrayList<String[]> cania_de_azucar=null;
+    public ArrayList<String[]> frutas_hortalizas=null;
+    public ArrayList<String[]> frutos_secos=null;
+    public ArrayList<String[]> lacteo=null;
+    public ArrayList<String[]> suministros=null;
+    public ArrayList<String[]> tabaco=null;
+    public ArrayList<String[]> vitivinicola=null;
+
+    public ArrayList<ArrayList<String[]>> grupos=null;
+
+
+    public ArrayList<String[]> destinatarios = null;
+
+    int eleccion=-1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar_grupo);
-
-        ArrayList<String> almazaras=null;
-        ArrayList<String> olivareras=null;
-        ArrayList<String> ac_de_mesa=null;
-        ArrayList<String> cania_de_azucar=null;
-        ArrayList<String> frutas_hortalizas=null;
-        ArrayList<String> frutos_secos=null;
-        ArrayList<String> lacteo=null;
-        ArrayList<String> suministros=null;
-        ArrayList<String> tabaco=null;
-        ArrayList<String> vitivinicola=null;
-
-        ArrayList<ArrayList<String>> grupos=null;
-
-
-
-        int eleccion=-1;
 
         ImageButton crearGrupos = (ImageButton) findViewById(R.id.crearGrupos);
 
@@ -51,16 +52,51 @@ public class enviarGrupo extends Activity {
             }
         });
 
-        /*almazaras=new ArrayList<>(R.array.almazaras);
-        olivareras=new ArrayList<>(R.array.olivareras);
-        ac_de_mesa=new ArrayList<>(R.array.aceituna_de_mesa);
-        cania_de_azucar=new ArrayList<>(R.array.cania_de_azucar);
-        frutas_hortalizas=new ArrayList<>(R.array.frutas_y_hortalizas);
-        frutos_secos=new ArrayList<>(R.array.frutos_secos);
-        lacteo=new ArrayList<>(R.array.lacteo);
-        suministros=new ArrayList<>(R.array.suministros);
-        tabaco=new ArrayList<>(R.array.tabaco);
-        vitivinicola=new ArrayList<>(R.array.vitivinicola);
+        String[] almres=getResources().getStringArray(R.array.almazaras);
+
+
+
+        Resources res = getResources();
+        String[] almazarasItems  = res.getStringArray(R.array.almazaras);
+        String[] olivarerasItems=res.getStringArray(R.array.olivareras);
+        String[] ac_De_mesaItems=res.getStringArray(R.array.aceituna_de_mesa);
+        String[] caniaItems=res.getStringArray(R.array.cania_de_azucar);
+        String[] frutasItems=res.getStringArray(R.array.frutas_y_hortalizas);
+        String[] frutosItems=res.getStringArray(R.array.frutos_secos);
+        String[] lacteoItems=res.getStringArray(R.array.lacteo);
+        String[] suministrosItems=res.getStringArray(R.array.suministros);
+        String[] tabacoItems=res.getStringArray(R.array.tabaco);
+        String[] vitiItems=res.getStringArray(R.array.vitivinicola);
+
+        almazaras=new ArrayList<>();
+        almazaras.add(almazarasItems);
+
+        olivareras=new ArrayList<>();
+        olivareras.add(olivarerasItems);
+
+        ac_de_mesa=new ArrayList<>();
+        ac_de_mesa.add(ac_De_mesaItems);
+
+        cania_de_azucar=new ArrayList<>();
+        cania_de_azucar.add(caniaItems);
+
+        frutas_hortalizas=new ArrayList<>();
+        frutas_hortalizas.add(frutasItems);
+
+        frutos_secos=new ArrayList<>();
+        frutos_secos.add(frutosItems);
+
+        lacteo=new ArrayList<>();
+        lacteo.add(lacteoItems);
+
+        suministros=new ArrayList<>();
+        suministros.add(suministrosItems);
+
+        tabaco=new ArrayList<>();
+        tabaco.add(tabacoItems);
+
+        vitivinicola=new ArrayList<>();
+        vitivinicola.add(vitiItems);
 
         grupos=new ArrayList<>();
         grupos.add(ac_de_mesa);
@@ -74,8 +110,6 @@ public class enviarGrupo extends Activity {
         grupos.add(tabaco);
         grupos.add(vitivinicola);
 
-        for(int i=0; i<grupos.size(); i++)
-            Collections.sort(grupos.get(i));
 
         Spinner spinerGrupos = (Spinner) findViewById(R.id.grupos);
         ImageButton enviar = (ImageButton) findViewById(R.id.enviarGrupos);
@@ -87,10 +121,11 @@ public class enviarGrupo extends Activity {
         switch (eleccion){
 
             case 0:
-                destinatarios=ac_de_mesa;
+                for (int i=0; i<ac_de_mesa.size();i++)
+                    destinatarios.add(ac_de_mesa.get(i));
                 break;
             case 1:
-                //destinatarios=almazaras;
+                destinatarios=almazaras;
                 break;
             case 2:
                 destinatarios=cania_de_azucar;
@@ -127,7 +162,7 @@ public class enviarGrupo extends Activity {
             public void onClick(View v) {
                 enviarGrupoNotificacion(destinatarios, getIntent().getStringExtra("mensaje"));
             }
-        });*/
+        });
     }
 
     public void enviarGrupoNotificacion(ArrayList destinatarios, String mensaje) {
