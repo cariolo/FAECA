@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.parse.ParseInstallation;
@@ -13,7 +12,6 @@ import com.parse.ParsePush;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 public class enviarGrupo extends Activity {
@@ -53,7 +51,7 @@ public class enviarGrupo extends Activity {
             }
         });
 
-        almazaras=new ArrayList<>(R.array.almazaras);
+        /*almazaras=new ArrayList<>(R.array.almazaras);
         olivareras=new ArrayList<>(R.array.olivareras);
         ac_de_mesa=new ArrayList<>(R.array.aceituna_de_mesa);
         cania_de_azucar=new ArrayList<>(R.array.cania_de_azucar);
@@ -129,7 +127,7 @@ public class enviarGrupo extends Activity {
             public void onClick(View v) {
                 enviarGrupoNotificacion(destinatarios, getIntent().getStringExtra("mensaje"));
             }
-        });
+        });*/
     }
 
     public void enviarGrupoNotificacion(ArrayList destinatarios, String mensaje) {

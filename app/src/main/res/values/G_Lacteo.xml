@@ -2,8 +2,5 @@
 <resources>
     <string-array name="lacteo">
         <item>SANTIAGO APOSTOL</item>
-        <item>OVINO-CAPRINO</item>
-        <item>COMERCIALIZADORA SEGUREÑA</item>
-        <item>COVECOL</item>
     </string-array>
 </resources>

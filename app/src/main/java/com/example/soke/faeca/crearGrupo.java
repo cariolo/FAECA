@@ -15,13 +15,24 @@ import java.util.Arrays;
 
 
 public class crearGrupo extends Activity {
+
     public ArrayList<String> grupoCooperativas = null;
     ListView lv = null;
     ImageButton creacionGrupo = null;
 
     public void crearGrupo(ArrayList grupo) {
+        String XML = String.valueOf(getResources().openRawResource(R.array.cooperativas)), newXML;
+        String[] xmlParts;
+        xmlParts = XML.split("</resources>");
+        xmlParts[0] += "\n<string-array name='peisen'>\n";
+        for (int i = 0; i < grupo.size(); i++) {
+            xmlParts[0] += "<item>" + grupo.get(i).toString() + "</item>\n";
+        }
+        xmlParts[0] += "</string-array>\n</resources>";
+        xmlParts[1] = null;
 
-
+        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, xmlParts);
+        lv.setAdapter(adapter);
     }
 
     @Override
