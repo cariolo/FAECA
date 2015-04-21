@@ -93,10 +93,9 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
         try {
 
             if (!valorSpin.equals("Privado")) {
-                consulta = ParseQuery.getQuery(valorSpin);
-                queries.add(consulta);
+                receptor = ParseQuery.getQuery(valorSpin);
             }
-            ParseQuery<ParseObject> general = ParseQuery.or(queries);
+            ParseQuery<ParseObject> general = receptor;
             List<ParseObject> lista = general.find();
             ArrayList<String> listaResultado = new ArrayList<>();
 
