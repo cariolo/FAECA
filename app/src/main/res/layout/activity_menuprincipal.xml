@@ -61,13 +61,12 @@
         android:id="@+id/enviarA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/consulta"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="55dp"
         android:background="@mipmap/enviar_a"
         android:longClickable="true"
         android:onClick="dummyClick"
-        android:src="@drawable/button_enabled" />
+        android:src="@drawable/button_enabled"
+        android:layout_above="@+id/consulta"
+        android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:id="@+id/consulta"
