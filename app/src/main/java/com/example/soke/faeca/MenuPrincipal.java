@@ -269,12 +269,16 @@ public class MenuPrincipal extends Activity {
 
     public void enviarGrupo() throws ParseException {
         EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
+        Spinner spinnerTipoPush = (Spinner) findViewById((R.id.spinnerTipoPush));
+
 
         if (campoTexto.getText().toString().length() == 0) {
             Toast.makeText(this, "Campo de texto vacío, rellénelo e inténtelo de nuevo", Toast.LENGTH_SHORT).show();
         } else {
             Intent i = new Intent(this, enviarGrupo.class);
+            i.putExtra("tipoMensaje", spinnerTipoPush.getSelectedItem().toString());
             i.putExtra("mensaje", campoTexto.getText().toString());
+            i.putExtra("usuario", shared.getString("usuario", "1").toString());
             startActivity(i);
             overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
         }

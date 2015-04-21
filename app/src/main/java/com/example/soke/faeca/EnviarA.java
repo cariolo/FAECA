@@ -27,7 +27,9 @@ public class EnviarA extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar);
+
         selectorUsuarios = (ListView) findViewById(R.id.usuarios);
+
         mensaje = getIntent().getStringExtra("mensaje");
         tipo = getIntent().getStringExtra("tipo");
         usuario = getIntent().getStringExtra("yo");

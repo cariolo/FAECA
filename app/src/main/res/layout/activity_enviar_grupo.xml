@@ -60,7 +60,7 @@
         android:src="@drawable/enviar_a_2" />
 
     <ImageButton
-        android:id="@+id/crearGrupos"
+        android:id="@+id/envioPersonalizado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/enviarGrupos"

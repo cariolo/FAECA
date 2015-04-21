@@ -32,6 +32,7 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
 
         LinkedList<String> lista = new LinkedList<String>();
         final Spinner spiner_oculto = (Spinner) findViewById(R.id.consulta_oculta);
+
         lista.add("Reunion");
         lista.add("Urgencia");
         lista.add("Conferencia");

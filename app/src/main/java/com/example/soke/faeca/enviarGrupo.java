@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
+import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 
@@ -35,12 +36,18 @@ public class enviarGrupo extends Activity {
     public List<String> vitivinicola = null;
 
     public Spinner spinerGrupos = null;
-
+    public String mensaje = null, tipoMensaje = null, sender = null, receiver = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar_grupo);
+
+        setTitle("Notificacion grupal");
+
+        tipoMensaje = getIntent().getStringExtra("tipoMensaje");
+        mensaje = getIntent().getStringExtra("mensaje");
+        sender = getIntent().getStringExtra("usuario");
 
         acdemesa = Arrays.asList(getResources().getStringArray(R.array.aceituna_de_mesa));
         almazaras = Arrays.asList(getResources().getStringArray(R.array.almazaras));
@@ -55,13 +62,15 @@ public class enviarGrupo extends Activity {
         vitivinicola = Arrays.asList(getResources().getStringArray(R.array.vitivinicola));
 
 
-        ImageButton crearGrupos = (ImageButton) findViewById(R.id.crearGrupos);
+        ImageButton envioPersonalizado = (ImageButton) findViewById(R.id.envioPersonalizado);
 
-        crearGrupos.setOnClickListener(new View.OnClickListener() {
+        envioPersonalizado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent creacionGrupo = new Intent(getApplicationContext(), EnvioGrupalCustomizado.class);
-                creacionGrupo.putExtra("mensaje", getIntent().getStringExtra("mensaje"));
+                creacionGrupo.putExtra("mensaje", mensaje);
+                creacionGrupo.putExtra("tipoMensaje", tipoMensaje);
+                creacionGrupo.putExtra("usuario", sender);
                 startActivity(creacionGrupo);
                 overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
             }
@@ -69,8 +78,6 @@ public class enviarGrupo extends Activity {
 
         spinerGrupos = (Spinner) findViewById(R.id.grupos);
         ImageButton enviar = (ImageButton) findViewById(R.id.enviarGrupos);
-
-        setTitle("Notificación grupal");
 
 
         enviar.setOnClickListener(new View.OnClickListener() {
@@ -81,41 +88,52 @@ public class enviarGrupo extends Activity {
                 switch (eleccion) {
                     case "ACEITE DE OLIVA (ALMAZARAS)":
                         destinatarios = almazaras;
+                        receiver = "ACEITE DE OLIVA (ALMAZARAS)";
                         break;
                     case "ACEITE DE OLIVA OLIVARERAS (OLIVARERAS)":
                         destinatarios = olivareras;
+                        receiver = "ACEITE DE OLIVA OLIVARERAS (OLIVARERAS)";
                         break;
                     case "ACEITUNA DE MESA":
                         destinatarios = acdemesa;
+                        receiver = "ACEITUNA DE MESA";
                         break;
                     case "CAÑA DE AZUCAR":
                         destinatarios = caniaazucar;
+                        receiver = "CAÑA DE AZUCAR";
                         break;
                     case "FRUTAS Y HORTALIZAS":
                         destinatarios = frutas;
+                        receiver = "FRUTAS Y HORTALIZAS";
                         break;
                     case "FRUTOS SECOS":
                         destinatarios = frutos;
+                        receiver = "FRUTOS SECOS";
                         break;
                     case "LACTEO":
                         destinatarios = lacteo;
+                        receiver = "LACTEO";
                         break;
                     case "OVINO CAPRINO":
                         destinatarios = ovino;
+                        receiver = "OVINO CAPRINO";
                         break;
                     case "SUMINISTROS":
                         destinatarios = suministros;
+                        receiver = "SUMINISTROS";
                         break;
                     case "TABACO":
                         destinatarios = tabaco;
+                        receiver = "TABACO";
                         break;
                     case "VITIVINICOLA":
                         destinatarios = vitivinicola;
+                        receiver = "VITIVINICOLA";
                         break;
                 }
 
                 try {
-                    enviarGrupoNotificacion(destinatarios, getIntent().getStringExtra("mensaje"));
+                    enviarGrupoNotificacion(destinatarios, mensaje, sender, receiver, tipoMensaje);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -123,14 +141,20 @@ public class enviarGrupo extends Activity {
         });
     }
 
-    public void enviarGrupoNotificacion(List destinatarios, String mensaje) throws ParseException {
+    public void enviarGrupoNotificacion(List destinatarios, String mensaje, String sender, String receiver, String tipoMensaje) throws ParseException {
         if (destinatarios == null) {
             Toast.makeText(getApplicationContext(), "No has seleccionado ningun grupo.", Toast.LENGTH_SHORT).show();
         } else {
 
             ParsePush push = new ParsePush();
             ParseQuery query = ParseInstallation.getQuery();
+            ParseObject push_respaldo = new ParseObject(tipoMensaje);
 
+            push_respaldo.put("Mensaje", mensaje);
+            push_respaldo.put("receiver", receiver);
+            push_respaldo.put("Sender", sender);
+
+            push_respaldo.saveEventually();
             for (int i = 0; i < destinatarios.size(); i++) {
                 query.whereEqualTo("user", destinatarios.get(i).toString());
 

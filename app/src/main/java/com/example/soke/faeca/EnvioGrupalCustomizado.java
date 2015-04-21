@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.parse.ParseInstallation;
+import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 
@@ -23,14 +24,21 @@ public class EnvioGrupalCustomizado extends Activity {
     public ArrayList<String> grupoCooperativas = null;
     public ListView lv = null;
     public ImageButton envioGrupoCustomizado = null;
-    public String mensaje = null;
     public ArrayAdapter<String> adapter = null;
+    public String mensaje = null, tipoMensaje = null, sender = null, receiver = null;
 
-    public void enviarGrupoCustomizado(ArrayList grupo, String mensaje) {
+    public void enviarGrupoCustomizado(ArrayList grupo, String mensaje, String tipoMensaje, String sender, String receiver) {
         if (grupo.size() == 0) {
             Toast.makeText(getApplicationContext(), "No has seleccionado ninguna cooperativa.", Toast.LENGTH_SHORT).show();
         } else {
             ParsePush push = new ParsePush();
+            ParseObject push_respaldo = new ParseObject(tipoMensaje);
+
+            push_respaldo.put("Mensaje", mensaje);
+            push_respaldo.put("receiver", receiver);
+            push_respaldo.put("Sender", sender);
+
+            push_respaldo.saveEventually();
 
             for (int i = 0; i < grupo.size(); i++) {
                 ParseQuery query = ParseInstallation.getQuery();
@@ -50,7 +58,13 @@ public class EnvioGrupalCustomizado extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_envio_grupo_personalizado);
 
+        setTitle("Envio libre");
+
         mensaje = getIntent().getStringExtra("mensaje");
+        tipoMensaje = getIntent().getStringExtra("tipoMensaje");
+        sender = getIntent().getStringExtra("usuario");
+
+
         envioGrupoCustomizado = (ImageButton) findViewById(R.id.grupoPersonalizado);
         lv = (ListView) findViewById(R.id.Cooperativas);
         grupoCooperativas = new ArrayList<>();
@@ -81,8 +95,21 @@ public class EnvioGrupalCustomizado extends Activity {
         envioGrupoCustomizado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enviarGrupoCustomizado(grupoCooperativas, mensaje);
+                receiver = "";
+                for (int i = 0; i < grupoCooperativas.size(); i++) {
+                    receiver += grupoCooperativas.get(i).toString();
+                    if ((i + 1) < grupoCooperativas.size())
+                        receiver += ", ";
+                    else
+                        receiver += ".";
+                }
+                enviarGrupoCustomizado(grupoCooperativas, mensaje, tipoMensaje, sender, receiver);
             }
         });
+    }
+
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
     }
 }
