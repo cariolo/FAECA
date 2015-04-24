@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -72,10 +73,9 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
     public void poblarListView(String valorSpin) {
 
         ParseQuery<ParseObject> receptor = null;
-        //if (valorSpin.equals("Privado")) {
+        if (valorSpin.equals("Privado")) {
             receptor = ParseQuery.getQuery(valorSpin).whereEqualTo("receiver", yo);
-            receptor.whereEqualTo("receiver", yo);
-        //}
+        }
 
         ListView vistaResultadosConsulta = (ListView) findViewById(R.id.listaResultados);
 
@@ -86,8 +86,8 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
             if (!valorSpin.equals("Privado")) {
                 receptor = ParseQuery.getQuery(valorSpin);
             }
-            ParseQuery<ParseObject> general = receptor;
-            List<ParseObject> lista = general.find();
+            List<ParseObject> lista = receptor.find();
+            Toast.makeText(getApplicationContext(), "count: "+lista.size(), Toast.LENGTH_SHORT).show();
             ArrayList<String> listaResultado = new ArrayList<>();
 
             for (int i = lista.size() - 1; i >= 0; i--) {

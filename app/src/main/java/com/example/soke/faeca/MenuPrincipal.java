@@ -288,4 +288,10 @@ public class MenuPrincipal extends Activity {
         finish();
         overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
     }
+
+
+    public void lanzarMapa(View v){
+        Intent i=new Intent(this, ReunionGPS.class);
+        startActivity(i);
+    }
 }

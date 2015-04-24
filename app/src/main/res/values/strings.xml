@@ -14,4 +14,5 @@
     <string name="title_activity_lanzador">Lanzador</string>
     <string name="title_activity_enviar_grupo">enviarGrupo</string>
     <string name="title_activity_crear_grupo">crearGrupo</string>
+    <string name="title_activity_reunion_gps">Map</string>
 </resources>
