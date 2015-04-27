@@ -6,7 +6,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -20,7 +19,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class ReunionGPS extends FragmentActivity implements LocationListener{
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    private CameraUpdate mCamera;
+    CameraPosition cameraPosition=null;
+    CameraUpdate camera= null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,21 +74,22 @@ public class ReunionGPS extends FragmentActivity implements LocationListener{
      */
     private void setUpMap() {
 
-        mMap.addMarker(new MarkerOptions().position(new LatLng(37.164968, -3.607663)).title("Cooperativas Agro-Alimentarias").icon(BitmapDescriptorFactory.fromResource(R.mipmap.reunion)));
-        CameraPosition cameraPosition=new CameraPosition(new LatLng(37.164968, -3.607663), 15, 0, 0);
-        CameraUpdate camera= CameraUpdateFactory.newCameraPosition(cameraPosition);
-
-        mMap.animateCamera(camera);
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(37.164968, -3.607663))
+                .title("Cooperativas Agro-Alimentarias")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.reunion)));
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,this);
+        ////////////////////////////////////////////////////ME QUEDO AÑADIENDO LOS LSITENERS PARA LOS MARCADORES
 
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        Toast.makeText(getApplicationContext(), "location: "+location.getLatitude() + " " + location.getAltitude(), Toast.LENGTH_SHORT).show();
-
+        cameraPosition=new CameraPosition(new LatLng(location.getLatitude(), location.getLongitude()), 15, 0, 0);
+        camera= CameraUpdateFactory.newCameraPosition(cameraPosition);
+        mMap.animateCamera(camera);
     }
 
     @Override
