@@ -1,9 +1,11 @@
 package com.example.soke.faeca;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -33,6 +35,7 @@ public class ReunionGPS extends FragmentActivity implements LocationListener{
         int sdk_version = Build.VERSION.SDK_INT;
         contenedor = String.valueOf(sdk_version);
         if (contenedor.equals("21")) {
+            mapIfLollipop();
 
         } else {
             setUpMapIfNeeded();
@@ -83,6 +86,13 @@ public class ReunionGPS extends FragmentActivity implements LocationListener{
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
+
+    private void mapIfLollipop(){
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                Uri.parse("http://maps.google.com/maps?saddr=20.344,34.34&daddr=20.5666,45.345"));
+        startActivity(intent);
+    }
+
     private void setUpMap() {
 
         mMap.addMarker(new MarkerOptions()
