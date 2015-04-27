@@ -24,6 +24,8 @@ public class ReunionGPS extends FragmentActivity implements LocationListener {
 
     CameraPosition cameraPosition = null;
     CameraUpdate camera = null;
+    String latitud = null, longitud = null;
+    boolean existeLocalizacion = false;
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
     @Override
@@ -31,6 +33,12 @@ public class ReunionGPS extends FragmentActivity implements LocationListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reunion_gps);
         setTitle("Mapa");
+
+        if (getIntent().getStringExtra("latitud") != null) {
+            latitud = getIntent().getStringExtra("latitud");
+            longitud = getIntent().getStringExtra("longitud");
+            existeLocalizacion = true;
+        }
 
         String contenedor = null;
         int sdk_version = Build.VERSION.SDK_INT;
@@ -104,15 +112,20 @@ public class ReunionGPS extends FragmentActivity implements LocationListener {
 
     private void setUpMap() {
 
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(37.164968, -3.607663))
-                .title("Cooperativas Agro-Alimentarias")
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.reunion)));
+        if (existeLocalizacion == false) {
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(37.164968, -3.607663))
+                    .title("Cooperativas Agro-Alimentarias")
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.reunion)));
 
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        ////////////////////////////////////////////////////ME QUEDO AÑADIENDO LOS LSITENERS PARA LOS MARCADORES
-
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            ////////////////////////////////////////////////////ME QUEDO AÑADIENDO LOS LSITENERS PARA LOS MARCADORES
+        } else {
+            mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(latitud), Double.valueOf(longitud))));
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        }
     }
 
     @Override

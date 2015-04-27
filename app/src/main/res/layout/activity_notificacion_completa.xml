@@ -12,15 +12,17 @@
     <TextView
         android:id="@+id/detalles_notificacion"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="false"
+        android:layout_height="350dp"
         android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="150dp"
         android:textColor="#ff000000"
         android:textSize="20dp" />
+
+    <ImageButton
+        android:id="@+id/verMapa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/button_ver_mapa" />
 
 </RelativeLayout>

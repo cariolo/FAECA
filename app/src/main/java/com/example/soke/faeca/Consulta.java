@@ -87,11 +87,11 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
                 receptor = ParseQuery.getQuery(valorSpin);
             }
             List<ParseObject> lista = receptor.find();
-            Toast.makeText(getApplicationContext(), "count: "+lista.size(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "count: " + lista.size(), Toast.LENGTH_SHORT).show();
             ArrayList<String> listaResultado = new ArrayList<>();
 
             for (int i = lista.size() - 1; i >= 0; i--) {
-                listaResultado.add(lista.get(i).getString("Sender") + ":\n\t\t" + lista.get(i).getString("Mensaje") + "\n\nFecha: \n" + lista.get(i).getCreatedAt().toString() + "\n\nDestinatario:\n" + lista.get(i).getString("receiver"));
+                listaResultado.add(lista.get(i).getString("Sender") + ":\n\t\t" + lista.get(i).getString("Mensaje") + "\n\nFecha: \n" + lista.get(i).getCreatedAt().toString() + "\n\nDestinatario:\n" + lista.get(i).getString("receiver") + "-" + lista.get(i).getString("localizacion"));
             }
 
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, listaResultado);
