@@ -20,7 +20,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ReunionGPS extends FragmentActivity implements LocationListener{
+public class ReunionGPS extends FragmentActivity implements LocationListener {
 
     CameraPosition cameraPosition = null;
     CameraUpdate camera = null;
@@ -46,9 +46,7 @@ public class ReunionGPS extends FragmentActivity implements LocationListener{
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
-                mMap.addMarker(new MarkerOptions().position(latLng));
                 String latitud = String.valueOf(latLng.latitude), longitud = String.valueOf(latLng.longitude);
-
                 Toast.makeText(getApplicationContext(), latitud + " " + longitud, Toast.LENGTH_LONG).show();
             }
         });
@@ -98,7 +96,7 @@ public class ReunionGPS extends FragmentActivity implements LocationListener{
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
 
-    private void mapIfLollipop(){
+    private void mapIfLollipop() {
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                 Uri.parse("https://www.google.com/maps/place/37%C2%B009'53.9%22N+3%C2%B036'27.6%22W/@37.164972,-3.60766,19z/data=!3m1!4b1!4m2!3m1!1s0x0:0x0"));
         startActivity(intent);
@@ -112,15 +110,15 @@ public class ReunionGPS extends FragmentActivity implements LocationListener{
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.reunion)));
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,this);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         ////////////////////////////////////////////////////ME QUEDO AÑADIENDO LOS LSITENERS PARA LOS MARCADORES
 
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        cameraPosition=new CameraPosition(new LatLng(location.getLatitude(), location.getLongitude()), 15, 0, 0);
-        camera= CameraUpdateFactory.newCameraPosition(cameraPosition);
+        cameraPosition = new CameraPosition(new LatLng(location.getLatitude(), location.getLongitude()), 15, 0, 0);
+        camera = CameraUpdateFactory.newCameraPosition(cameraPosition);
         mMap.animateCamera(camera);
     }
 
