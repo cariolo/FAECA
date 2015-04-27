@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,12 +35,23 @@ public class ReunionGPS extends FragmentActivity implements LocationListener{
         String contenedor = null;
         int sdk_version = Build.VERSION.SDK_INT;
         contenedor = String.valueOf(sdk_version);
+
         if (contenedor.equals("21")) {
             mapIfLollipop();
 
         } else {
             setUpMapIfNeeded();
         }
+
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                mMap.addMarker(new MarkerOptions().position(latLng));
+                String latitud = String.valueOf(latLng.latitude), longitud = String.valueOf(latLng.longitude);
+
+                Toast.makeText(getApplicationContext(), latitud + " " + longitud, Toast.LENGTH_LONG).show();
+            }
+        });
 
 
     }
@@ -74,7 +86,6 @@ public class ReunionGPS extends FragmentActivity implements LocationListener{
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 mMap.setMyLocationEnabled(true);
-
                 setUpMap();
             }
         }
