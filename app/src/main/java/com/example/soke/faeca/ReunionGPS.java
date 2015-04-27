@@ -22,12 +22,14 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ReunionGPS extends FragmentActivity implements LocationListener{
+public class ReunionGPS extends FragmentActivity implements LocationListener {
 
+    static LocationManager locationManager;
     CameraPosition cameraPosition = null;
     CameraUpdate camera = null;
+    boolean existeLocalizacion = false;
+    String latitud = null, longitud = null;
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    static LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,15 @@ public class ReunionGPS extends FragmentActivity implements LocationListener{
         int sdk_version = Build.VERSION.SDK_INT;
         String contenedor = String.valueOf(sdk_version);
 
+        if (getIntent().getStringExtra("latitud") != null) {
+            latitud = getIntent().getStringExtra("latitud");
+            longitud = getIntent().getStringExtra("longitud");
+            existeLocalizacion = true;
+        }
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        if ( !locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             buildAlertMessageNoGps();
         }
 
@@ -65,19 +72,19 @@ public class ReunionGPS extends FragmentActivity implements LocationListener{
 
     }
 
-    private void buildAlertMessageNoGps(){
+    private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Parece que tu GPS esta desactivado. Activarlo mejora la precision de la localizacion.\n¿Desea activarlo?")
                 .setCancelable(false)
                 .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,ReunionGPS.this);
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, ReunionGPS.this);
                         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,ReunionGPS.this);
+                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, ReunionGPS.this);
                         dialog.cancel();
                     }
                 });
@@ -90,6 +97,7 @@ public class ReunionGPS extends FragmentActivity implements LocationListener{
         super.onResume();
         setUpMapIfNeeded();
     }
+
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
@@ -105,7 +113,7 @@ public class ReunionGPS extends FragmentActivity implements LocationListener{
     }
 
 
-    private void mapIfLollipop(){
+    private void mapIfLollipop() {
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                 Uri.parse("https://www.google.com/maps/place/37%C2%B009'53.9%22N+3%C2%B036'27.6%22W/@37.164972,-3.60766,19z/data=!3m1!4b1!4m2!3m1!1s0x0:0x0"));
         startActivity(intent);
@@ -113,18 +121,20 @@ public class ReunionGPS extends FragmentActivity implements LocationListener{
 
     private void setUpMap() {
 
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(37.164968, -3.607663))
-                .title("Cooperativas Agro-Alimentarias")
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.reunion)));
-
-
+        if (existeLocalizacion == false) {
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(37.164968, -3.607663))
+                    .title("Cooperativas Agro-Alimentarias")
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.reunion)));
+        } else {
+            mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(latitud), Double.valueOf(longitud))));
+        }
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        cameraPosition=new CameraPosition(new LatLng(location.getLatitude(), location.getLongitude()), 15, 0, 0);
-        camera= CameraUpdateFactory.newCameraPosition(cameraPosition);
+        cameraPosition = new CameraPosition(new LatLng(location.getLatitude(), location.getLongitude()), 15, 0, 0);
+        camera = CameraUpdateFactory.newCameraPosition(cameraPosition);
         mMap.animateCamera(camera);
     }
 
