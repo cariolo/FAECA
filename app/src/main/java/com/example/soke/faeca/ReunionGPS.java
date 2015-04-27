@@ -89,7 +89,7 @@ public class ReunionGPS extends FragmentActivity implements LocationListener{
 
     private void mapIfLollipop(){
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse("http://maps.google.com/maps?saddr=20.344,34.34&daddr=20.5666,45.345"));
+                Uri.parse("https://www.google.com/maps/place/37%C2%B009'53.9%22N+3%C2%B036'27.6%22W/@37.164972,-3.60766,19z/data=!3m1!4b1!4m2!3m1!1s0x0:0x0"));
         startActivity(intent);
     }
 
