@@ -4,6 +4,7 @@ import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -18,16 +19,26 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ReunionGPS extends FragmentActivity implements LocationListener{
 
+    CameraPosition cameraPosition = null;
+    CameraUpdate camera = null;
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    CameraPosition cameraPosition=null;
-    CameraUpdate camera= null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reunion_gps);
         setTitle("Mapa");
-        setUpMapIfNeeded();
+
+        String contenedor = null;
+        int sdk_version = Build.VERSION.SDK_INT;
+        contenedor = String.valueOf(sdk_version);
+        if (contenedor.equals("21")) {
+
+        } else {
+            setUpMapIfNeeded();
+        }
+
+
     }
 
     @Override

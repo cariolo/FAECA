@@ -47,7 +47,6 @@ public class MenuPrincipal extends Activity {
 
         Parse.setLogLevel(Parse.LOG_LEVEL_VERBOSE);
 
-
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         shared = settings;
         if (settings.getBoolean("my_first_time", true)) {
@@ -225,6 +224,7 @@ public class MenuPrincipal extends Activity {
 
             push.put("Mensaje", campoTexto.getText().toString());
             push.put("Sender", shared.getString("usuario", "1"));
+            push.put("receiver", "Todos");
             push.saveEventually();
         }
     }
