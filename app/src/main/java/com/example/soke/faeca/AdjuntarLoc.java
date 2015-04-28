@@ -8,8 +8,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -18,6 +18,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class AdjuntarLoc extends FragmentActivity implements LocationListener{
@@ -26,6 +27,7 @@ public class AdjuntarLoc extends FragmentActivity implements LocationListener{
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     public String loc=null;
+    public Marker m=null;
 
     CameraPosition cameraPosition = null;
     CameraUpdate camera = null;
@@ -44,10 +46,20 @@ public class AdjuntarLoc extends FragmentActivity implements LocationListener{
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
-                mMap.addMarker(new MarkerOptions().position(latLng));
-                String latitud = String.valueOf(latLng.latitude), longitud = String.valueOf(latLng.longitude);
 
-                loc=latitud+"|"+longitud;
+                if (m==null) {
+                    m = mMap.addMarker(new MarkerOptions().position(latLng));
+                    String latitud = String.valueOf(latLng.latitude), longitud = String.valueOf(latLng.longitude);
+
+                    loc = latitud + "|" + longitud;
+                }
+                else{
+                    m.remove();
+                    m = mMap.addMarker(new MarkerOptions().position(latLng));
+                    String latitud = String.valueOf(latLng.latitude), longitud = String.valueOf(latLng.longitude);
+
+                    loc = latitud + "|" + longitud;
+                }
             }
         });
 
@@ -114,6 +126,7 @@ public class AdjuntarLoc extends FragmentActivity implements LocationListener{
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
+        Toast.makeText(getApplicationContext(), "Manten pulsado donde quieres marcar y vuelve atras", Toast.LENGTH_LONG).show();
     }
 
     @Override
