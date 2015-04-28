@@ -29,7 +29,7 @@ public class NotificacionCompleta extends Activity {
         if (partesTexto[1].length()>10) {
             latitudLongitud = partesTexto[1].split("\\|");
             localizacion = true;
-            partesTexto[0] += "\nCoordenadas de la localización:  \n " + latitudLongitud[0].toString() + latitudLongitud[1].toString();
+            partesTexto[0] += "\nCoordenadas de la localización:  \n " + latitudLongitud[0] + latitudLongitud[1];
             verMapa.setVisibility(View.VISIBLE);
         }
         texto.setText(partesTexto[0]);

@@ -150,9 +150,14 @@ public class enviarGrupo extends Activity {
             ParseQuery query = ParseInstallation.getQuery();
             ParseObject push_respaldo = new ParseObject(tipoMensaje);
 
+            String loc=getIntent().getStringExtra("loc")!=null ? getIntent().getStringExtra("loc") : null;
+
             push_respaldo.put("Mensaje", mensaje);
             push_respaldo.put("receiver", receiver);
             push_respaldo.put("Sender", sender);
+
+            if(loc!=null)
+                push_respaldo.put("localizacion", loc);
 
             push_respaldo.saveEventually();
             for (int i = 0; i < destinatarios.size(); i++) {

@@ -111,7 +111,7 @@ public class ReunionGPS extends FragmentActivity implements LocationListener {
 
     private void setUpMap() {
 
-        if (existeLocalizacion == false) {
+        if (!existeLocalizacion) {
             mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(37.164968, -3.607663))
                     .title("Cooperativas Agro-Alimentarias")

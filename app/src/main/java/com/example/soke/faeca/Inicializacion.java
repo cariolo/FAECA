@@ -4,9 +4,6 @@ import android.app.Application;
 
 import com.parse.Parse;
 
-/**
- * Created by soke on 27/03/2015.
- */
 public class Inicializacion extends Application {
     @Override
     public void onCreate() {

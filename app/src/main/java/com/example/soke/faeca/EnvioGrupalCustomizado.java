@@ -72,7 +72,7 @@ public class EnvioGrupalCustomizado extends Activity {
         String[] coops = getResources().getStringArray(R.array.cooperativas);
         Arrays.sort(coops);
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, coops);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, coops);
         lv.setAdapter(adapter);
         lv.setTextFilterEnabled(true);
 
@@ -97,7 +97,7 @@ public class EnvioGrupalCustomizado extends Activity {
             public void onClick(View v) {
                 receiver = "";
                 for (int i = 0; i < grupoCooperativas.size(); i++) {
-                    receiver += grupoCooperativas.get(i).toString();
+                    receiver += grupoCooperativas.get(i);
                     if ((i + 1) < grupoCooperativas.size())
                         receiver += ", ";
                     else

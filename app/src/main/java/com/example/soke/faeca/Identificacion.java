@@ -38,7 +38,7 @@ public class Identificacion extends Activity {
         });
         String[] coops = getResources().getStringArray(R.array.cooperativas);
         Arrays.sort(coops);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, coops);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_single_choice, coops);
 
         lv = (ListView) findViewById(R.id.Cooperativas);
         lv.setAdapter(adapter);

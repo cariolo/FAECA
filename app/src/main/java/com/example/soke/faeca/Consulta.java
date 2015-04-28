@@ -30,7 +30,7 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
 
         yo = getIntent().getStringExtra("usuario");
 
-        LinkedList<String> lista = new LinkedList<String>();
+        LinkedList<String> lista = new LinkedList<>();
         final Spinner spiner_oculto = (Spinner) findViewById(R.id.consulta_oculta);
 
         lista.add("Reunion");
@@ -39,7 +39,7 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
         lista.add("Recordatorio");
         lista.add("Privado");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, lista);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, lista);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spiner_oculto.setAdapter(adapter);
         spiner_oculto.setVisibility(View.VISIBLE);
@@ -85,7 +85,7 @@ public class Consulta extends Activity implements AdapterView.OnItemClickListene
             if (!valorSpin.equals("Privado")) {
                 receptor = ParseQuery.getQuery(valorSpin);
             }
-            List<ParseObject> lista = receptor.find();
+            List<ParseObject> lista = receptor != null ? receptor.find() : null;
             ArrayList<String> listaResultado = new ArrayList<>();
 
             for (int i = lista.size() - 1; i >= 0; i--) {

@@ -60,9 +60,13 @@ public class EnviarA extends Activity {
         ParseQuery query = ParseInstallation.getQuery();
         query.whereEqualTo("user", usuario_destino);
 
+        String loc=getIntent().getStringExtra("loc")!=null ? getIntent().getStringExtra("loc") : null;
+
         push_respaldo.put("Mensaje", mensaje);
-        push_respaldo.put("receiver", usuario_destino.toString());
+        push_respaldo.put("receiver", usuario_destino);
         push_respaldo.put("Sender", usuario);
+        if (loc!=null)
+            push_respaldo.put("localizacion",loc);
 
         push_respaldo.saveEventually();
 
@@ -70,6 +74,7 @@ public class EnviarA extends Activity {
         push.setMessage(mensaje);
         push.sendInBackground();
         Toast.makeText(this, "Enviando a " + usuario_destino, Toast.LENGTH_LONG).show();
+
 
     }
 

@@ -32,13 +32,12 @@ import java.util.ArrayList;
 public class MenuPrincipal extends Activity {
 
     public static String usuario = null;
-    public static boolean terminado = false;
     public int USUARIO = -1;
-    public int LOC=-1;
+    public int LOC = -1;
     public SharedPreferences shared;
-    public boolean loc_adjunta=false;
+    public boolean loc_adjunta = false;
     ImageButton env;
-    String loc=null;
+    String loc = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +45,8 @@ public class MenuPrincipal extends Activity {
 
         super.onCreate(savedInstanceState);
         final int USUARIO_REQUEST_CODE = 1;
-        final int LOC_REQUEST_CODE=2;
-        LOC=LOC_REQUEST_CODE;
+        final int LOC_REQUEST_CODE = 2;
+        LOC = LOC_REQUEST_CODE;
         USUARIO = USUARIO_REQUEST_CODE;
         final String PREFS_NAME = "MyPrefsFile";
 
@@ -81,6 +80,7 @@ public class MenuPrincipal extends Activity {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
+                    Log.d("ERROR AL SUSCRIBIR", "Ha habido un error al suscribirte");
                 } else {
                     Log.d("ERROR AL SUSCRIBIR", "Ha habido un error al suscribirte");
                     e.printStackTrace();
@@ -91,6 +91,7 @@ public class MenuPrincipal extends Activity {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
+                    Log.d("ERROR AL SUSCRIBIR", "Ha habido un error al suscribirte");
                 } else {
                     Log.d("ERROR AL SUSCRIBIR", "Ha habido un error al suscribirte");
                     e.printStackTrace();
@@ -112,14 +113,14 @@ public class MenuPrincipal extends Activity {
                 .setCancelable(false)
                 .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                        loc_adjunta=true;
-                        Intent mapa=new Intent(MenuPrincipal.this, AdjuntarLoc.class);
+                        loc_adjunta = true;
+                        Intent mapa = new Intent(MenuPrincipal.this, AdjuntarLoc.class);
                         startActivityForResult(mapa, LOC);
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                        loc_adjunta=false;
+                        loc_adjunta = false;
                         dialog.cancel();
                     }
                 });
@@ -179,7 +180,7 @@ public class MenuPrincipal extends Activity {
                     user.signUpInBackground(new SignUpCallback() {
                         public void done(ParseException e) {
                             if (e == null) {
-
+                                Log.e("ERROR", "Error a crear usuario.");
                             } else {
                                 e.printStackTrace();
                             }
@@ -198,14 +199,12 @@ public class MenuPrincipal extends Activity {
                 super.finish();
                 finish();
             }
-        }
-        else if(requestCode==LOC){
-            if(resultCode==RESULT_OK){
-                loc=data.getStringExtra("loc");
+        } else if (requestCode == LOC) {
+            if (resultCode == RESULT_OK) {
+                loc = data.getStringExtra("loc");
                 openContextMenu(env);
 
-            }
-            else if (resultCode == RESULT_CANCELED) {
+            } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "No ha añadido ninguna direccion", Toast.LENGTH_LONG).show();
             }
         }
@@ -247,10 +246,9 @@ public class MenuPrincipal extends Activity {
         EditText mensaje = (EditText) findViewById(R.id.mensajeCaja);
         Spinner spinnerLayout = (Spinner) findViewById((R.id.spinnerTipoPush));
         String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
-        EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
         ParsePush pushAtodos = new ParsePush();
 
-        if (campoTexto.getText().toString().length() == 0) {
+        if (mensaje.getText().toString().length() == 0) {
             Toast.makeText(this, "Campo de texto vacío, rellénelo e inténtelo de nuevo", Toast.LENGTH_SHORT).show();
         } else {
             Intent i = new Intent(this, Consulta.class);
@@ -262,23 +260,23 @@ public class MenuPrincipal extends Activity {
 
             ParseObject push = new ParseObject(valorSpin);
 
-            push.put("Mensaje", campoTexto.getText().toString());
+            push.put("Mensaje", mensaje.getText().toString());
             push.put("Sender", shared.getString("usuario", "1"));
             push.put("receiver", "Todos");
-            if(loc_adjunta) push.put("localizacion", loc);
+            if (loc_adjunta) push.put("localizacion", loc);
             push.saveEventually();
+            loc_adjunta=false;
         }
     }
 
     public void enviarA() throws ParseException {
         EditText campoTexto = (EditText) findViewById(R.id.mensajeCaja);
-        ImageButton enviarA = (ImageButton) findViewById(R.id.enviarA);
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         Spinner spinnerLayout = (Spinner) findViewById((R.id.spinnerTipoPush));
         String valorSpin = String.valueOf(spinnerLayout.getSelectedItem());
 
         ArrayList<String> usuarios = new ArrayList<>();
-        ArrayList<ParseUser> users = new ArrayList<>();
+        ArrayList<ParseUser> users;
         users = (ArrayList<ParseUser>) query.find();
         if (campoTexto.getText().toString().length() == 0) {
             Toast.makeText(this, "Campo de texto vacío, rellénelo e inténtelo de nuevo", Toast.LENGTH_SHORT).show();
@@ -292,7 +290,9 @@ public class MenuPrincipal extends Activity {
             i.putExtra("usuarios", usuarios);
             i.putExtra("tipo", valorSpin);
             i.putExtra("yo", shared.getString("usuario", "1"));
+            if(loc_adjunta) i.putExtra("loc", loc);
             startActivity(i);
+            loc_adjunta=false;
             overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
         }
     }
@@ -319,8 +319,10 @@ public class MenuPrincipal extends Activity {
             Intent i = new Intent(this, enviarGrupo.class);
             i.putExtra("tipoMensaje", spinnerTipoPush.getSelectedItem().toString());
             i.putExtra("mensaje", campoTexto.getText().toString());
-            i.putExtra("usuario", shared.getString("usuario", "1").toString());
+            i.putExtra("usuario", shared.getString("usuario", "1"));
+            if(loc_adjunta) i.putExtra("loc", loc);
             startActivity(i);
+            loc_adjunta=false;
             overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
         }
     }
