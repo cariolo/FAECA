@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#ff146f03"
+        android:background="#9fbc17"
         android:paddingLeft="20dp"
         android:text="Registro"
         android:textAppearance="?android:attr/textAppearanceLarge"

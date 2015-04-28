@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#ff146f03"
+        android:background="#9fbc17"
         android:paddingLeft="20dp"
         android:text="Asunto"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -40,7 +40,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/spinnerTipoPush"
         android:layout_marginTop="40dp"
-        android:background="#ff146f03"
+        android:background="#9fbc17"
         android:paddingLeft="20dp"
         android:text="Mensaje"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -61,12 +61,12 @@
         android:id="@+id/enviarA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/consulta"
+        android:layout_centerHorizontal="true"
         android:background="@mipmap/enviar_a"
         android:longClickable="true"
         android:onClick="dummyClick"
-        android:src="@drawable/button_enabled"
-        android:layout_above="@+id/consulta"
-        android:layout_centerHorizontal="true" />
+        android:src="@drawable/button_enabled" />
 
     <ImageButton
         android:id="@+id/consulta"
