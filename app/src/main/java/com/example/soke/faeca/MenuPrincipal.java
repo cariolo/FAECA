@@ -1,6 +1,8 @@
 package com.example.soke.faeca;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -32,7 +34,11 @@ public class MenuPrincipal extends Activity {
     public static String usuario = null;
     public static boolean terminado = false;
     public int USUARIO = -1;
+    public int LOC=-1;
     public SharedPreferences shared;
+    public boolean loc_adjunta=false;
+    ImageButton env;
+    String loc=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,8 @@ public class MenuPrincipal extends Activity {
 
         super.onCreate(savedInstanceState);
         final int USUARIO_REQUEST_CODE = 1;
+        final int LOC_REQUEST_CODE=2;
+        LOC=LOC_REQUEST_CODE;
         USUARIO = USUARIO_REQUEST_CODE;
         final String PREFS_NAME = "MyPrefsFile";
 
@@ -62,6 +70,8 @@ public class MenuPrincipal extends Activity {
             Toast.makeText(this, "Bienvenido/a " + shared.getString("usuario", "1"), Toast.LENGTH_LONG).show();
         }
         setContentView(R.layout.activity_menuprincipal);
+
+        env = (ImageButton) findViewById(R.id.enviarA);
 
 
         ParseInstallation.getCurrentInstallation().put("user", shared.getString("usuario", "1"));
@@ -95,7 +105,27 @@ public class MenuPrincipal extends Activity {
     }
 
     public void dummyClick(View v) {
-        ImageButton env = (ImageButton) findViewById(R.id.enviarA);
+
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("¿Deseas añadir una dirección al mensaje?")
+                .setCancelable(false)
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        loc_adjunta=true;
+                        Intent mapa=new Intent(MenuPrincipal.this, AdjuntarLoc.class);
+                        startActivityForResult(mapa, LOC);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        loc_adjunta=false;
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+
 
         openContextMenu(env);
     }
@@ -169,6 +199,16 @@ public class MenuPrincipal extends Activity {
                 finish();
             }
         }
+        else if(requestCode==LOC){
+            if(resultCode==RESULT_OK){
+                loc=data.getStringExtra("loc");
+                openContextMenu(env);
+
+            }
+            else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "No ha añadido ninguna direccion", Toast.LENGTH_LONG).show();
+            }
+        }
         overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
     }
 
@@ -225,6 +265,7 @@ public class MenuPrincipal extends Activity {
             push.put("Mensaje", campoTexto.getText().toString());
             push.put("Sender", shared.getString("usuario", "1"));
             push.put("receiver", "Todos");
+            if(loc_adjunta) push.put("localizacion", loc);
             push.saveEventually();
         }
     }
@@ -287,11 +328,5 @@ public class MenuPrincipal extends Activity {
     public void onBackPressed() {
         finish();
         overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
-    }
-
-
-    public void lanzarMapa(View v){
-        Intent i=new Intent(this, ReunionGPS.class);
-        startActivity(i);
     }
 }

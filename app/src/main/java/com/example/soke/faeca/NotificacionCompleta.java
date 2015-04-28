@@ -24,10 +24,10 @@ public class NotificacionCompleta extends Activity {
         TextView texto = (TextView) findViewById(R.id.detalles_notificacion);
         String textoModificar = getIntent().getStringExtra("notificacion");
 
-        String[] partesTexto = textoModificar.split("-");
+        String[] partesTexto = textoModificar.split("/");
 
-        if (partesTexto[1] != null || partesTexto[1] != " ") {
-            latitudLongitud = partesTexto[1].split("|");
+        if (partesTexto[1].length()>10) {
+            latitudLongitud = partesTexto[1].split("\\|");
             localizacion = true;
             partesTexto[0] += "\nCoordenadas de la localización:  \n " + latitudLongitud[0].toString() + latitudLongitud[1].toString();
             verMapa.setVisibility(View.VISIBLE);

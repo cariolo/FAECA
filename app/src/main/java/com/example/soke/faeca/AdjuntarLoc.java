@@ -7,43 +7,50 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ReunionGPS extends FragmentActivity implements LocationListener {
+public class AdjuntarLoc extends FragmentActivity implements LocationListener{
 
     LocationManager locationManager;
+
+    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    public String loc=null;
+
     CameraPosition cameraPosition = null;
     CameraUpdate camera = null;
-    boolean existeLocalizacion = false;
-    String latitud = null, longitud = null;
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reunion_gps);
-        setTitle("Mapa");
+        setContentView(R.layout.activity_adjuntar_loc);
 
         int sdk_version = Build.VERSION.SDK_INT;
         String contenedor = String.valueOf(sdk_version);
 
-        if (getIntent().getStringExtra("latitud") != null) {
-            latitud = getIntent().getStringExtra("latitud");
-            longitud = getIntent().getStringExtra("longitud");
-            existeLocalizacion = true;
-        }
+        setUpMapIfNeeded();
+
+
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                mMap.addMarker(new MarkerOptions().position(latLng));
+                String latitud = String.valueOf(latLng.latitude), longitud = String.valueOf(latLng.longitude);
+
+                loc=latitud+"|"+longitud;
+            }
+        });
+
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -52,14 +59,11 @@ public class ReunionGPS extends FragmentActivity implements LocationListener {
         }
 
         if (contenedor.equals("21")) {
-            mapIfLollipop();
+            Toast.makeText(getApplicationContext(), "Lo sentimos, no esta disponible esta opcion para la version Android que usa. Lo estara pronto, disculpe las molestias", Toast.LENGTH_LONG).show();
 
         } else {
             setUpMapIfNeeded();
         }
-
-
-
     }
 
     private void buildAlertMessageNoGps() {
@@ -68,19 +72,20 @@ public class ReunionGPS extends FragmentActivity implements LocationListener {
                 .setCancelable(false)
                 .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, ReunionGPS.this);
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, AdjuntarLoc.this);
                         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, ReunionGPS.this);
+                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, AdjuntarLoc.this);
                         dialog.cancel();
                     }
                 });
         final AlertDialog alert = builder.create();
         alert.show();
     }
+
 
     @Override
     protected void onResume() {
@@ -102,30 +107,28 @@ public class ReunionGPS extends FragmentActivity implements LocationListener {
         }
     }
 
-
-    private void mapIfLollipop() {
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse("https://www.google.com/maps/place/37%C2%B009'53.9%22N+3%C2%B036'27.6%22W/@37.164972,-3.60766,19z/data=!3m1!4b1!4m2!3m1!1s0x0:0x0"));
-        startActivity(intent);
+    /**
+     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
+     * just add a marker near Africa.
+     * <p/>
+     * This should only be called once and when we are sure that {@link #mMap} is not null.
+     */
+    private void setUpMap() {
     }
 
-    private void setUpMap() {
+    @Override
+    public void onBackPressed() {
 
-        if (existeLocalizacion == false) {
-            mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(37.164968, -3.607663))
-                    .title("Cooperativas Agro-Alimentarias")
-                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.reunion)));
-        } else {
-            mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(latitud), Double.valueOf(longitud))));
-            cameraPosition=new CameraPosition(new LatLng(Double.valueOf(latitud), Double.valueOf(longitud)), 15, 0, 0);
-            camera = CameraUpdateFactory.newCameraPosition(cameraPosition);
-            mMap.animateCamera(camera);
-        }
+        Intent i = new Intent();
+        i.putExtra("loc", loc);
+        setResult(RESULT_OK, i);
+        finish();
+        overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
     }
 
     @Override
     public void onLocationChanged(Location location) {
+
         cameraPosition = new CameraPosition(new LatLng(location.getLatitude(), location.getLongitude()), 15, 0, 0);
         camera = CameraUpdateFactory.newCameraPosition(cameraPosition);
         mMap.animateCamera(camera);
