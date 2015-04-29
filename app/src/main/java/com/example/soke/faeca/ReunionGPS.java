@@ -59,7 +59,6 @@ public class ReunionGPS extends FragmentActivity implements LocationListener {
         }
 
 
-
     }
 
     private void buildAlertMessageNoGps() {
@@ -105,7 +104,7 @@ public class ReunionGPS extends FragmentActivity implements LocationListener {
 
     private void mapIfLollipop() {
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse("https://www.google.com.au/maps/preview/@" + latitud + "," + longitud + ",19z"));
+                Uri.parse("http://maps.google.com/maps?q=loc:" + latitud + "," + longitud + ",19z"));
         startActivity(intent);
     }
 
@@ -118,7 +117,7 @@ public class ReunionGPS extends FragmentActivity implements LocationListener {
                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.reunion)));
         } else {
             mMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(latitud), Double.valueOf(longitud))));
-            cameraPosition=new CameraPosition(new LatLng(Double.valueOf(latitud), Double.valueOf(longitud)), 15, 0, 0);
+            cameraPosition = new CameraPosition(new LatLng(Double.valueOf(latitud), Double.valueOf(longitud)), 15, 0, 0);
             camera = CameraUpdateFactory.newCameraPosition(cameraPosition);
             mMap.animateCamera(camera);
         }
