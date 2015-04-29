@@ -63,10 +63,10 @@
         android:id="@+id/envioPersonalizado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/enviarGrupos"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
         android:background="@mipmap/crear_grupo"
         android:onClick="enviarGrupoCustomizado"
-        android:src="@drawable/envio_grupo_customizado" />
+        android:src="@drawable/envio_grupo_customizado"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
