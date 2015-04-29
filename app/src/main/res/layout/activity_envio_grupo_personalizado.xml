@@ -48,10 +48,11 @@
         android:id="@+id/grupoPersonalizado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:background="@mipmap/crear_grupo"
         android:onClick="guardarGrupo"
-        android:src="@drawable/envio_grupo_customizado" />
+        android:src="@drawable/envio_grupo_customizado"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
