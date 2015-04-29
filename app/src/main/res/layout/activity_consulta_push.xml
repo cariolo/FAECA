@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@mipmap/prueba"
+    android:background="#7ad4ff00"
     tools:context="com.example.soke.faeca.Consulta">
 
     <Spinner
