@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -69,6 +71,10 @@ public class MenuPrincipal extends Activity {
             Toast.makeText(this, "Bienvenido/a " + shared.getString("usuario", "1"), Toast.LENGTH_LONG).show();
         }
         setContentView(R.layout.activity_menuprincipal);
+
+        EditText sms = (EditText) findViewById(R.id.mensajeCaja);
+        sms.getBackground().setColorFilter(Color.argb(255, 97, 158, 0), PorterDuff.Mode.SRC_ATOP);
+
 
         env = (ImageButton) findViewById(R.id.enviarA);
 
