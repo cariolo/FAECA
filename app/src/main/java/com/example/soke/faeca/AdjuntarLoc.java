@@ -21,16 +21,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class AdjuntarLoc extends FragmentActivity implements LocationListener{
+public class AdjuntarLoc extends FragmentActivity implements LocationListener {
 
+    public String loc = null;
+    public Marker m = null;
     LocationManager locationManager;
-
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    public String loc=null;
-    public Marker m=null;
-
     CameraPosition cameraPosition = null;
     CameraUpdate camera = null;
+    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +45,12 @@ public class AdjuntarLoc extends FragmentActivity implements LocationListener{
             @Override
             public void onMapLongClick(LatLng latLng) {
 
-                if (m==null) {
+                if (m == null) {
                     m = mMap.addMarker(new MarkerOptions().position(latLng));
                     String latitud = String.valueOf(latLng.latitude), longitud = String.valueOf(latLng.longitude);
 
                     loc = latitud + "|" + longitud;
-                }
-                else{
+                } else {
                     m.remove();
                     m = mMap.addMarker(new MarkerOptions().position(latLng));
                     String latitud = String.valueOf(latLng.latitude), longitud = String.valueOf(latLng.longitude);
@@ -133,8 +130,11 @@ public class AdjuntarLoc extends FragmentActivity implements LocationListener{
     public void onBackPressed() {
 
         Intent i = new Intent();
-        i.putExtra("loc", loc);
-        setResult(RESULT_OK, i);
+        if (loc != null) {
+            i.putExtra("loc", loc);
+            setResult(RESULT_OK, i);
+        } else
+            setResult(RESULT_CANCELED, i);
         finish();
         overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
     }

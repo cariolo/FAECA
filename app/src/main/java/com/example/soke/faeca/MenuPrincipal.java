@@ -46,13 +46,13 @@ public class MenuPrincipal extends Activity {
         overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
 
         super.onCreate(savedInstanceState);
-        final int USUARIO_REQUEST_CODE = 1;
+        //final int USUARIO_REQUEST_CODE = 1;
         final int LOC_REQUEST_CODE = 2;
         LOC = LOC_REQUEST_CODE;
-        USUARIO = USUARIO_REQUEST_CODE;
+        //USUARIO = USUARIO_REQUEST_CODE;
         final String PREFS_NAME = "MyPrefsFile";
 
-        setTitle("Menú principal");
+        setTitle("Cooperativas Granada");
 
         Parse.setLogLevel(Parse.LOG_LEVEL_VERBOSE);
 
@@ -60,13 +60,15 @@ public class MenuPrincipal extends Activity {
         shared = settings;
         if (settings.getBoolean("my_first_time", true)) {
 
-            String usuario = null;
-            Bundle extras = new Bundle();
+            String usuario = "Cooperativas Granada";
+            shared.edit().putString("usuario", usuario).commit();
+            /*Bundle extras = new Bundle();
             extras.putString("usuario", usuario);
-
+                                                                    CODIGO PARA QUE LA APP PIDA IDENTIFICACION AL INICIAR POR PRIMERA VEZ (DESBLOQUEAR TAMBIEN LAS DOS LINEAS COMENDATAS DE ARRIBA)
             Intent i = new Intent(this, Identificacion.class);
             i.putExtras(extras);
-            startActivityForResult(i, USUARIO_REQUEST_CODE);
+            startActivityForResult(i, USUARIO_REQUEST_CODE);*/
+            this.onActivityResult(-1, -1, null);
         } else {
             Toast.makeText(this, "Bienvenido/a " + shared.getString("usuario", "1"), Toast.LENGTH_LONG).show();
         }
@@ -160,9 +162,13 @@ public class MenuPrincipal extends Activity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        //Toast.makeText(getApplicationContext(), "reqcode: "+requestCode+"=usuario: "+USUARIO+"... resultcode: "+resultCode+"=Resultok: "+RESULT_OK, Toast.LENGTH_LONG).show();
         if (requestCode == USUARIO) {
             if (resultCode == RESULT_OK) {
-                usuario = data.getStringExtra("usuario");
+                if (data != null)
+                    usuario = data.getStringExtra("usuario");
+                else
+                    usuario = shared.getString("usuario", "1");
                 Toast.makeText(this, "Bienvenido " + usuario, Toast.LENGTH_LONG).show();
                 if (usuario != null) {
                     shared.edit().putBoolean("my_first_time", false).commit();
@@ -198,7 +204,7 @@ public class MenuPrincipal extends Activity {
                 openContextMenu(env);
 
             } else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "No ha añadido ninguna direccion", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "No has añadido ninguna direccion", Toast.LENGTH_LONG).show();
             }
         }
         overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
