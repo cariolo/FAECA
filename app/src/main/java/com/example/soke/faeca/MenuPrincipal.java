@@ -80,19 +80,6 @@ public class MenuPrincipal extends Activity {
 
 
         ParseInstallation.getCurrentInstallation().put("user", shared.getString("usuario", "1"));
-
-
-        ParsePush.subscribeInBackground("Administradores", new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Log.d("ERROR AL SUSCRIBIR", "Ha habido un error al suscribirte");
-                } else {
-                    Log.d("ERROR AL SUSCRIBIR", "Ha habido un error al suscribirte");
-                    e.printStackTrace();
-                }
-            }
-        });
         ParsePush.subscribeInBackground("Todos", new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -271,7 +258,7 @@ public class MenuPrincipal extends Activity {
             push.put("receiver", "Todos");
             if (loc_adjunta) push.put("localizacion", loc);
             push.saveEventually();
-            loc_adjunta=false;
+            loc_adjunta = false;
         }
     }
 
@@ -296,9 +283,9 @@ public class MenuPrincipal extends Activity {
             i.putExtra("usuarios", usuarios);
             i.putExtra("tipo", valorSpin);
             i.putExtra("yo", shared.getString("usuario", "1"));
-            if(loc_adjunta) i.putExtra("loc", loc);
+            if (loc_adjunta) i.putExtra("loc", loc);
             startActivity(i);
-            loc_adjunta=false;
+            loc_adjunta = false;
             overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
         }
     }
@@ -326,9 +313,9 @@ public class MenuPrincipal extends Activity {
             i.putExtra("tipoMensaje", spinnerTipoPush.getSelectedItem().toString());
             i.putExtra("mensaje", campoTexto.getText().toString());
             i.putExtra("usuario", shared.getString("usuario", "1"));
-            if(loc_adjunta) i.putExtra("loc", loc);
+            if (loc_adjunta) i.putExtra("loc", loc);
             startActivity(i);
-            loc_adjunta=false;
+            loc_adjunta = false;
             overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom);
         }
     }
