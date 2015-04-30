@@ -14,7 +14,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 
 public class Identificacion extends Activity {
@@ -30,15 +37,41 @@ public class Identificacion extends Activity {
         setContentView(R.layout.activity_identificacion);
         buscador = (EditText) findViewById(R.id.CampoNombre);
 
-        buscador.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                buscador.setText("");
-            }
-        });
         String[] coops = getResources().getStringArray(R.array.cooperativas);
         Arrays.sort(coops);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_single_choice, coops);
+        List coopsList = new ArrayList();
+
+        for (int i = 0; i < coops.length; i++) {
+            coopsList.add(coops[i]);
+        }
+
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        ArrayList<String> usuarios = new ArrayList<>();
+        ArrayList<ParseUser> users;
+        try {
+
+            users = (ArrayList<ParseUser>) query.find();
+            for (int i = 0; i < users.size(); i++) {
+                usuarios.add(users.get(i).getUsername());
+            }
+
+            for (int i = 0; i < coopsList.size(); i++) {
+                for (int k = 0; k < usuarios.size(); k++) {
+                    if (coopsList.get(i).equals(usuarios.get(k).toString())) {
+                        coopsList.remove(i);
+                    }
+                }
+            }
+            Collections.sort(coopsList);
+            coops = new String[coopsList.size()];
+            for (int i = 0; i < coopsList.size(); i++) {
+                coops[i] = coopsList.get(i).toString();
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, coops);
 
         lv = (ListView) findViewById(R.id.Cooperativas);
         lv.setAdapter(adapter);
@@ -69,7 +102,12 @@ public class Identificacion extends Activity {
 
             }
         });
-
+        buscador.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buscador.setText("");
+            }
+        });
 
         setTitle("Registro del usuario");
     }
